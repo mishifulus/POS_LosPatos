@@ -1,0 +1,14 @@
+# Ignorar carpetas de compilación
+bin/
+obj/
+
+# Archivos de depuración y compilados
+*.exe
+*.dll
+*.pdb
+
+# Archivos de usuario y configuración de Visual Studio
+*.suo
+*.user
+*.vs/
+
