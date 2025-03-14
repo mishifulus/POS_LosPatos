@@ -8,14 +8,24 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using LosPatosSystem.Data;
 
 namespace LosPatosSystem.Forms
 {
-    public partial class Main: Form
+    public partial class Main : Form
     {
-        public Main()
+        private int IdSesion;
+        private int IdUsuario;
+        private string Username;
+
+        public Main(int IdSesion, int IdUsuario, string Username)
         {
             InitializeComponent();
+            this.IdSesion = IdSesion;
+            this.IdUsuario = IdUsuario;
+            this.Username = Username;
+
+            txtUsuario.Text = Username;
         }
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
@@ -25,11 +35,12 @@ namespace LosPatosSystem.Forms
 
         private void Main_Load(object sender, EventArgs e)
         {
+            AbrirFormInPanel(new Forms.Inicio());
         }
 
         private void btnSlide_Click(object sender, EventArgs e)
         {
-            if(MenuLateral.Width == 250)
+            if (MenuLateral.Width == 250)
             {
                 MenuLateral.Width = 60;
             }
@@ -41,7 +52,11 @@ namespace LosPatosSystem.Forms
 
         private void btnClose_Click(object sender, EventArgs e)
         {
-            //Cerrar sesión antes
+            SesionDAO sesionDAO = new SesionDAO();
+
+            sesionDAO.CerrarSesion(IdUsuario, IdSesion);
+            MessageBox.Show("¡Adiós! Tu sesión se ha cerrado correctamente", "Cerrar Sesión");
+
             Application.Exit();
         }
 
@@ -68,6 +83,58 @@ namespace LosPatosSystem.Forms
         {
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
+
+        private void AbrirFormInPanel(object Formhijo)
+        {
+            if (this.PanelContenedor.Controls.Count > 0)
+                this.PanelContenedor.Controls.RemoveAt(0);
+            Form fh = Formhijo as Form;
+            fh.TopLevel = false;
+            fh.Dock = DockStyle.Fill;
+            this.PanelContenedor.Controls.Add(fh);
+            this.PanelContenedor.Tag = fh;
+            fh.Show();
+        }
+
+        private void btnFProductos_Click(object sender, EventArgs e)
+        {
+            AbrirFormInPanel(new Forms.Productos());
+        }
+
+        private void panelUsuario_MouseClick(object sender, MouseEventArgs e)
+        {
+            SesionDAO sesionDAO = new SesionDAO();
+
+            sesionDAO.CerrarSesion(IdUsuario, IdSesion);
+            MessageBox.Show("¡Adiós! Tu sesión se ha cerrado correctamente", "Cerrar Sesión");
+
+            Application.Exit();
+        }
+
+        private void pictureBox2_MouseClick(object sender, MouseEventArgs e)
+        {
+            SesionDAO sesionDAO = new SesionDAO();
+
+            sesionDAO.CerrarSesion(IdUsuario, IdSesion);
+            MessageBox.Show("¡Adiós! Tu sesión se ha cerrado correctamente", "Cerrar Sesión");
+
+            Application.Exit();
+        }
+
+        private void txtUsuario_MouseClick(object sender, MouseEventArgs e)
+        {
+            SesionDAO sesionDAO = new SesionDAO();
+
+            sesionDAO.CerrarSesion(IdUsuario, IdSesion);
+            MessageBox.Show("¡Adiós! Tu sesión se ha cerrado correctamente", "Cerrar Sesión");
+
+            Application.Exit();
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            AbrirFormInPanel(new Forms.Inicio());
         }
     }
 }

@@ -21,7 +21,7 @@ namespace LosPatosSystem.Data
                 conexion.Open();
                 try
                 {
-                    using (SqlCommand cmd = new SqlCommand("spProducto", conexion))
+                    using (SqlCommand cmd = new SqlCommand("spProductos", conexion))
                     {
                         SqlDataAdapter dataAdapter = new SqlDataAdapter();
                         cmd.CommandType = CommandType.StoredProcedure;
@@ -58,7 +58,7 @@ namespace LosPatosSystem.Data
                 conexion.Open();
                 try
                 {
-                    using (SqlCommand cmd = new SqlCommand("spProducto", conexion))
+                    using (SqlCommand cmd = new SqlCommand("spProductos", conexion))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@Accion", pAction);
@@ -126,6 +126,44 @@ namespace LosPatosSystem.Data
                 {
                     conexion.Close();
                 }
+            }
+        }
+
+        public List<Producto> obtenerProductosBajoStock()
+        {
+            List<Producto> productos = new List<Producto>();
+
+            try
+            {
+                using (SqlConnection conexion = ConexionBD.ObtenerConexion())
+                {
+                    conexion.Open();
+                    string query = "SELECT IdProducto, Codigo, Nombre, Stock, StockMinimo FROM Productos WHERE Stock < StockMinimo AND EstatusRegistro = 1";
+                    using (SqlCommand cmd = new SqlCommand(query, conexion))
+                    {
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                Producto producto = new Producto
+                                {
+                                    IdProducto = reader.GetInt32(0),
+                                    Nombre = reader.GetString(1),
+                                    Codigo = reader.GetString(2),
+                                    Stock = reader.GetInt32(8),
+                                    StockMinimo = reader.GetInt32(9)
+                                };
+                                productos.Add(producto);
+                            }
+                        }
+                    }
+                }
+                return productos;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+                return null;
             }
         }
     }

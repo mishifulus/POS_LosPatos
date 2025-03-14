@@ -129,6 +129,7 @@
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.panel1.Controls.Add(this.btnClose);
             this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.label7);

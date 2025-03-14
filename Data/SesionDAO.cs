@@ -79,6 +79,7 @@ namespace LosPatosSystem.Data
 
                         // Obtener valores de salida
                         IdSesion = (paramIdSesion.Value != DBNull.Value) ? Convert.ToInt32(paramIdSesion.Value) : 0;
+                        IdUsuario = (paramIdSesion.Value != DBNull.Value) ? Convert.ToInt32(paramIdUsuario.Value) : 0;
                         Mensaje = paramMensaje.Value.ToString();
 
                         return IdSesion > 0;

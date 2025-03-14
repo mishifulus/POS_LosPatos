@@ -49,15 +49,14 @@ namespace LosPatosSystem
 
             if (sesionDAO.IniciarSesion(usuario, pass, out int IdSesion, out int IdUsuario, out string Mensaje))
             {
-                MessageBox.Show(Mensaje, "Iniciar Sesión");
                 // Acceder al sistema y mostrar sesión (IdSesion, IdUsuario y Username)
                 this.Hide();
-                Main main = new Main();
+                Main main = new Main(IdSesion,IdUsuario,usuario);
                 main.Show();
             }
             else
             {
-                MessageBox.Show(Mensaje);
+                MessageBox.Show("Inicio de Sesión", Mensaje);
             }
         }
 
