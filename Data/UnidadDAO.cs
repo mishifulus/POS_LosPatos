@@ -21,7 +21,7 @@ namespace LosPatosSystem.Data
                 conexion.Open();
                 try
                 {
-                    using (SqlCommand cmd = new SqlCommand("spUnidad", conexion))
+                    using (SqlCommand cmd = new SqlCommand("spUnidades", conexion))
                     {
                         SqlDataAdapter dataAdapter = new SqlDataAdapter();
                         cmd.CommandType = CommandType.StoredProcedure;
@@ -58,7 +58,7 @@ namespace LosPatosSystem.Data
                 conexion.Open();
                 try
                 {
-                    using (SqlCommand cmd = new SqlCommand("spUnidad", conexion))
+                    using (SqlCommand cmd = new SqlCommand("spUnidades", conexion))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@Accion", pAction);

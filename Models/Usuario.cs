@@ -16,6 +16,7 @@ namespace LosPatosSystem.Models
         public string Pass { get; set; }
         public bool Estado { get; set; } = false;
         public int IdRol { get; set; }
+        public string Rol { get; set; }
         public DateTime FechaCreacion { get; set; } = DateTime.Now;
         public bool EstatusRegistro { get; set; } = true;
     }

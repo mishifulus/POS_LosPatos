@@ -12,6 +12,7 @@ namespace LosPatosSystem.Models
         public string Nombre { get; set; }
         public DateTime FechaCreacion { get; set; } = DateTime.Now;
         public int IdUsuario { get; set; }
+        public string Username { get; set; }
         public bool EstatusRegistro { get; set; } = true;
     }
 }

@@ -15,15 +15,22 @@ namespace LosPatosSystem.Forms
     public partial class Main : Form
     {
         private int IdSesion;
-        private int IdUsuario;
-        private string Username;
+        public int IdUsuario { get; set; }
+        
 
         public Main(int IdSesion, int IdUsuario, string Username)
         {
             InitializeComponent();
+
+            Rectangle screenBounds = Screen.PrimaryScreen.WorkingArea;
+            this.MaximizedBounds = screenBounds;
+
+            this.WindowState = FormWindowState.Maximized;
+            btnRestaurar.Visible = true;
+            btnMaximizar.Visible = false;
+
             this.IdSesion = IdSesion;
             this.IdUsuario = IdUsuario;
-            this.Username = Username;
 
             txtUsuario.Text = Username;
         }
@@ -72,6 +79,12 @@ namespace LosPatosSystem.Forms
             this.WindowState = FormWindowState.Normal;
             btnRestaurar.Visible = false;
             btnMaximizar.Visible = true;
+
+            Rectangle screenBounds = Screen.PrimaryScreen.WorkingArea;
+            int x = (screenBounds.Width - this.Width) / 2;
+            int y = (screenBounds.Height - this.Height) / 2;
+
+            this.Location = new Point(x, y);
         }
 
         private void btnMinimizar_Click(object sender, EventArgs e)
@@ -99,7 +112,7 @@ namespace LosPatosSystem.Forms
 
         private void btnFProductos_Click(object sender, EventArgs e)
         {
-            AbrirFormInPanel(new Forms.Productos());
+            AbrirFormInPanel(new Forms.ProductosVista(IdUsuario));
         }
 
         private void panelUsuario_MouseClick(object sender, MouseEventArgs e)

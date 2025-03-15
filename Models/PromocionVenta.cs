@@ -13,6 +13,7 @@ namespace LosPatosSystem.Models
         public int IdPromocion { get; set; }
         public double DescuentoAplicado { get; set; }
         public int IdUsuario { get; set; }
+        public string Username { get; set; }
         public bool EstatusRegistro { get; set; } = true;
     }
 }

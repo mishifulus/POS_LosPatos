@@ -145,17 +145,23 @@
     <Compile Include="Forms\Productos\ProductoForm.Designer.cs">
       <DependentUpon>ProductoForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Productos\Productos.cs">
+    <Compile Include="Forms\Productos\ProductosVista.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Productos\Productos.Designer.cs">
-      <DependentUpon>Productos.cs</DependentUpon>
+    <Compile Include="Forms\Productos\ProductosVista.Designer.cs">
+      <DependentUpon>ProductosVista.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Productos\ProductosInactivos.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Productos\ProductosInactivos.Designer.cs">
       <DependentUpon>ProductosInactivos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Productos\UnidadesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Productos\UnidadesForm.Designer.cs">
+      <DependentUpon>UnidadesForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Caja.cs" />
     <Compile Include="Models\Categoria.cs" />
@@ -183,8 +189,14 @@
     <EmbeddedResource Include="Forms\Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Productos\Productos.resx">
-      <DependentUpon>Productos.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Productos\ProductoForm.resx">
+      <DependentUpon>ProductoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Productos\ProductosVista.resx">
+      <DependentUpon>ProductosVista.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Productos\UnidadesForm.resx">
+      <DependentUpon>UnidadesForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

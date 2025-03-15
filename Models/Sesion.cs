@@ -10,6 +10,7 @@ namespace LosPatosSystem.Models
     {
         public int IdSesion { get; set; }
         public int IdUsuario { get; set; }
+        public string Username { get; set; }
         public DateTime FechaInicio { get; set; } = DateTime.Now;
         public DateTime FechaFin { get; set; }
         public bool Estado { get; set; } = true;

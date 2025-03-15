@@ -11,6 +11,7 @@ namespace LosPatosSystem.Models
         public int IdDetalleVenta { get; set; }
         public int IdVenta { get; set; }
         public int IdProducto { get; set; }
+        public string NombreProducto { get; set; }
         public int Cantidad { get; set; }
         public double PrecioUnitario { get; set; }
         public double Subtotal { get; set; }

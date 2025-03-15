@@ -14,6 +14,7 @@ namespace LosPatosSystem.Models
         public double TotalDevuelto { get; set; }
         public string Motivo { get; set; }
         public int IdUsuario { get; set; }
+        public string Username { get; set; }
         public bool EstatusRegistro { get; set; } = true;
     }
 }
