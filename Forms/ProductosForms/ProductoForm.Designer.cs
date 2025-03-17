@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProductoForm));
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btnClose = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.txtCodigo = new System.Windows.Forms.TextBox();
@@ -50,19 +50,20 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.cbUnidad = new System.Windows.Forms.ComboBox();
-            this.cbCategoria = new System.Windows.Forms.ComboBox();
+            this.cmbUnidad = new System.Windows.Forms.ComboBox();
+            this.cmbCategoria = new System.Windows.Forms.ComboBox();
             this.btnGuardar = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnCancelar = new System.Windows.Forms.Button();
+            this.txtIdProducto = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnClose)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(25)))), ((int)(((byte)(86)))));
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.pictureBox1);
+            this.panel1.Controls.Add(this.btnClose);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
@@ -81,15 +82,16 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Productos";
             // 
-            // pictureBox1
+            // btnClose
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(908, 8);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(32, 32);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            this.btnClose.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnClose.Image = ((System.Drawing.Image)(resources.GetObject("btnClose.Image")));
+            this.btnClose.Location = new System.Drawing.Point(908, 8);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(32, 32);
+            this.btnClose.TabIndex = 0;
+            this.btnClose.TabStop = false;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // label2
             // 
@@ -173,11 +175,12 @@
             // txtStockMinimo
             // 
             this.txtStockMinimo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtStockMinimo.Font = new System.Drawing.Font("Century Gothic", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtStockMinimo.Font = new System.Drawing.Font("Century Gothic", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtStockMinimo.Location = new System.Drawing.Point(514, 320);
             this.txtStockMinimo.Name = "txtStockMinimo";
             this.txtStockMinimo.Size = new System.Drawing.Size(351, 27);
             this.txtStockMinimo.TabIndex = 14;
+            this.txtStockMinimo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtStockMinimo_KeyPress);
             // 
             // label7
             // 
@@ -197,6 +200,7 @@
             this.txtStock.Name = "txtStock";
             this.txtStock.Size = new System.Drawing.Size(351, 27);
             this.txtStock.TabIndex = 12;
+            this.txtStock.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtStock_KeyPress);
             // 
             // label8
             // 
@@ -216,6 +220,7 @@
             this.txtPrecioVenta.Name = "txtPrecioVenta";
             this.txtPrecioVenta.Size = new System.Drawing.Size(318, 27);
             this.txtPrecioVenta.TabIndex = 18;
+            this.txtPrecioVenta.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrecioVenta_KeyPress);
             // 
             // label9
             // 
@@ -235,6 +240,7 @@
             this.txtPrecioCompra.Name = "txtPrecioCompra";
             this.txtPrecioCompra.Size = new System.Drawing.Size(318, 27);
             this.txtPrecioCompra.TabIndex = 16;
+            this.txtPrecioCompra.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrecioCompra_KeyPress);
             // 
             // label10
             // 
@@ -266,25 +272,25 @@
             this.label12.TabIndex = 20;
             this.label12.Text = "$";
             // 
-            // cbUnidad
+            // cmbUnidad
             // 
-            this.cbUnidad.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cbUnidad.Font = new System.Drawing.Font("Century Gothic", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbUnidad.FormattingEnabled = true;
-            this.cbUnidad.Location = new System.Drawing.Point(514, 96);
-            this.cbUnidad.Name = "cbUnidad";
-            this.cbUnidad.Size = new System.Drawing.Size(351, 29);
-            this.cbUnidad.TabIndex = 21;
+            this.cmbUnidad.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cmbUnidad.Font = new System.Drawing.Font("Century Gothic", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbUnidad.FormattingEnabled = true;
+            this.cmbUnidad.Location = new System.Drawing.Point(514, 96);
+            this.cmbUnidad.Name = "cmbUnidad";
+            this.cmbUnidad.Size = new System.Drawing.Size(351, 29);
+            this.cmbUnidad.TabIndex = 21;
             // 
-            // cbCategoria
+            // cmbCategoria
             // 
-            this.cbCategoria.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cbCategoria.Font = new System.Drawing.Font("Century Gothic", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbCategoria.FormattingEnabled = true;
-            this.cbCategoria.Location = new System.Drawing.Point(514, 169);
-            this.cbCategoria.Name = "cbCategoria";
-            this.cbCategoria.Size = new System.Drawing.Size(351, 29);
-            this.cbCategoria.TabIndex = 22;
+            this.cmbCategoria.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cmbCategoria.Font = new System.Drawing.Font("Century Gothic", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbCategoria.FormattingEnabled = true;
+            this.cmbCategoria.Location = new System.Drawing.Point(514, 169);
+            this.cmbCategoria.Name = "cmbCategoria";
+            this.cmbCategoria.Size = new System.Drawing.Size(351, 29);
+            this.cmbCategoria.TabIndex = 22;
             // 
             // btnGuardar
             // 
@@ -303,34 +309,45 @@
             this.btnGuardar.TabIndex = 23;
             this.btnGuardar.Text = "    Guardar";
             this.btnGuardar.UseVisualStyleBackColor = false;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
-            // button1
+            // btnCancelar
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Century Gothic", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(704, 428);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(161, 45);
-            this.button1.TabIndex = 24;
-            this.button1.Text = "    Cancelar";
-            this.button1.UseVisualStyleBackColor = false;
+            this.btnCancelar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.btnCancelar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCancelar.FlatAppearance.BorderSize = 0;
+            this.btnCancelar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancelar.Font = new System.Drawing.Font("Century Gothic", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancelar.ForeColor = System.Drawing.Color.White;
+            this.btnCancelar.Image = ((System.Drawing.Image)(resources.GetObject("btnCancelar.Image")));
+            this.btnCancelar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCancelar.Location = new System.Drawing.Point(704, 428);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(161, 45);
+            this.btnCancelar.TabIndex = 24;
+            this.btnCancelar.Text = "    Cancelar";
+            this.btnCancelar.UseVisualStyleBackColor = false;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            // 
+            // txtIdProducto
+            // 
+            this.txtIdProducto.Location = new System.Drawing.Point(514, 372);
+            this.txtIdProducto.Name = "txtIdProducto";
+            this.txtIdProducto.Size = new System.Drawing.Size(100, 26);
+            this.txtIdProducto.TabIndex = 25;
+            this.txtIdProducto.Visible = false;
             // 
             // ProductoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(950, 550);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.txtIdProducto);
+            this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnGuardar);
-            this.Controls.Add(this.cbCategoria);
-            this.Controls.Add(this.cbUnidad);
+            this.Controls.Add(this.cmbCategoria);
+            this.Controls.Add(this.cmbUnidad);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.txtPrecioVenta);
@@ -354,9 +371,10 @@
             this.Name = "ProductoForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ProductoForm";
+            this.Load += new System.EventHandler(this.ProductoForm_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnClose)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -366,7 +384,7 @@
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox btnClose;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.TextBox txtCodigo;
@@ -385,9 +403,10 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.ComboBox cbUnidad;
-        private System.Windows.Forms.ComboBox cbCategoria;
+        private System.Windows.Forms.ComboBox cmbUnidad;
+        private System.Windows.Forms.ComboBox cmbCategoria;
         private System.Windows.Forms.Button btnGuardar;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnCancelar;
+        private System.Windows.Forms.TextBox txtIdProducto;
     }
 }

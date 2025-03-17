@@ -71,6 +71,7 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(315, 530);
             this.panel2.TabIndex = 1;
+            this.panel2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseDown);
             // 
             // label4
             // 
@@ -144,6 +145,7 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(435, 530);
             this.panel1.TabIndex = 2;
+            this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
             // 
             // btnClose
             // 
@@ -207,9 +209,9 @@
             // 
             this.pictureBox2.BackColor = System.Drawing.Color.White;
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(0, 209);
+            this.pictureBox2.Location = new System.Drawing.Point(3, 211);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(51, 42);
+            this.pictureBox2.Size = new System.Drawing.Size(48, 37);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 4;
             this.pictureBox2.TabStop = false;
@@ -218,6 +220,7 @@
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.White;
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel4.Controls.Add(this.txtPass);
             this.panel4.Controls.Add(this.pictureBox3);
             this.panel4.Location = new System.Drawing.Point(0, 265);
@@ -235,14 +238,15 @@
             this.txtPass.Size = new System.Drawing.Size(356, 30);
             this.txtPass.TabIndex = 1;
             this.txtPass.UseSystemPasswordChar = true;
+            this.txtPass.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPass_KeyDown);
             // 
             // pictureBox3
             // 
             this.pictureBox3.Cursor = System.Windows.Forms.Cursors.WaitCursor;
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox3.Location = new System.Drawing.Point(0, 1);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(51, 45);
+            this.pictureBox3.Size = new System.Drawing.Size(51, 38);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox3.TabIndex = 7;
             this.pictureBox3.TabStop = false;
@@ -253,6 +257,7 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.White;
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel3.Controls.Add(this.txtUsername);
             this.panel3.Location = new System.Drawing.Point(0, 208);
             this.panel3.Name = "panel3";
@@ -290,10 +295,10 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.KeyPreview = true;
             this.Name = "Login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
-            this.Load += new System.EventHandler(this.Login_Load);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

@@ -37,10 +37,11 @@ namespace LosPatosSystem.Data
             }
         }
 
-        public bool IniciarSesion(string Username, string Password, out int IdSesion, out int IdUsuario, out string Mensaje)
+        public bool IniciarSesion(string Username, string Password, out int IdSesion, out int IdUsuario, out int IdRol, out string Mensaje)
         {
             IdSesion = 0;
             IdUsuario = 0;
+            IdRol = 0;
             Mensaje = string.Empty;
 
             using (SqlConnection conexion = ConexionBD.ObtenerConexion())
@@ -69,6 +70,12 @@ namespace LosPatosSystem.Data
                         };
                         cmd.Parameters.Add(paramIdUsuario);
 
+                        SqlParameter paramIdRol = new SqlParameter("@IdRol", SqlDbType.Int)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+                        cmd.Parameters.Add(paramIdRol);
+
                         SqlParameter paramMensaje = new SqlParameter("@Mensaje", SqlDbType.NVarChar, 40)
                         {
                             Direction = ParameterDirection.Output
@@ -80,6 +87,7 @@ namespace LosPatosSystem.Data
                         // Obtener valores de salida
                         IdSesion = (paramIdSesion.Value != DBNull.Value) ? Convert.ToInt32(paramIdSesion.Value) : 0;
                         IdUsuario = (paramIdSesion.Value != DBNull.Value) ? Convert.ToInt32(paramIdUsuario.Value) : 0;
+                        IdRol = (paramIdRol.Value != DBNull.Value) ? Convert.ToInt32(paramIdRol.Value) : 0;
                         Mensaje = paramMensaje.Value.ToString();
 
                         return IdSesion > 0;

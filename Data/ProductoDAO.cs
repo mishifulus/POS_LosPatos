@@ -28,6 +28,7 @@ namespace LosPatosSystem.Data
                         cmd.Parameters.Add(new SqlParameter("@Accion", pAction));
                         if (producto != null)
                         {
+                            cmd.Parameters.Add(new SqlParameter("@Id", producto.IdProducto));
                             cmd.Parameters.Add(new SqlParameter("@Nombre", producto.Nombre));
                             cmd.Parameters.Add(new SqlParameter("@Codigo", producto.Codigo));
                             cmd.Parameters.Add(new SqlParameter("@IdUnidad", producto.IdUnidad));
@@ -51,7 +52,7 @@ namespace LosPatosSystem.Data
             }
         }
 
-        public void CrudProducto(Producto producto, string pAction)
+        public void CrudProducto(string pAction, Producto producto)
         {
             using (SqlConnection conexion = ConexionBD.ObtenerConexion())
             {
@@ -62,7 +63,7 @@ namespace LosPatosSystem.Data
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@Accion", pAction);
-                        cmd.Parameters.AddWithValue("@Id", producto.IdUnidad);
+                        cmd.Parameters.AddWithValue("@Id", producto.IdProducto);
                         cmd.Parameters.AddWithValue("@Nombre", producto.Nombre);
                         cmd.Parameters.AddWithValue("@Codigo", producto.Codigo);
                         cmd.Parameters.AddWithValue("@IdUnidad", producto.IdUnidad);

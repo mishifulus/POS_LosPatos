@@ -48,7 +48,6 @@
             this.btnMinimizar = new System.Windows.Forms.PictureBox();
             this.btnRestaurar = new System.Windows.Forms.PictureBox();
             this.btnClose = new System.Windows.Forms.PictureBox();
-            this.btnSlide = new System.Windows.Forms.PictureBox();
             this.PanelContenedor = new System.Windows.Forms.Panel();
             this.MenuLateral.SuspendLayout();
             this.panelUsuario.SuspendLayout();
@@ -59,7 +58,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.btnMinimizar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnRestaurar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnClose)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnSlide)).BeginInit();
             this.SuspendLayout();
             // 
             // MenuLateral
@@ -168,6 +166,7 @@
             this.btnFUsuarios.TabIndex = 7;
             this.btnFUsuarios.Text = "Usuarios";
             this.btnFUsuarios.UseVisualStyleBackColor = true;
+            this.btnFUsuarios.Click += new System.EventHandler(this.btnFUsuarios_Click);
             // 
             // btnFCaja
             // 
@@ -219,6 +218,7 @@
             this.btnFPromociones.TabIndex = 4;
             this.btnFPromociones.Text = "   Promociones";
             this.btnFPromociones.UseVisualStyleBackColor = true;
+            this.btnFPromociones.Click += new System.EventHandler(this.btnFPromociones_Click);
             // 
             // btnFCompras
             // 
@@ -290,7 +290,6 @@
             this.BarraTitulo.Controls.Add(this.btnMinimizar);
             this.BarraTitulo.Controls.Add(this.btnRestaurar);
             this.BarraTitulo.Controls.Add(this.btnClose);
-            this.BarraTitulo.Controls.Add(this.btnSlide);
             this.BarraTitulo.Dock = System.Windows.Forms.DockStyle.Top;
             this.BarraTitulo.Location = new System.Drawing.Point(250, 0);
             this.BarraTitulo.Name = "BarraTitulo";
@@ -351,18 +350,6 @@
             this.btnClose.TabStop = false;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
-            // btnSlide
-            // 
-            this.btnSlide.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSlide.Image = ((System.Drawing.Image)(resources.GetObject("btnSlide.Image")));
-            this.btnSlide.Location = new System.Drawing.Point(4, 8);
-            this.btnSlide.Name = "btnSlide";
-            this.btnSlide.Size = new System.Drawing.Size(36, 36);
-            this.btnSlide.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btnSlide.TabIndex = 0;
-            this.btnSlide.TabStop = false;
-            this.btnSlide.Click += new System.EventHandler(this.btnSlide_Click);
-            // 
             // PanelContenedor
             // 
             this.PanelContenedor.BackColor = System.Drawing.SystemColors.Window;
@@ -396,7 +383,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.btnMinimizar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnRestaurar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnClose)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnSlide)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -405,7 +391,6 @@
 
         private System.Windows.Forms.Panel MenuLateral;
         private System.Windows.Forms.Panel BarraTitulo;
-        private System.Windows.Forms.PictureBox btnSlide;
         private System.Windows.Forms.Panel PanelContenedor;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox btnClose;

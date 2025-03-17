@@ -33,7 +33,7 @@ namespace LosPatosSystem.Forms.Productos
             SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void btnClose_Click(object sender, EventArgs e)
         {
             UnidadesForm.ActiveForm.Close();
         }
@@ -158,6 +158,7 @@ namespace LosPatosSystem.Forms.Productos
             Unidad unidad = new Unidad();
             unidad.IdUnidad = idUnidad;
             unidad.IdUsuario = idUsuario;
+
             UnidadDAO unidadDAO = new UnidadDAO();
             unidadDAO.CrudUnidad(unidad, "D");
             MessageBox.Show("Unidad eliminada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);

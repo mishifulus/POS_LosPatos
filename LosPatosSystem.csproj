@@ -139,29 +139,65 @@
     <Compile Include="Forms\Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Productos\ProductoForm.cs">
+    <Compile Include="Forms\ProductosForms\CategoriasForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Productos\ProductoForm.Designer.cs">
+    <Compile Include="Forms\ProductosForms\CategoriasForm.Designer.cs">
+      <DependentUpon>CategoriasForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ProductosForms\ProductoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ProductosForms\ProductoForm.Designer.cs">
       <DependentUpon>ProductoForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Productos\ProductosVista.cs">
+    <Compile Include="Forms\ProductosForms\ProductosVista.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Productos\ProductosVista.Designer.cs">
+    <Compile Include="Forms\ProductosForms\ProductosVista.Designer.cs">
       <DependentUpon>ProductosVista.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Productos\ProductosInactivos.cs">
+    <Compile Include="Forms\ProductosForms\UnidadesForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Productos\ProductosInactivos.Designer.cs">
-      <DependentUpon>ProductosInactivos.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Productos\UnidadesForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Productos\UnidadesForm.Designer.cs">
+    <Compile Include="Forms\ProductosForms\UnidadesForm.Designer.cs">
       <DependentUpon>UnidadesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\PromocionesForms\PromocionesVista.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PromocionesForms\PromocionesVista.Designer.cs">
+      <DependentUpon>PromocionesVista.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\PromocionesForms\PromocionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PromocionesForms\PromocionForm.Designer.cs">
+      <DependentUpon>PromocionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\UsuariosForms\CambiarPass.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\UsuariosForms\CambiarPass.Designer.cs">
+      <DependentUpon>CambiarPass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\UsuariosForms\RolesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\UsuariosForms\RolesForm.Designer.cs">
+      <DependentUpon>RolesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\UsuariosForms\UsuarioForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\UsuariosForms\UsuarioForm.Designer.cs">
+      <DependentUpon>UsuarioForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\UsuariosForms\UsuariosVista.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\UsuariosForms\UsuariosVista.Designer.cs">
+      <DependentUpon>UsuariosVista.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Caja.cs" />
     <Compile Include="Models\Categoria.cs" />
@@ -189,14 +225,32 @@
     <EmbeddedResource Include="Forms\Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Productos\ProductoForm.resx">
+    <EmbeddedResource Include="Forms\ProductosForms\CategoriasForm.resx">
+      <DependentUpon>CategoriasForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ProductosForms\ProductoForm.resx">
       <DependentUpon>ProductoForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Productos\ProductosVista.resx">
+    <EmbeddedResource Include="Forms\ProductosForms\ProductosVista.resx">
       <DependentUpon>ProductosVista.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Productos\UnidadesForm.resx">
+    <EmbeddedResource Include="Forms\ProductosForms\UnidadesForm.resx">
       <DependentUpon>UnidadesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PromocionesForms\PromocionesVista.resx">
+      <DependentUpon>PromocionesVista.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\UsuariosForms\CambiarPass.resx">
+      <DependentUpon>CambiarPass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\UsuariosForms\RolesForm.resx">
+      <DependentUpon>RolesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\UsuariosForms\UsuarioForm.resx">
+      <DependentUpon>UsuarioForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\UsuariosForms\UsuariosVista.resx">
+      <DependentUpon>UsuariosVista.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

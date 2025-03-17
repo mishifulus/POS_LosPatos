@@ -25,11 +25,6 @@ namespace LosPatosSystem
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
         private extern static void SendMessage(System.IntPtr hwnd, int wmsg, int wparam, int lparam);
 
-        private void Login_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void pictureBox3_MouseDown(object sender, MouseEventArgs e)
         {
             txtPass.UseSystemPasswordChar = false;
@@ -47,11 +42,10 @@ namespace LosPatosSystem
 
             SesionDAO sesionDAO = new SesionDAO();
 
-            if (sesionDAO.IniciarSesion(usuario, pass, out int IdSesion, out int IdUsuario, out string Mensaje))
+            if (sesionDAO.IniciarSesion(usuario, pass, out int IdSesion, out int IdUsuario, out int IdRol, out string Mensaje))
             {
-                // Acceder al sistema y mostrar sesión (IdSesion, IdUsuario y Username)
                 this.Hide();
-                Main main = new Main(IdSesion,IdUsuario,usuario);
+                Main main = new Main(IdSesion,IdUsuario,usuario, IdRol);
                 main.Show();
             }
             else
@@ -75,6 +69,15 @@ namespace LosPatosSystem
         private void btnClose_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void txtPass_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                btnLogin.PerformClick();
+            }
         }
     }
 }

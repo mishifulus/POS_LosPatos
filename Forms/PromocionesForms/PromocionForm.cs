@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace LosPatosSystem.Forms.Productos
+namespace LosPatosSystem.Forms.PromocionesForms
 {
-    public partial class ProductosInactivos: Form
+    public partial class PromocionForm: Form
     {
-        public ProductosInactivos()
+        public PromocionForm()
         {
             InitializeComponent();
         }

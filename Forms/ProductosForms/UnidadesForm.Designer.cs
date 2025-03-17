@@ -79,7 +79,7 @@
             this.btnClose.Size = new System.Drawing.Size(32, 32);
             this.btnClose.TabIndex = 0;
             this.btnClose.TabStop = false;
-            this.btnClose.Click += new System.EventHandler(this.pictureBox1_Click);
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // btnCancelar
             // 

@@ -29,15 +29,16 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProductosVista));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.btnAgregar = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.panelBusqueda = new System.Windows.Forms.Panel();
             this.txtBuscar = new System.Windows.Forms.TextBox();
             this.btnBuscar = new System.Windows.Forms.PictureBox();
             this.btnEditar = new System.Windows.Forms.Button();
             this.btnEliminar = new System.Windows.Forms.Button();
-            this.dgvProductos = new System.Windows.Forms.DataGridView();
             this.btnUnidades = new System.Windows.Forms.Button();
             this.btnCategorias = new System.Windows.Forms.Button();
             this.btnInactivos = new System.Windows.Forms.Button();
@@ -48,13 +49,18 @@
             this.btnDesechable = new System.Windows.Forms.Button();
             this.btnJugos = new System.Windows.Forms.Button();
             this.btnAguas = new System.Windows.Forms.Button();
-            this.panel1.SuspendLayout();
+            this.dgvProductos = new System.Windows.Forms.DataGridView();
+            this.txtIdProducto = new System.Windows.Forms.TextBox();
+            this.btnActivar = new System.Windows.Forms.Button();
+            this.btnProductosActivos = new System.Windows.Forms.Button();
+            this.panelBusqueda.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnBuscar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(449, 23);
@@ -80,16 +86,16 @@
             this.btnAgregar.UseVisualStyleBackColor = false;
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
-            // panel1
+            // panelBusqueda
             // 
-            this.panel1.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.txtBuscar);
-            this.panel1.Controls.Add(this.btnBuscar);
-            this.panel1.Location = new System.Drawing.Point(35, 77);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(274, 45);
-            this.panel1.TabIndex = 4;
+            this.panelBusqueda.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panelBusqueda.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelBusqueda.Controls.Add(this.txtBuscar);
+            this.panelBusqueda.Controls.Add(this.btnBuscar);
+            this.panelBusqueda.Location = new System.Drawing.Point(35, 77);
+            this.panelBusqueda.Name = "panelBusqueda";
+            this.panelBusqueda.Size = new System.Drawing.Size(274, 45);
+            this.panelBusqueda.TabIndex = 4;
             // 
             // txtBuscar
             // 
@@ -111,6 +117,7 @@
             this.btnBuscar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.btnBuscar.TabIndex = 0;
             this.btnBuscar.TabStop = false;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // btnEditar
             // 
@@ -127,6 +134,7 @@
             this.btnEditar.Size = new System.Drawing.Size(46, 45);
             this.btnEditar.TabIndex = 5;
             this.btnEditar.UseVisualStyleBackColor = false;
+            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
             // 
             // btnEliminar
             // 
@@ -143,31 +151,7 @@
             this.btnEliminar.Size = new System.Drawing.Size(46, 45);
             this.btnEliminar.TabIndex = 6;
             this.btnEliminar.UseVisualStyleBackColor = false;
-            // 
-            // dgvProductos
-            // 
-            this.dgvProductos.AllowUserToAddRows = false;
-            this.dgvProductos.AllowUserToDeleteRows = false;
-            this.dgvProductos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
-            this.dgvProductos.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllHeaders;
-            this.dgvProductos.BackgroundColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Century Gothic", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(25)))), ((int)(((byte)(86)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvProductos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvProductos.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.dgvProductos.Location = new System.Drawing.Point(32, 160);
-            this.dgvProductos.Name = "dgvProductos";
-            this.dgvProductos.ReadOnly = true;
-            this.dgvProductos.RowHeadersWidth = 62;
-            this.dgvProductos.RowTemplate.Height = 28;
-            this.dgvProductos.Size = new System.Drawing.Size(932, 577);
-            this.dgvProductos.TabIndex = 7;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // btnUnidades
             // 
@@ -207,6 +191,7 @@
             this.btnCategorias.TabIndex = 9;
             this.btnCategorias.Text = "    Categorias";
             this.btnCategorias.UseVisualStyleBackColor = false;
+            this.btnCategorias.Click += new System.EventHandler(this.btnCategorias_Click);
             // 
             // btnInactivos
             // 
@@ -223,6 +208,7 @@
             this.btnInactivos.Size = new System.Drawing.Size(46, 45);
             this.btnInactivos.TabIndex = 10;
             this.btnInactivos.UseVisualStyleBackColor = false;
+            this.btnInactivos.Click += new System.EventHandler(this.btnInactivos_Click);
             // 
             // btnCerveza
             // 
@@ -240,6 +226,7 @@
             this.btnCerveza.Size = new System.Drawing.Size(46, 45);
             this.btnCerveza.TabIndex = 11;
             this.btnCerveza.UseVisualStyleBackColor = false;
+            this.btnCerveza.Click += new System.EventHandler(this.btnCerveza_Click);
             // 
             // btnRefrescos
             // 
@@ -257,6 +244,7 @@
             this.btnRefrescos.Size = new System.Drawing.Size(46, 45);
             this.btnRefrescos.TabIndex = 12;
             this.btnRefrescos.UseVisualStyleBackColor = false;
+            this.btnRefrescos.Click += new System.EventHandler(this.btnRefrescos_Click);
             // 
             // btnPapas
             // 
@@ -274,6 +262,7 @@
             this.btnPapas.Size = new System.Drawing.Size(46, 45);
             this.btnPapas.TabIndex = 13;
             this.btnPapas.UseVisualStyleBackColor = false;
+            this.btnPapas.Click += new System.EventHandler(this.btnPapas_Click);
             // 
             // btnCigarros
             // 
@@ -291,6 +280,7 @@
             this.btnCigarros.Size = new System.Drawing.Size(46, 45);
             this.btnCigarros.TabIndex = 14;
             this.btnCigarros.UseVisualStyleBackColor = false;
+            this.btnCigarros.Click += new System.EventHandler(this.btnCigarros_Click);
             // 
             // btnDesechable
             // 
@@ -308,6 +298,7 @@
             this.btnDesechable.Size = new System.Drawing.Size(46, 45);
             this.btnDesechable.TabIndex = 15;
             this.btnDesechable.UseVisualStyleBackColor = false;
+            this.btnDesechable.Click += new System.EventHandler(this.btnDesechable_Click);
             // 
             // btnJugos
             // 
@@ -325,6 +316,7 @@
             this.btnJugos.Size = new System.Drawing.Size(46, 45);
             this.btnJugos.TabIndex = 16;
             this.btnJugos.UseVisualStyleBackColor = false;
+            this.btnJugos.Click += new System.EventHandler(this.btnJugos_Click);
             // 
             // btnAguas
             // 
@@ -342,6 +334,92 @@
             this.btnAguas.Size = new System.Drawing.Size(46, 45);
             this.btnAguas.TabIndex = 17;
             this.btnAguas.UseVisualStyleBackColor = false;
+            this.btnAguas.Click += new System.EventHandler(this.btnAguas_Click);
+            // 
+            // dgvProductos
+            // 
+            this.dgvProductos.AllowUserToAddRows = false;
+            this.dgvProductos.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.dgvProductos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvProductos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dgvProductos.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dgvProductos.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.dgvProductos.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvProductos.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.ControlLight;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Century Gothic", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(25)))), ((int)(((byte)(86)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvProductos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            this.dgvProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvProductos.Cursor = System.Windows.Forms.Cursors.Hand;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Century Gothic", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(25)))), ((int)(((byte)(86)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvProductos.DefaultCellStyle = dataGridViewCellStyle6;
+            this.dgvProductos.Location = new System.Drawing.Point(32, 160);
+            this.dgvProductos.MultiSelect = false;
+            this.dgvProductos.Name = "dgvProductos";
+            this.dgvProductos.ReadOnly = true;
+            this.dgvProductos.RowHeadersVisible = false;
+            this.dgvProductos.RowHeadersWidth = 62;
+            this.dgvProductos.RowTemplate.Height = 28;
+            this.dgvProductos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvProductos.Size = new System.Drawing.Size(932, 577);
+            this.dgvProductos.TabIndex = 40;
+            this.dgvProductos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductos_CellClick);
+            // 
+            // txtIdProducto
+            // 
+            this.txtIdProducto.Location = new System.Drawing.Point(880, 46);
+            this.txtIdProducto.Name = "txtIdProducto";
+            this.txtIdProducto.Size = new System.Drawing.Size(100, 26);
+            this.txtIdProducto.TabIndex = 41;
+            this.txtIdProducto.Visible = false;
+            // 
+            // btnActivar
+            // 
+            this.btnActivar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(25)))), ((int)(((byte)(86)))));
+            this.btnActivar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnActivar.FlatAppearance.BorderSize = 0;
+            this.btnActivar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.btnActivar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnActivar.Font = new System.Drawing.Font("Century Gothic", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnActivar.ForeColor = System.Drawing.Color.White;
+            this.btnActivar.Image = ((System.Drawing.Image)(resources.GetObject("btnActivar.Image")));
+            this.btnActivar.Location = new System.Drawing.Point(454, 78);
+            this.btnActivar.Name = "btnActivar";
+            this.btnActivar.Size = new System.Drawing.Size(46, 45);
+            this.btnActivar.TabIndex = 42;
+            this.btnActivar.UseVisualStyleBackColor = false;
+            this.btnActivar.Visible = false;
+            this.btnActivar.Click += new System.EventHandler(this.btnActivar_Click);
+            // 
+            // btnProductosActivos
+            // 
+            this.btnProductosActivos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(25)))), ((int)(((byte)(86)))));
+            this.btnProductosActivos.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnProductosActivos.FlatAppearance.BorderSize = 0;
+            this.btnProductosActivos.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.btnProductosActivos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnProductosActivos.Font = new System.Drawing.Font("Century Gothic", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnProductosActivos.ForeColor = System.Drawing.Color.White;
+            this.btnProductosActivos.Image = ((System.Drawing.Image)(resources.GetObject("btnProductosActivos.Image")));
+            this.btnProductosActivos.Location = new System.Drawing.Point(520, 77);
+            this.btnProductosActivos.Name = "btnProductosActivos";
+            this.btnProductosActivos.Size = new System.Drawing.Size(46, 45);
+            this.btnProductosActivos.TabIndex = 43;
+            this.btnProductosActivos.UseVisualStyleBackColor = false;
+            this.btnProductosActivos.Visible = false;
+            this.btnProductosActivos.Click += new System.EventHandler(this.btnProductosActivos_Click);
             // 
             // ProductosVista
             // 
@@ -349,6 +427,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(1050, 800);
+            this.Controls.Add(this.btnProductosActivos);
+            this.Controls.Add(this.btnActivar);
+            this.Controls.Add(this.txtIdProducto);
+            this.Controls.Add(this.dgvProductos);
             this.Controls.Add(this.btnAguas);
             this.Controls.Add(this.btnJugos);
             this.Controls.Add(this.btnDesechable);
@@ -359,18 +441,17 @@
             this.Controls.Add(this.btnInactivos);
             this.Controls.Add(this.btnCategorias);
             this.Controls.Add(this.btnUnidades);
-            this.Controls.Add(this.dgvProductos);
             this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.btnEditar);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panelBusqueda);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "ProductosVista";
             this.Text = "Productos";
             this.Load += new System.EventHandler(this.Productos_Load);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.panelBusqueda.ResumeLayout(false);
+            this.panelBusqueda.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnBuscar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).EndInit();
             this.ResumeLayout(false);
@@ -382,12 +463,11 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnAgregar;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panelBusqueda;
         private System.Windows.Forms.TextBox txtBuscar;
         private System.Windows.Forms.PictureBox btnBuscar;
         private System.Windows.Forms.Button btnEditar;
         private System.Windows.Forms.Button btnEliminar;
-        private System.Windows.Forms.DataGridView dgvProductos;
         private System.Windows.Forms.Button btnUnidades;
         private System.Windows.Forms.Button btnCategorias;
         private System.Windows.Forms.Button btnInactivos;
@@ -398,5 +478,9 @@
         private System.Windows.Forms.Button btnDesechable;
         private System.Windows.Forms.Button btnJugos;
         private System.Windows.Forms.Button btnAguas;
+        private System.Windows.Forms.DataGridView dgvProductos;
+        private System.Windows.Forms.TextBox txtIdProducto;
+        private System.Windows.Forms.Button btnActivar;
+        private System.Windows.Forms.Button btnProductosActivos;
     }
 }

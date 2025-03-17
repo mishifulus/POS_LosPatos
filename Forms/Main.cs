@@ -16,9 +16,10 @@ namespace LosPatosSystem.Forms
     {
         private int IdSesion;
         public int IdUsuario { get; set; }
-        
+        public int IdRol { get; set; }
 
-        public Main(int IdSesion, int IdUsuario, string Username)
+
+        public Main(int IdSesion, int IdUsuario, string Username, int IdRol)
         {
             InitializeComponent();
 
@@ -31,6 +32,7 @@ namespace LosPatosSystem.Forms
 
             this.IdSesion = IdSesion;
             this.IdUsuario = IdUsuario;
+            this.IdRol = IdRol;
 
             txtUsuario.Text = Username;
         }
@@ -43,17 +45,11 @@ namespace LosPatosSystem.Forms
         private void Main_Load(object sender, EventArgs e)
         {
             AbrirFormInPanel(new Forms.Inicio());
-        }
-
-        private void btnSlide_Click(object sender, EventArgs e)
-        {
-            if (MenuLateral.Width == 250)
+            if (IdRol != 1)
             {
-                MenuLateral.Width = 60;
-            }
-            else
-            {
-                MenuLateral.Width = 250;
+                btnFUsuarios.Visible = false;
+                btnFAjustes.Visible = false;
+                btnFReportes.Visible = false;
             }
         }
 
@@ -112,7 +108,7 @@ namespace LosPatosSystem.Forms
 
         private void btnFProductos_Click(object sender, EventArgs e)
         {
-            AbrirFormInPanel(new Forms.ProductosVista(IdUsuario));
+            AbrirFormInPanel(new Forms.ProductosVista(IdUsuario, IdRol));
         }
 
         private void panelUsuario_MouseClick(object sender, MouseEventArgs e)
@@ -148,6 +144,16 @@ namespace LosPatosSystem.Forms
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             AbrirFormInPanel(new Forms.Inicio());
+        }
+
+        private void btnFUsuarios_Click(object sender, EventArgs e)
+        {
+            AbrirFormInPanel(new Forms.UsuariosForms.UsuariosVista());
+        }
+
+        private void btnFPromociones_Click(object sender, EventArgs e)
+        {
+            AbrirFormInPanel(new Forms.PromocionesForms.PromocionesVista(IdUsuario, IdRol);
         }
     }
 }

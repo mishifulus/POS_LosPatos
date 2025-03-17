@@ -21,7 +21,7 @@ namespace LosPatosSystem.Data
                 conexion.Open();
                 try
                 {
-                    using (SqlCommand cmd = new SqlCommand("spUsuario", conexion))
+                    using (SqlCommand cmd = new SqlCommand("spUsuarios", conexion))
                     {
                         SqlDataAdapter dataAdapter = new SqlDataAdapter();
                         cmd.CommandType = CommandType.StoredProcedure;
@@ -59,7 +59,7 @@ namespace LosPatosSystem.Data
                 conexion.Open();
                 try
                 {
-                    using (SqlCommand cmd = new SqlCommand("spUsuario", conexion))
+                    using (SqlCommand cmd = new SqlCommand("spUsuarios", conexion))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@Accion", pAction);
@@ -69,7 +69,6 @@ namespace LosPatosSystem.Data
                         cmd.Parameters.AddWithValue("@AMaterno", usuario.AMaterno);
                         cmd.Parameters.AddWithValue("@Username", usuario.Username);
                         cmd.Parameters.AddWithValue("@Pass", usuario.Pass);
-                        cmd.Parameters.AddWithValue("@Estado", usuario.Estado);
                         cmd.Parameters.AddWithValue("@IdRol", usuario.IdRol);
                         cmd.ExecuteNonQuery();
                     }
