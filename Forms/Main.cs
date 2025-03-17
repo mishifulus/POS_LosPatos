@@ -153,7 +153,7 @@ namespace LosPatosSystem.Forms
 
         private void btnFPromociones_Click(object sender, EventArgs e)
         {
-            AbrirFormInPanel(new Forms.PromocionesForms.PromocionesVista(IdUsuario, IdRol);
+            AbrirFormInPanel(new Forms.PromocionesForms.PromocionesVista(IdUsuario, IdRol));
         }
     }
 }

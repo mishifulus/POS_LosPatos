@@ -196,6 +196,12 @@ namespace LosPatosSystem.Forms
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(txtIdProducto.Text))
+            {
+                MessageBox.Show("Seleccione un producto para editar", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             int IdProducto = Convert.ToInt32(txtIdProducto.Text);
             ProductoForm productoForm = new ProductoForm("Editar", IdUsuario, IdProducto);
             productoForm.NuevoProducto += ObtenerProductos;
@@ -340,6 +346,27 @@ namespace LosPatosSystem.Forms
             producto.IdCategoria = 7;
 
             BuscarProducto(producto);
+        }
+
+        private void txtBuscar_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                if (string.IsNullOrEmpty(txtBuscar.Text))
+                {
+                    ObtenerProductos();
+                }
+                else
+                {
+                    Producto producto = new Producto();
+                    producto.Nombre = txtBuscar.Text;
+                    producto.Codigo = txtBuscar.Text;
+                    producto.Descripcion = txtBuscar.Text;
+
+                    BuscarProducto(producto);
+                }
+            }
         }
     }
 }

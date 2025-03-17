@@ -29,7 +29,6 @@ namespace LosPatosSystem.Forms.Productos
             this.IdUsuario = IdUsuario;
 
             txtIdProducto.Text = IdProducto.ToString();
-
         }
 
         private void ProductoForm_Load(object sender, EventArgs e)

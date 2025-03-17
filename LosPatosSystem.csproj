@@ -240,6 +240,9 @@
     <EmbeddedResource Include="Forms\PromocionesForms\PromocionesVista.resx">
       <DependentUpon>PromocionesVista.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PromocionesForms\PromocionForm.resx">
+      <DependentUpon>PromocionForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\UsuariosForms\CambiarPass.resx">
       <DependentUpon>CambiarPass.cs</DependentUpon>
     </EmbeddedResource>

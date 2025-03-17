@@ -37,8 +37,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.panelBusqueda = new System.Windows.Forms.Panel();
             this.txtBuscar = new System.Windows.Forms.TextBox();
-            this.btnCambiarPass = new System.Windows.Forms.Button();
             this.btnBuscar = new System.Windows.Forms.PictureBox();
+            this.btnCambiarPass = new System.Windows.Forms.Button();
             this.btnUsuariosActivos = new System.Windows.Forms.Button();
             this.btnActivar = new System.Windows.Forms.Button();
             this.btnInactivos = new System.Windows.Forms.Button();
@@ -131,6 +131,19 @@
             this.txtBuscar.Name = "txtBuscar";
             this.txtBuscar.Size = new System.Drawing.Size(208, 25);
             this.txtBuscar.TabIndex = 1;
+            this.txtBuscar.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtBuscar_KeyDown);
+            // 
+            // btnBuscar
+            // 
+            this.btnBuscar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnBuscar.Image = ((System.Drawing.Image)(resources.GetObject("btnBuscar.Image")));
+            this.btnBuscar.Location = new System.Drawing.Point(3, 3);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(47, 39);
+            this.btnBuscar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btnBuscar.TabIndex = 0;
+            this.btnBuscar.TabStop = false;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // btnCambiarPass
             // 
@@ -148,18 +161,6 @@
             this.btnCambiarPass.TabIndex = 63;
             this.btnCambiarPass.UseVisualStyleBackColor = false;
             this.btnCambiarPass.Click += new System.EventHandler(this.btnCambiarPass_Click);
-            // 
-            // btnBuscar
-            // 
-            this.btnBuscar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnBuscar.Image = ((System.Drawing.Image)(resources.GetObject("btnBuscar.Image")));
-            this.btnBuscar.Location = new System.Drawing.Point(3, 3);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(47, 39);
-            this.btnBuscar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btnBuscar.TabIndex = 0;
-            this.btnBuscar.TabStop = false;
-            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // btnUsuariosActivos
             // 

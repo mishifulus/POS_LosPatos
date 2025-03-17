@@ -28,6 +28,7 @@ namespace LosPatosSystem.Data
                         cmd.Parameters.Add(new SqlParameter("@Accion", pAction));
                         if (promocion != null)
                         {
+                            cmd.Parameters.Add(new SqlParameter("@Id", promocion.IdPromocion));
                             cmd.Parameters.Add(new SqlParameter("@Nombre", promocion.Nombre));
                             cmd.Parameters.Add(new SqlParameter("@Descripcion", promocion.Descripcion));
                             cmd.Parameters.Add(new SqlParameter("@Tipo", promocion.Tipo));
@@ -68,8 +69,10 @@ namespace LosPatosSystem.Data
                         cmd.Parameters.AddWithValue("@ValorDescuento", promocion.ValorDescuento);
                         cmd.Parameters.AddWithValue("@CantidadMinima", promocion.CantidadMinima);
                         cmd.Parameters.AddWithValue("@ProductoAsociado", promocion.ProductoAsociado);
-                        cmd.Parameters.AddWithValue("@FechaInicio", promocion.FechaInicio);
-                        cmd.Parameters.AddWithValue("@FechaFin", promocion.FechaFin);
+                        cmd.Parameters.AddWithValue("@FechaInicio",
+                            (promocion.FechaInicio < new DateTime(1753, 1, 1)) ? (object)DBNull.Value : promocion.FechaInicio);
+                        cmd.Parameters.AddWithValue("@FechaFin",
+                            (promocion.FechaFin < new DateTime(1753, 1, 1)) ? (object)DBNull.Value : promocion.FechaFin);
                         cmd.Parameters.AddWithValue("@IdUsuario", promocion.IdUsuario);
                         cmd.ExecuteNonQuery();
                     }

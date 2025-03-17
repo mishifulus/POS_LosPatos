@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PromocionesVista));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnPromocionesActivos = new System.Windows.Forms.Button();
             this.btnActivar = new System.Windows.Forms.Button();
             this.txtIdPromocion = new System.Windows.Forms.TextBox();
@@ -68,6 +68,7 @@
             this.btnPromocionesActivos.TabIndex = 62;
             this.btnPromocionesActivos.UseVisualStyleBackColor = false;
             this.btnPromocionesActivos.Visible = false;
+            this.btnPromocionesActivos.Click += new System.EventHandler(this.btnPromocionesActivos_Click);
             // 
             // btnActivar
             // 
@@ -79,16 +80,17 @@
             this.btnActivar.Font = new System.Drawing.Font("Century Gothic", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnActivar.ForeColor = System.Drawing.Color.White;
             this.btnActivar.Image = ((System.Drawing.Image)(resources.GetObject("btnActivar.Image")));
-            this.btnActivar.Location = new System.Drawing.Point(454, 70);
+            this.btnActivar.Location = new System.Drawing.Point(454, 69);
             this.btnActivar.Name = "btnActivar";
             this.btnActivar.Size = new System.Drawing.Size(46, 45);
             this.btnActivar.TabIndex = 61;
             this.btnActivar.UseVisualStyleBackColor = false;
             this.btnActivar.Visible = false;
+            this.btnActivar.Click += new System.EventHandler(this.btnActivar_Click);
             // 
             // txtIdPromocion
             // 
-            this.txtIdPromocion.Location = new System.Drawing.Point(880, 38);
+            this.txtIdPromocion.Location = new System.Drawing.Point(919, 54);
             this.txtIdPromocion.Name = "txtIdPromocion";
             this.txtIdPromocion.Size = new System.Drawing.Size(100, 26);
             this.txtIdPromocion.TabIndex = 60;
@@ -98,31 +100,31 @@
             // 
             this.dgvPromociones.AllowUserToAddRows = false;
             this.dgvPromociones.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.dgvPromociones.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.dgvPromociones.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvPromociones.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgvPromociones.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvPromociones.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvPromociones.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvPromociones.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.ControlLight;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Century Gothic", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(25)))), ((int)(((byte)(86)))));
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPromociones.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.ControlLight;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Century Gothic", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(25)))), ((int)(((byte)(86)))));
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPromociones.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.dgvPromociones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPromociones.Cursor = System.Windows.Forms.Cursors.Hand;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Century Gothic", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(25)))), ((int)(((byte)(86)))));
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvPromociones.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Century Gothic", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(25)))), ((int)(((byte)(86)))));
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvPromociones.DefaultCellStyle = dataGridViewCellStyle9;
             this.dgvPromociones.Location = new System.Drawing.Point(32, 152);
             this.dgvPromociones.MultiSelect = false;
             this.dgvPromociones.Name = "dgvPromociones";
@@ -133,6 +135,7 @@
             this.dgvPromociones.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPromociones.Size = new System.Drawing.Size(932, 577);
             this.dgvPromociones.TabIndex = 59;
+            this.dgvPromociones.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPromociones_CellClick);
             // 
             // btn2x1
             // 
@@ -150,6 +153,7 @@
             this.btn2x1.Size = new System.Drawing.Size(46, 45);
             this.btn2x1.TabIndex = 54;
             this.btn2x1.UseVisualStyleBackColor = false;
+            this.btn2x1.Click += new System.EventHandler(this.btn2x1_Click);
             // 
             // btnMonto
             // 
@@ -167,6 +171,7 @@
             this.btnMonto.Size = new System.Drawing.Size(46, 45);
             this.btnMonto.TabIndex = 53;
             this.btnMonto.UseVisualStyleBackColor = false;
+            this.btnMonto.Click += new System.EventHandler(this.btnMonto_Click);
             // 
             // btnDescuento
             // 
@@ -184,6 +189,7 @@
             this.btnDescuento.Size = new System.Drawing.Size(46, 45);
             this.btnDescuento.TabIndex = 52;
             this.btnDescuento.UseVisualStyleBackColor = false;
+            this.btnDescuento.Click += new System.EventHandler(this.btnDescuento_Click);
             // 
             // btnInactivos
             // 
@@ -200,6 +206,7 @@
             this.btnInactivos.Size = new System.Drawing.Size(46, 45);
             this.btnInactivos.TabIndex = 51;
             this.btnInactivos.UseVisualStyleBackColor = false;
+            this.btnInactivos.Click += new System.EventHandler(this.btnInactivos_Click);
             // 
             // btnEliminar
             // 
@@ -216,6 +223,7 @@
             this.btnEliminar.Size = new System.Drawing.Size(46, 45);
             this.btnEliminar.TabIndex = 48;
             this.btnEliminar.UseVisualStyleBackColor = false;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // btnEditar
             // 
@@ -232,6 +240,7 @@
             this.btnEditar.Size = new System.Drawing.Size(46, 45);
             this.btnEditar.TabIndex = 47;
             this.btnEditar.UseVisualStyleBackColor = false;
+            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
             // 
             // panelBusqueda
             // 
@@ -253,6 +262,7 @@
             this.txtBuscar.Name = "txtBuscar";
             this.txtBuscar.Size = new System.Drawing.Size(208, 25);
             this.txtBuscar.TabIndex = 1;
+            this.txtBuscar.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtBuscar_KeyDown);
             // 
             // btnBuscar
             // 
@@ -264,6 +274,7 @@
             this.btnBuscar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.btnBuscar.TabIndex = 0;
             this.btnBuscar.TabStop = false;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // btnAgregar
             // 
@@ -280,6 +291,7 @@
             this.btnAgregar.Size = new System.Drawing.Size(46, 45);
             this.btnAgregar.TabIndex = 45;
             this.btnAgregar.UseVisualStyleBackColor = false;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
             // label1
             // 

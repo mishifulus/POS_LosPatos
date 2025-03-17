@@ -126,6 +126,12 @@ namespace LosPatosSystem.Forms.UsuariosForms
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(txtIdUsuario.Text))
+            {
+                MessageBox.Show("Seleccione un usuario para editar", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             int IdUsuario = Convert.ToInt32(txtIdUsuario.Text);
             UsuarioForm usuarioForm = new UsuarioForm("Editar", IdUsuario);
             usuarioForm.NuevoUsuario += ObtenerUsuarios;
@@ -158,6 +164,7 @@ namespace LosPatosSystem.Forms.UsuariosForms
             btnAgregar.Visible = false;
             btnEditar.Visible = false;
             btnEliminar.Visible = false;
+            btnCambiarPass.Visible = false;
             btnInactivos.Visible = false;
             btnRoles.Visible = false;
             btnActivar.Visible = true;
@@ -188,6 +195,7 @@ namespace LosPatosSystem.Forms.UsuariosForms
             btnAgregar.Visible = true;
             btnEditar.Visible = true;
             btnEliminar.Visible = true;
+            btnCambiarPass.Visible = true;
             btnInactivos.Visible = true;
             btnRoles.Visible = true;
             btnActivar.Visible = false;
@@ -229,6 +237,28 @@ namespace LosPatosSystem.Forms.UsuariosForms
             }
 
             
+        }
+
+        private void txtBuscar_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                if (string.IsNullOrEmpty(txtBuscar.Text))
+                {
+                    ObtenerUsuarios();
+                }
+                else
+                {
+                    Usuario usuario = new Usuario();
+                    usuario.Nombre = txtBuscar.Text;
+                    usuario.APaterno = txtBuscar.Text;
+                    usuario.AMaterno = txtBuscar.Text;
+                    usuario.Username = txtBuscar.Text;
+
+                    BuscarUsuario(usuario);
+                }
+            }
         }
     }
 }
