@@ -44,6 +44,7 @@
             this.btnFVentas = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.BarraTitulo = new System.Windows.Forms.Panel();
+            this.txtTitle = new System.Windows.Forms.Label();
             this.btnMaximizar = new System.Windows.Forms.PictureBox();
             this.btnMinimizar = new System.Windows.Forms.PictureBox();
             this.btnRestaurar = new System.Windows.Forms.PictureBox();
@@ -236,6 +237,7 @@
             this.btnFCompras.TabIndex = 3;
             this.btnFCompras.Text = "Compras";
             this.btnFCompras.UseVisualStyleBackColor = true;
+            this.btnFCompras.Click += new System.EventHandler(this.btnFCompras_Click);
             // 
             // btnFProductos
             // 
@@ -271,6 +273,7 @@
             this.btnFVentas.TabIndex = 1;
             this.btnFVentas.Text = "Ventas";
             this.btnFVentas.UseVisualStyleBackColor = true;
+            this.btnFVentas.Click += new System.EventHandler(this.btnFVentas_Click);
             // 
             // pictureBox1
             // 
@@ -286,6 +289,7 @@
             // BarraTitulo
             // 
             this.BarraTitulo.BackColor = System.Drawing.Color.Gainsboro;
+            this.BarraTitulo.Controls.Add(this.txtTitle);
             this.BarraTitulo.Controls.Add(this.btnMaximizar);
             this.BarraTitulo.Controls.Add(this.btnMinimizar);
             this.BarraTitulo.Controls.Add(this.btnRestaurar);
@@ -296,6 +300,17 @@
             this.BarraTitulo.Size = new System.Drawing.Size(1050, 50);
             this.BarraTitulo.TabIndex = 1;
             this.BarraTitulo.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BarraTitulo_MouseDown);
+            // 
+            // txtTitle
+            // 
+            this.txtTitle.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txtTitle.AutoSize = true;
+            this.txtTitle.Font = new System.Drawing.Font("Century Gothic", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTitle.Location = new System.Drawing.Point(492, 7);
+            this.txtTitle.Name = "txtTitle";
+            this.txtTitle.Size = new System.Drawing.Size(113, 38);
+            this.txtTitle.TabIndex = 5;
+            this.txtTitle.Text = "label1";
             // 
             // btnMaximizar
             // 
@@ -379,6 +394,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.BarraTitulo.ResumeLayout(false);
+            this.BarraTitulo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnMaximizar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnMinimizar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnRestaurar)).EndInit();
@@ -409,5 +425,6 @@
         private System.Windows.Forms.Panel panelUsuario;
         private System.Windows.Forms.Label txtUsuario;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Label txtTitle;
     }
 }

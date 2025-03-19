@@ -27,7 +27,7 @@ namespace LosPatosSystem.Forms.UsuariosForms
 
         private void UsuariosVista_Resize(object sender, EventArgs e)
         {
-            if (dgvUsuarios.Width == 978 && dgvUsuarios.Height == 577)
+            if (dgvUsuarios.Width == 978 && dgvUsuarios.Height == 633)
             {
                 dgvUsuarios.Width = dgvUsuarios.Width + 610;
                 dgvUsuarios.Height = dgvUsuarios.Height + 200;
@@ -35,7 +35,7 @@ namespace LosPatosSystem.Forms.UsuariosForms
             else
             {
                 dgvUsuarios.Width = 978;
-                dgvUsuarios.Height = 577;
+                dgvUsuarios.Height = 633;
             }
         }
 

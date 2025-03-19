@@ -41,7 +41,7 @@ namespace LosPatosSystem.Forms.PromocionesForms
 
         private void PromocionesVista_Resize(object sender, EventArgs e)
         {
-            if (dgvPromociones.Width == 932 && dgvPromociones.Height == 577)
+            if (dgvPromociones.Width == 932 && dgvPromociones.Height == 617)
             {
                 dgvPromociones.Width = dgvPromociones.Width + 610;
                 dgvPromociones.Height = dgvPromociones.Height + 200;
@@ -49,7 +49,7 @@ namespace LosPatosSystem.Forms.PromocionesForms
             else
             {
                 dgvPromociones.Width = 932;
-                dgvPromociones.Height = 577;
+                dgvPromociones.Height = 617;
             }
         }
 

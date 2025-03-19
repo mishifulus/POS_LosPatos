@@ -34,7 +34,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UsuariosVista));
             this.txtIdUsuario = new System.Windows.Forms.TextBox();
             this.dgvUsuarios = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
             this.panelBusqueda = new System.Windows.Forms.Panel();
             this.txtBuscar = new System.Windows.Forms.TextBox();
             this.btnBuscar = new System.Windows.Forms.PictureBox();
@@ -53,7 +52,7 @@
             // 
             // txtIdUsuario
             // 
-            this.txtIdUsuario.Location = new System.Drawing.Point(875, 66);
+            this.txtIdUsuario.Location = new System.Drawing.Point(875, 19);
             this.txtIdUsuario.Name = "txtIdUsuario";
             this.txtIdUsuario.Size = new System.Drawing.Size(100, 26);
             this.txtIdUsuario.TabIndex = 59;
@@ -88,7 +87,7 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvUsuarios.DefaultCellStyle = dataGridViewCellStyle3;
-            this.dgvUsuarios.Location = new System.Drawing.Point(27, 180);
+            this.dgvUsuarios.Location = new System.Drawing.Point(27, 124);
             this.dgvUsuarios.MultiSelect = false;
             this.dgvUsuarios.Name = "dgvUsuarios";
             this.dgvUsuarios.ReadOnly = true;
@@ -96,20 +95,9 @@
             this.dgvUsuarios.RowHeadersWidth = 62;
             this.dgvUsuarios.RowTemplate.Height = 28;
             this.dgvUsuarios.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvUsuarios.Size = new System.Drawing.Size(978, 577);
+            this.dgvUsuarios.Size = new System.Drawing.Size(978, 633);
             this.dgvUsuarios.TabIndex = 58;
             this.dgvUsuarios.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsuarios_CellClick);
-            // 
-            // label1
-            // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(444, 43);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(125, 28);
-            this.label1.TabIndex = 44;
-            this.label1.Text = "USUARIOS";
             // 
             // panelBusqueda
             // 
@@ -117,7 +105,7 @@
             this.panelBusqueda.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelBusqueda.Controls.Add(this.txtBuscar);
             this.panelBusqueda.Controls.Add(this.btnBuscar);
-            this.panelBusqueda.Location = new System.Drawing.Point(27, 98);
+            this.panelBusqueda.Location = new System.Drawing.Point(27, 51);
             this.panelBusqueda.Name = "panelBusqueda";
             this.panelBusqueda.Size = new System.Drawing.Size(274, 45);
             this.panelBusqueda.TabIndex = 62;
@@ -155,7 +143,7 @@
             this.btnCambiarPass.Font = new System.Drawing.Font("Century Gothic", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCambiarPass.ForeColor = System.Drawing.Color.White;
             this.btnCambiarPass.Image = ((System.Drawing.Image)(resources.GetObject("btnCambiarPass.Image")));
-            this.btnCambiarPass.Location = new System.Drawing.Point(514, 99);
+            this.btnCambiarPass.Location = new System.Drawing.Point(514, 52);
             this.btnCambiarPass.Name = "btnCambiarPass";
             this.btnCambiarPass.Size = new System.Drawing.Size(46, 45);
             this.btnCambiarPass.TabIndex = 63;
@@ -172,7 +160,7 @@
             this.btnUsuariosActivos.Font = new System.Drawing.Font("Century Gothic", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUsuariosActivos.ForeColor = System.Drawing.Color.White;
             this.btnUsuariosActivos.Image = ((System.Drawing.Image)(resources.GetObject("btnUsuariosActivos.Image")));
-            this.btnUsuariosActivos.Location = new System.Drawing.Point(578, 99);
+            this.btnUsuariosActivos.Location = new System.Drawing.Point(578, 52);
             this.btnUsuariosActivos.Name = "btnUsuariosActivos";
             this.btnUsuariosActivos.Size = new System.Drawing.Size(46, 45);
             this.btnUsuariosActivos.TabIndex = 61;
@@ -190,7 +178,7 @@
             this.btnActivar.Font = new System.Drawing.Font("Century Gothic", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnActivar.ForeColor = System.Drawing.Color.White;
             this.btnActivar.Image = ((System.Drawing.Image)(resources.GetObject("btnActivar.Image")));
-            this.btnActivar.Location = new System.Drawing.Point(514, 99);
+            this.btnActivar.Location = new System.Drawing.Point(514, 52);
             this.btnActivar.Name = "btnActivar";
             this.btnActivar.Size = new System.Drawing.Size(46, 45);
             this.btnActivar.TabIndex = 60;
@@ -208,7 +196,7 @@
             this.btnInactivos.Font = new System.Drawing.Font("Century Gothic", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnInactivos.ForeColor = System.Drawing.Color.White;
             this.btnInactivos.Image = ((System.Drawing.Image)(resources.GetObject("btnInactivos.Image")));
-            this.btnInactivos.Location = new System.Drawing.Point(578, 99);
+            this.btnInactivos.Location = new System.Drawing.Point(578, 52);
             this.btnInactivos.Name = "btnInactivos";
             this.btnInactivos.Size = new System.Drawing.Size(46, 45);
             this.btnInactivos.TabIndex = 50;
@@ -227,7 +215,7 @@
             this.btnRoles.ForeColor = System.Drawing.Color.White;
             this.btnRoles.Image = ((System.Drawing.Image)(resources.GetObject("btnRoles.Image")));
             this.btnRoles.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnRoles.Location = new System.Drawing.Point(862, 98);
+            this.btnRoles.Location = new System.Drawing.Point(862, 51);
             this.btnRoles.Name = "btnRoles";
             this.btnRoles.Size = new System.Drawing.Size(143, 45);
             this.btnRoles.TabIndex = 49;
@@ -245,7 +233,7 @@
             this.btnEliminar.Font = new System.Drawing.Font("Century Gothic", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEliminar.ForeColor = System.Drawing.Color.White;
             this.btnEliminar.Image = ((System.Drawing.Image)(resources.GetObject("btnEliminar.Image")));
-            this.btnEliminar.Location = new System.Drawing.Point(449, 98);
+            this.btnEliminar.Location = new System.Drawing.Point(449, 51);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(46, 45);
             this.btnEliminar.TabIndex = 47;
@@ -262,7 +250,7 @@
             this.btnEditar.Font = new System.Drawing.Font("Century Gothic", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEditar.ForeColor = System.Drawing.Color.White;
             this.btnEditar.Image = ((System.Drawing.Image)(resources.GetObject("btnEditar.Image")));
-            this.btnEditar.Location = new System.Drawing.Point(383, 98);
+            this.btnEditar.Location = new System.Drawing.Point(383, 51);
             this.btnEditar.Name = "btnEditar";
             this.btnEditar.Size = new System.Drawing.Size(46, 45);
             this.btnEditar.TabIndex = 46;
@@ -279,7 +267,7 @@
             this.btnAgregar.Font = new System.Drawing.Font("Century Gothic", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAgregar.ForeColor = System.Drawing.Color.White;
             this.btnAgregar.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregar.Image")));
-            this.btnAgregar.Location = new System.Drawing.Point(318, 98);
+            this.btnAgregar.Location = new System.Drawing.Point(318, 51);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(46, 45);
             this.btnAgregar.TabIndex = 45;
@@ -303,7 +291,6 @@
             this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.btnEditar);
             this.Controls.Add(this.btnAgregar);
-            this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "UsuariosVista";
             this.Text = "UsuariosVista";
@@ -328,7 +315,6 @@
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.Button btnEditar;
         private System.Windows.Forms.Button btnAgregar;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panelBusqueda;
         private System.Windows.Forms.TextBox txtBuscar;
         private System.Windows.Forms.PictureBox btnBuscar;

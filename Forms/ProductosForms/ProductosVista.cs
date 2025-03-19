@@ -46,7 +46,7 @@ namespace LosPatosSystem.Forms
 
         private void ProductosVista_Resize(object sender, EventArgs e)
         {
-            if (dgvProductos.Width == 932 && dgvProductos.Height == 577)
+            if (dgvProductos.Width == 932 && dgvProductos.Height == 623)
             {
                 dgvProductos.Width = dgvProductos.Width + 610;
                 dgvProductos.Height = dgvProductos.Height + 200;
@@ -54,7 +54,7 @@ namespace LosPatosSystem.Forms
             else
             {
                 dgvProductos.Width = 932;
-                dgvProductos.Height = 577;
+                dgvProductos.Height = 623;
             }
         }
 

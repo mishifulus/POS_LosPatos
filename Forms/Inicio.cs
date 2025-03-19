@@ -67,5 +67,10 @@ namespace LosPatosSystem.Forms
         {
             CargarProductosBajoStock();
         }
+
+        private void dgvBajoStock_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

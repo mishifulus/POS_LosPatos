@@ -14,9 +14,10 @@ namespace LosPatosSystem.Forms
 {
     public partial class Main : Form
     {
-        private int IdSesion;
+        private int IdSesion { get; set; }
         public int IdUsuario { get; set; }
         public int IdRol { get; set; }
+        public string Username { get; set; }
 
 
         public Main(int IdSesion, int IdUsuario, string Username, int IdRol)
@@ -33,8 +34,10 @@ namespace LosPatosSystem.Forms
             this.IdSesion = IdSesion;
             this.IdUsuario = IdUsuario;
             this.IdRol = IdRol;
+            this.Username = Username;
 
             txtUsuario.Text = Username;
+            txtTitle.Text = string.Empty;
         }
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
@@ -108,6 +111,7 @@ namespace LosPatosSystem.Forms
 
         private void btnFProductos_Click(object sender, EventArgs e)
         {
+            txtTitle.Text = "PRODUCTOS";
             AbrirFormInPanel(new Forms.ProductosVista(IdUsuario, IdRol));
         }
 
@@ -143,17 +147,32 @@ namespace LosPatosSystem.Forms
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
+            txtTitle.Text = string.Empty;
             AbrirFormInPanel(new Forms.Inicio());
         }
 
         private void btnFUsuarios_Click(object sender, EventArgs e)
         {
+            txtTitle.Text = "USUARIOS";
             AbrirFormInPanel(new Forms.UsuariosForms.UsuariosVista());
         }
 
         private void btnFPromociones_Click(object sender, EventArgs e)
         {
+            txtTitle.Text = "PROMOCIONES";
             AbrirFormInPanel(new Forms.PromocionesForms.PromocionesVista(IdUsuario, IdRol));
+        }
+
+        private void btnFCompras_Click(object sender, EventArgs e)
+        {
+            txtTitle.Text = "COMPRAS";
+            AbrirFormInPanel(new Forms.ComprasForms.ComprasVista(IdUsuario, Username));
+        }
+
+        private void btnFVentas_Click(object sender, EventArgs e)
+        {
+            txtTitle.Text = "VENTAS";
+            AbrirFormInPanel(new Forms.VentasForms.VentasVista());
         }
     }
 }

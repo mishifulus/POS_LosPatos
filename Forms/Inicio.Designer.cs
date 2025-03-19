@@ -113,6 +113,7 @@
             this.dgvBajoStock.RowTemplate.Height = 28;
             this.dgvBajoStock.Size = new System.Drawing.Size(537, 378);
             this.dgvBajoStock.TabIndex = 6;
+            this.dgvBajoStock.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBajoStock_CellContentClick);
             // 
             // Inicio
             // 
