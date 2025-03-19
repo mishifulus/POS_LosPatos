@@ -211,6 +211,18 @@
     <Compile Include="Forms\UsuariosForms\UsuariosVista.Designer.cs">
       <DependentUpon>UsuariosVista.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\VentasForms\AceptarVenta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\VentasForms\AceptarVenta.Designer.cs">
+      <DependentUpon>AceptarVenta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\VentasForms\VentasVista.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\VentasForms\VentasVista.Designer.cs">
+      <DependentUpon>VentasVista.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Caja.cs" />
     <Compile Include="Models\Categoria.cs" />
     <Compile Include="Models\Compra.cs" />
@@ -273,6 +285,12 @@
     <EmbeddedResource Include="Forms\UsuariosForms\UsuariosVista.resx">
       <DependentUpon>UsuariosVista.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\VentasForms\AceptarVenta.resx">
+      <DependentUpon>AceptarVenta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\VentasForms\VentasVista.resx">
+      <DependentUpon>VentasVista.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -299,7 +317,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Config\" />
-    <Folder Include="Forms\VentasForms\" />
     <Folder Include="Utils\" />
   </ItemGroup>
   <ItemGroup>

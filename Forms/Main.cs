@@ -172,7 +172,7 @@ namespace LosPatosSystem.Forms
         private void btnFVentas_Click(object sender, EventArgs e)
         {
             txtTitle.Text = "VENTAS";
-            AbrirFormInPanel(new Forms.VentasForms.VentasVista());
+            AbrirFormInPanel(new Forms.VentasForms.VentasVista(IdUsuario, Username));
         }
     }
 }

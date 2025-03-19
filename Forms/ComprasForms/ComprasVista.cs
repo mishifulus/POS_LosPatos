@@ -180,13 +180,29 @@ namespace LosPatosSystem.Forms.ComprasForms
             double precioUnitario = Convert.ToDouble(txtPrecioCompra.Text);
             double subtotal = cantidad * precioUnitario;
 
-            detalleCompra.Rows.Add(idProducto, producto, descripcion, cantidad, precioUnitario, subtotal);
+            bool productoExistente = false;
+
+            foreach (DataRow row in detalleCompra.Rows)
+            {
+                if (Convert.ToInt32(row["IdProducto"]) == idProducto)
+                {
+                    row["Cantidad"] = Convert.ToInt32(row["Cantidad"]) + cantidad;
+                    row["Subtotal"] = Convert.ToDouble(row["Subtotal"]) + subtotal;
+                    productoExistente = true;
+                    break;
+                }
+            }
+
+            if (!productoExistente)
+            {
+                detalleCompra.Rows.Add(idProducto, producto, descripcion, cantidad, precioUnitario, subtotal);
+            }
             CalcularTotal();
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("¿Seguro que deseas cancelar la venta?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            DialogResult result = MessageBox.Show("¿Seguro que deseas cancelar la compra?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)
             {
                 txtTotal.Text = "$0";
@@ -213,6 +229,9 @@ namespace LosPatosSystem.Forms.ComprasForms
             detalleCompra.Columns.Remove("Subtotal");
 
             AceptarCompra aceptarCompra = new AceptarCompra(IdUsuario, Convert.ToDouble(txtTotal.Text.Substring(1)), detalleCompra);
+
+            InicializarTabla();
+
             aceptarCompra.Show();
         }
     }
