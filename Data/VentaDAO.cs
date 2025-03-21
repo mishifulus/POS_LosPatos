@@ -73,5 +73,30 @@ namespace LosPatosSystem.Data
                 return false;
             }
         }
+
+        public double AplicarPromocion(int idProducto, int cantidad, double precioVenta)
+        {
+            double descuentoAplicado = 0;
+
+            using (SqlConnection conexion = ConexionBD.ObtenerConexion())
+            {
+                conexion.Open();
+                using (SqlCommand cmd = new SqlCommand("sp_AplicarPromocion", conexion))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@IdProducto", idProducto);
+                    cmd.Parameters.AddWithValue("@Cantidad", cantidad);
+                    cmd.Parameters.AddWithValue("@PrecioVenta", precioVenta);
+
+                    SqlParameter outputDescuento = new SqlParameter("@DescuentoAplicado", SqlDbType.Decimal) { Direction = ParameterDirection.Output };
+                    cmd.Parameters.Add(outputDescuento);
+
+                    cmd.ExecuteNonQuery();
+                    descuentoAplicado = Convert.ToDouble(outputDescuento.Value);
+                }
+            }
+
+            return descuentoAplicado;
+        }
     }
 }

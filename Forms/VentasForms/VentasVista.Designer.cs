@@ -58,7 +58,7 @@
             this.btnMenos = new System.Windows.Forms.Button();
             this.txtCantidad = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.txtPrecioCompra = new System.Windows.Forms.TextBox();
+            this.txtPrecioVenta = new System.Windows.Forms.TextBox();
             this.txtDescripcion = new System.Windows.Forms.TextBox();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -227,7 +227,7 @@
             this.panel3.Controls.Add(this.btnMenos);
             this.panel3.Controls.Add(this.txtCantidad);
             this.panel3.Controls.Add(this.label6);
-            this.panel3.Controls.Add(this.txtPrecioCompra);
+            this.panel3.Controls.Add(this.txtPrecioVenta);
             this.panel3.Controls.Add(this.txtDescripcion);
             this.panel3.Controls.Add(this.txtNombre);
             this.panel3.Controls.Add(this.label5);
@@ -356,6 +356,7 @@
             this.txtCantidad.Name = "txtCantidad";
             this.txtCantidad.Size = new System.Drawing.Size(153, 32);
             this.txtCantidad.TabIndex = 7;
+            this.txtCantidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label6
             // 
@@ -367,14 +368,14 @@
             this.label6.TabIndex = 6;
             this.label6.Text = "$";
             // 
-            // txtPrecioCompra
+            // txtPrecioVenta
             // 
-            this.txtPrecioCompra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtPrecioCompra.Font = new System.Drawing.Font("Century Gothic", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPrecioCompra.Location = new System.Drawing.Point(92, 338);
-            this.txtPrecioCompra.Name = "txtPrecioCompra";
-            this.txtPrecioCompra.Size = new System.Drawing.Size(236, 27);
-            this.txtPrecioCompra.TabIndex = 5;
+            this.txtPrecioVenta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtPrecioVenta.Font = new System.Drawing.Font("Century Gothic", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPrecioVenta.Location = new System.Drawing.Point(92, 338);
+            this.txtPrecioVenta.Name = "txtPrecioVenta";
+            this.txtPrecioVenta.Size = new System.Drawing.Size(236, 27);
+            this.txtPrecioVenta.TabIndex = 5;
             // 
             // txtDescripcion
             // 
@@ -470,6 +471,7 @@
             this.dgvDetalleVenta.Size = new System.Drawing.Size(644, 599);
             this.dgvDetalleVenta.TabIndex = 42;
             this.dgvDetalleVenta.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDetalleVenta_CellClick);
+            this.dgvDetalleVenta.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dgvDetalleVenta_CellPainting);
             // 
             // dgvDetalleCompra
             // 
@@ -566,7 +568,7 @@
         private System.Windows.Forms.Button btnMenos;
         private System.Windows.Forms.TextBox txtCantidad;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox txtPrecioCompra;
+        private System.Windows.Forms.TextBox txtPrecioVenta;
         private System.Windows.Forms.TextBox txtDescripcion;
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Label label5;

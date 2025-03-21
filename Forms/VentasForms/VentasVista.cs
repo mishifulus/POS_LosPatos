@@ -37,6 +37,9 @@ namespace LosPatosSystem.Forms.VentasForms
             txtFecha.Text = fecha;
             txtUsername.Text = Username;
             ObtenerProductos();
+
+            dgvDetalleVenta.CellPainting += new DataGridViewCellPaintingEventHandler(dgvDetalleVenta_CellPainting);
+
         }
 
         private void InicializarTabla()
@@ -47,6 +50,7 @@ namespace LosPatosSystem.Forms.VentasForms
             detalleVenta.Columns.Add("Descripcion", typeof(string));
             detalleVenta.Columns.Add("Cantidad", typeof(int));
             detalleVenta.Columns.Add("PrecioUnitario", typeof(double));
+            detalleVenta.Columns.Add("Descuento", typeof(double));
             detalleVenta.Columns.Add("Subtotal", typeof(double));
             dgvDetalleVenta.DataSource = detalleVenta;
 
@@ -60,6 +64,8 @@ namespace LosPatosSystem.Forms.VentasForms
             dgvDetalleVenta.Columns["IdProducto"].Visible = false;
             dgvDetalleVenta.Columns["PrecioUnitario"].HeaderText = "Precio Unitario";
             dgvDetalleVenta.Columns["PrecioUnitario"].DefaultCellStyle.Format = "C";
+            dgvDetalleVenta.Columns["Descuento"].HeaderText = "Precio Con Descuento";
+            dgvDetalleVenta.Columns["Descuento"].DefaultCellStyle.Format = "C";
             dgvDetalleVenta.Columns["Subtotal"].DefaultCellStyle.Format = "C";
         }
 
@@ -106,7 +112,7 @@ namespace LosPatosSystem.Forms.VentasForms
             txtCodigo.Text = row["Codigo"].ToString();
             txtNombre.Text = row["Nombre"].ToString();
             txtDescripcion.Text = row["Descripcion"].ToString();
-            txtPrecioCompra.Text = row["PrecioCompra"].ToString();
+            txtPrecioVenta.Text = row["PrecioVenta"].ToString();
             txtUnidad.Text = row["Unidad"].ToString();
             txtCantidad.Text = "1";
             txtCantidad.Focus();
@@ -176,8 +182,14 @@ namespace LosPatosSystem.Forms.VentasForms
             string producto = txtNombre.Text;
             string descripcion = txtDescripcion.Text;
             int cantidad = Convert.ToInt32(txtCantidad.Text);
-            double precioUnitario = Convert.ToDouble(txtPrecioCompra.Text);
+            double precioUnitario = Convert.ToDouble(txtPrecioVenta.Text);
             double subtotal = cantidad * precioUnitario;
+
+            VentaDAO ventaDAO = new VentaDAO();
+            double descuento = ventaDAO.AplicarPromocion(idProducto, cantidad, precioUnitario);
+            double precioConDescuento = precioUnitario - (descuento / cantidad);
+            subtotal = cantidad * precioConDescuento;
+
 
             bool productoExistente = false;
 
@@ -186,7 +198,8 @@ namespace LosPatosSystem.Forms.VentasForms
                 if (Convert.ToInt32(row["IdProducto"]) == idProducto)
                 {
                     row["Cantidad"] = Convert.ToInt32(row["Cantidad"]) + cantidad;
-                    row["Subtotal"] = Convert.ToDouble(row["Subtotal"]) + subtotal;
+                    row["PrecioUnitario"] = precioConDescuento;
+                    row["Subtotal"] = (Convert.ToInt32(row["Cantidad"]) + cantidad) * precioConDescuento;
                     productoExistente = true;
                     break;
                 }
@@ -194,7 +207,7 @@ namespace LosPatosSystem.Forms.VentasForms
 
             if (!productoExistente)
             {
-                detalleVenta.Rows.Add(idProducto, producto, descripcion, cantidad, precioUnitario, subtotal);
+                detalleVenta.Rows.Add(idProducto, producto, descripcion, cantidad, precioUnitario, precioConDescuento, subtotal);
             }
             CalcularTotal();
         }
@@ -225,6 +238,7 @@ namespace LosPatosSystem.Forms.VentasForms
         {
             detalleVenta.Columns.Remove("Producto");
             detalleVenta.Columns.Remove("Descripcion");
+            detalleVenta.Columns.Remove("PrecioUnitario");
             detalleVenta.Columns.Remove("Subtotal");
 
             AceptarVenta aceptarVenta = new AceptarVenta(IdUsuario, Convert.ToDouble(txtTotal.Text.Substring(1)), detalleVenta);
@@ -233,6 +247,35 @@ namespace LosPatosSystem.Forms.VentasForms
 
             aceptarVenta.Show();
             
+        }
+
+        private void dgvDetalleVenta_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            if (dgvDetalleVenta.Columns[e.ColumnIndex].Name == "PrecioUnitario" && e.RowIndex >= 0)
+            {
+                double precioConDescuento = Convert.ToDouble(dgvDetalleVenta.Rows[e.RowIndex].Cells["Descuento"].Value ?? 0);
+                double precioOriginal = Convert.ToDouble(dgvDetalleVenta.Rows[e.RowIndex].Cells["PrecioUnitario"].Value);
+
+                e.PaintBackground(e.CellBounds, true);
+
+                if (precioConDescuento < precioOriginal)
+                {
+
+                    using (Font fontTachado = new Font(e.CellStyle.Font, FontStyle.Strikeout))
+                    {
+                        SizeF textSize = e.Graphics.MeasureString(precioOriginal.ToString("C"), fontTachado);
+
+                        // Calcular posición centrada en la celda
+                        float posX = e.CellBounds.X + (e.CellBounds.Width - textSize.Width) / 2;
+                        float posY = e.CellBounds.Y + (e.CellBounds.Height - textSize.Height) / 2;
+
+                        // Dibujar el texto centrado
+                        e.Graphics.DrawString(precioOriginal.ToString("C"), fontTachado, Brushes.Red, e.CellBounds.Left, posY);
+                    }
+
+                    e.Handled = true;
+                }
+            }
         }
     }
 }
