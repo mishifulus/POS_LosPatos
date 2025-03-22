@@ -44,6 +44,7 @@ namespace LosPatosSystem.Forms.ComprasForms
         {
             detalleCompra = new DataTable();
             detalleCompra.Columns.Add("IdProducto", typeof(int));
+            detalleCompra.Columns.Add("Codigo", typeof(string));
             detalleCompra.Columns.Add("Producto", typeof(string));
             detalleCompra.Columns.Add("Descripcion", typeof(string));
             detalleCompra.Columns.Add("Cantidad", typeof(int));
@@ -60,6 +61,7 @@ namespace LosPatosSystem.Forms.ComprasForms
 
             dgvDetalleCompra.Columns["IdProducto"].Visible = false;
             dgvDetalleCompra.Columns["PrecioUnitario"].HeaderText = "Precio Unitario";
+            dgvDetalleCompra.Columns["Codigo"].HeaderText = "Código";
             dgvDetalleCompra.Columns["PrecioUnitario"].DefaultCellStyle.Format = "C";
             dgvDetalleCompra.Columns["Subtotal"].DefaultCellStyle.Format = "C";
         }
@@ -174,6 +176,7 @@ namespace LosPatosSystem.Forms.ComprasForms
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             int idProducto = Convert.ToInt32(txtIdProducto.Text);
+            string codigo = txtCodigo.Text;
             string producto = txtNombre.Text;
             string descripcion = txtDescripcion.Text;
             int cantidad = Convert.ToInt32(txtCantidad.Text);
@@ -195,7 +198,7 @@ namespace LosPatosSystem.Forms.ComprasForms
 
             if (!productoExistente)
             {
-                detalleCompra.Rows.Add(idProducto, producto, descripcion, cantidad, precioUnitario, subtotal);
+                detalleCompra.Rows.Add(idProducto, codigo, producto, descripcion, cantidad, precioUnitario, subtotal);
             }
             CalcularTotal();
         }
@@ -224,6 +227,7 @@ namespace LosPatosSystem.Forms.ComprasForms
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
+            detalleCompra.Columns.Remove("Codigo");
             detalleCompra.Columns.Remove("Producto");
             detalleCompra.Columns.Remove("Descripcion");
             detalleCompra.Columns.Remove("Subtotal");

@@ -17,6 +17,7 @@ namespace LosPatosSystem.Forms
     {
         private Timer timer;
         String fecha = DateTime.Now.ToString("dddd d 'de' MMMM 'de' yyyy", new CultureInfo("es-ES"));
+        DataTable productosStock {  get; set; }
         public Inicio()
         {
             InitializeComponent();
@@ -43,24 +44,13 @@ namespace LosPatosSystem.Forms
         private void CargarProductosBajoStock()
         {
             ProductoDAO productoDAO = new ProductoDAO();
-            List<Producto> productos = productoDAO.obtenerProductosBajoStock();
-            dgvBajoStock.DataSource = productos;
+            productosStock = productoDAO.obtenerProductosBajoStock();
+            dgvBajoStock.DataSource = productosStock;
 
             dgvBajoStock.Columns["IdProducto"].Visible = false;
             dgvBajoStock.Columns["Codigo"].HeaderText = "Código";
             dgvBajoStock.Columns["Nombre"].HeaderText = "Producto";
-            dgvBajoStock.Columns["IdUnidad"].Visible = false;
-            dgvBajoStock.Columns["Descripcion"].Visible = false;
-            dgvBajoStock.Columns["IdCategoria"].Visible = false;
-            dgvBajoStock.Columns["PrecioCompra"].Visible = false;
-            dgvBajoStock.Columns["PrecioVenta"].Visible = false;
             dgvBajoStock.Columns["StockMinimo"].HeaderText = "Stock Mínimo";
-            dgvBajoStock.Columns["FechaCreacion"].Visible = false;
-            dgvBajoStock.Columns["IdUsuario"].Visible = false;
-            dgvBajoStock.Columns["EstatusRegistro"].Visible = false;
-
-            dgvBajoStock.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvBajoStock.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
         }
 
         private void Inicio_Load(object sender, EventArgs e)

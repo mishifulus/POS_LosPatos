@@ -130,42 +130,33 @@ namespace LosPatosSystem.Data
             }
         }
 
-        public List<Producto> obtenerProductosBajoStock()
+        public DataTable obtenerProductosBajoStock()
         {
-            List<Producto> productos = new List<Producto>();
+            DataTable dtProductos = new DataTable();
 
-            try
+            using (SqlConnection conexion = ConexionBD.ObtenerConexion())
             {
-                using (SqlConnection conexion = ConexionBD.ObtenerConexion())
+                try
                 {
                     conexion.Open();
+
                     string query = "SELECT IdProducto, Codigo, Nombre, Stock, StockMinimo FROM Productos WHERE Stock < StockMinimo AND EstatusRegistro = 1";
                     using (SqlCommand cmd = new SqlCommand(query, conexion))
                     {
-                        using (SqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                Producto producto = new Producto
-                                {
-                                    IdProducto = reader.GetInt32(0),
-                                    Nombre = reader.GetString(1),
-                                    Codigo = reader.GetString(2),
-                                    Stock = reader.GetInt32(8),
-                                    StockMinimo = reader.GetInt32(9)
-                                };
-                                productos.Add(producto);
-                            }
-                        }
+                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                        adapter.Fill(dtProductos);
                     }
                 }
-                return productos;
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+                finally
+                {
+                    conexion.Close();
+                }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message);
-                return null;
-            }
+            return dtProductos;
         }
     }
 }

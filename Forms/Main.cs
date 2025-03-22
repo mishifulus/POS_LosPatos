@@ -174,5 +174,11 @@ namespace LosPatosSystem.Forms
             txtTitle.Text = "VENTAS";
             AbrirFormInPanel(new Forms.VentasForms.VentasVista(IdUsuario, Username));
         }
+
+        private void btnDevoluciones_Click(object sender, EventArgs e)
+        {
+            txtTitle.Text = "DEVOLUCIONES";
+            AbrirFormInPanel(new Forms.DevolucionesForms.DevolucionesVista(IdUsuario, Username));
+        }
     }
 }

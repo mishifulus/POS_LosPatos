@@ -39,13 +39,13 @@ namespace LosPatosSystem.Forms.VentasForms
             ObtenerProductos();
 
             dgvDetalleVenta.CellPainting += new DataGridViewCellPaintingEventHandler(dgvDetalleVenta_CellPainting);
-
         }
 
         private void InicializarTabla()
         {
             detalleVenta = new DataTable();
             detalleVenta.Columns.Add("IdProducto", typeof(int));
+            detalleVenta.Columns.Add("Codigo", typeof(string));
             detalleVenta.Columns.Add("Producto", typeof(string));
             detalleVenta.Columns.Add("Descripcion", typeof(string));
             detalleVenta.Columns.Add("Cantidad", typeof(int));
@@ -63,6 +63,7 @@ namespace LosPatosSystem.Forms.VentasForms
 
             dgvDetalleVenta.Columns["IdProducto"].Visible = false;
             dgvDetalleVenta.Columns["PrecioUnitario"].HeaderText = "Precio Unitario";
+            dgvDetalleVenta.Columns["Codigo"].HeaderText = "Código";
             dgvDetalleVenta.Columns["PrecioUnitario"].DefaultCellStyle.Format = "C";
             dgvDetalleVenta.Columns["Descuento"].HeaderText = "Precio Con Descuento";
             dgvDetalleVenta.Columns["Descuento"].DefaultCellStyle.Format = "C";
@@ -179,17 +180,12 @@ namespace LosPatosSystem.Forms.VentasForms
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             int idProducto = Convert.ToInt32(txtIdProducto.Text);
+            string codigo = txtCodigo.Text;
             string producto = txtNombre.Text;
             string descripcion = txtDescripcion.Text;
             int cantidad = Convert.ToInt32(txtCantidad.Text);
             double precioUnitario = Convert.ToDouble(txtPrecioVenta.Text);
             double subtotal = cantidad * precioUnitario;
-
-            VentaDAO ventaDAO = new VentaDAO();
-            double descuento = ventaDAO.AplicarPromocion(idProducto, cantidad, precioUnitario);
-            double precioConDescuento = precioUnitario - (descuento / cantidad);
-            subtotal = cantidad * precioConDescuento;
-
 
             bool productoExistente = false;
 
@@ -197,9 +193,16 @@ namespace LosPatosSystem.Forms.VentasForms
             {
                 if (Convert.ToInt32(row["IdProducto"]) == idProducto)
                 {
-                    row["Cantidad"] = Convert.ToInt32(row["Cantidad"]) + cantidad;
-                    row["PrecioUnitario"] = precioConDescuento;
-                    row["Subtotal"] = (Convert.ToInt32(row["Cantidad"]) + cantidad) * precioConDescuento;
+                    int newCantidad = Convert.ToInt32(row["Cantidad"]) + cantidad;
+
+                    VentaDAO ventaDAO = new VentaDAO();
+                    double descuento = ventaDAO.AplicarPromocion(idProducto, newCantidad, precioUnitario);
+                    double precioConDescuento = precioUnitario - (descuento / newCantidad);
+                    subtotal = newCantidad * precioConDescuento;
+
+                    row["Cantidad"] = newCantidad;
+                    row["Descuento"] = precioConDescuento;
+                    row["Subtotal"] = subtotal;
                     productoExistente = true;
                     break;
                 }
@@ -207,7 +210,12 @@ namespace LosPatosSystem.Forms.VentasForms
 
             if (!productoExistente)
             {
-                detalleVenta.Rows.Add(idProducto, producto, descripcion, cantidad, precioUnitario, precioConDescuento, subtotal);
+                VentaDAO ventaDAO = new VentaDAO();
+                double descuento = ventaDAO.AplicarPromocion(idProducto, cantidad, precioUnitario);
+                double precioConDescuento = precioUnitario - (descuento / cantidad);
+                subtotal = cantidad * precioConDescuento;
+
+                detalleVenta.Rows.Add(idProducto, codigo, producto, descripcion, cantidad, precioUnitario, precioConDescuento, subtotal);
             }
             CalcularTotal();
         }
@@ -236,17 +244,26 @@ namespace LosPatosSystem.Forms.VentasForms
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            detalleVenta.Columns.Remove("Producto");
-            detalleVenta.Columns.Remove("Descripcion");
-            detalleVenta.Columns.Remove("PrecioUnitario");
-            detalleVenta.Columns.Remove("Subtotal");
+            if (detalleVenta.Rows.Count > 0)
+            {
+                detalleVenta.Columns.Remove("Codigo");
+                detalleVenta.Columns.Remove("Producto");
+                detalleVenta.Columns.Remove("Descripcion");
+                detalleVenta.Columns.Remove("Descuento");
+                detalleVenta.Columns.Remove("Subtotal");
 
-            AceptarVenta aceptarVenta = new AceptarVenta(IdUsuario, Convert.ToDouble(txtTotal.Text.Substring(1)), detalleVenta);
+                AceptarVenta aceptarVenta = new AceptarVenta(IdUsuario, Convert.ToDouble(txtTotal.Text.Substring(1)), detalleVenta);
 
-            InicializarTabla();
+                InicializarTabla();
 
-            aceptarVenta.Show();
-            
+                aceptarVenta.Show();
+            }
+            else
+            {
+                MessageBox.Show("No hay productos para vender.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
         }
 
         private void dgvDetalleVenta_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)

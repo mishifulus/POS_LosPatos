@@ -133,6 +133,18 @@
     <Compile Include="Forms\ComprasForms\ComprasVista.Designer.cs">
       <DependentUpon>ComprasVista.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\DevolucionesForms\AceptarDevolucion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DevolucionesForms\AceptarDevolucion.Designer.cs">
+      <DependentUpon>AceptarDevolucion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\DevolucionesForms\DevolucionesVista.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DevolucionesForms\DevolucionesVista.Designer.cs">
+      <DependentUpon>DevolucionesVista.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Inicio.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -245,6 +257,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ComprasForms\ComprasVista.resx">
       <DependentUpon>ComprasVista.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DevolucionesForms\AceptarDevolucion.resx">
+      <DependentUpon>AceptarDevolucion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DevolucionesForms\DevolucionesVista.resx">
+      <DependentUpon>DevolucionesVista.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>
