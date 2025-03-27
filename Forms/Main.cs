@@ -147,7 +147,7 @@ namespace LosPatosSystem.Forms
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            txtTitle.Text = string.Empty;
+            txtTitle.Text = "INICIO";
             AbrirFormInPanel(new Forms.Inicio());
         }
 
@@ -179,6 +179,12 @@ namespace LosPatosSystem.Forms
         {
             txtTitle.Text = "DEVOLUCIONES";
             AbrirFormInPanel(new Forms.DevolucionesForms.DevolucionesVista(IdUsuario, Username));
+        }
+
+        private void btnFCaja_Click(object sender, EventArgs e)
+        {
+            txtTitle.Text = "CAJA";
+            AbrirFormInPanel(new Forms.CajaForms.CajaVista(IdUsuario, IdRol));
         }
     }
 }

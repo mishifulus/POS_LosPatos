@@ -91,6 +91,11 @@ namespace LosPatosSystem.Forms.VentasForms
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+            if (Convert.ToDouble(txtRecibido.Text) < Convert.ToDouble(txtTotal.Text))
+            {
+                MessageBox.Show("Ingrese la cantidad completa", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
             VentaDAO ventaDAO = new VentaDAO();
             int idVenta = 0;
             bool result = ventaDAO.RegistrarVenta(Total, (int)cmbTipoPago.SelectedValue, IdUsuario, detalleVenta, out idVenta);

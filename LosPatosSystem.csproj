@@ -121,6 +121,18 @@
     <Compile Include="Data\UnidadDAO.cs" />
     <Compile Include="Data\UsuarioDAO.cs" />
     <Compile Include="Data\VentaDAO.cs" />
+    <Compile Include="Forms\CajaForms\CajaVista.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CajaForms\CajaVista.Designer.cs">
+      <DependentUpon>CajaVista.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CajaForms\MovimientoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CajaForms\MovimientoForm.Designer.cs">
+      <DependentUpon>MovimientoForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ComprasForms\AceptarCompra.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -252,6 +264,12 @@
     <Compile Include="Models\Venta.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\CajaForms\CajaVista.resx">
+      <DependentUpon>CajaVista.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CajaForms\MovimientoForm.resx">
+      <DependentUpon>MovimientoForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ComprasForms\AceptarCompra.resx">
       <DependentUpon>AceptarCompra.cs</DependentUpon>
     </EmbeddedResource>

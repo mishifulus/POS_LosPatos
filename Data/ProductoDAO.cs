@@ -88,48 +88,6 @@ namespace LosPatosSystem.Data
             }
         }
 
-        public string RevisarStock(int IdProducto)
-        {
-            string Mensaje = string.Empty;
-
-            using (SqlConnection conexion = ConexionBD.ObtenerConexion())
-            {
-                conexion.Open();
-                try
-                {
-                    using (SqlCommand cmd = new SqlCommand("spRevisarStock", conexion))
-                    {
-                        cmd.CommandType = CommandType.StoredProcedure;
-
-                        // Parámetros de entrada
-                        cmd.Parameters.AddWithValue("@IdProducto", IdProducto);
-
-                        SqlParameter paramMensaje = new SqlParameter("@Mensaje", SqlDbType.NVarChar, 40)
-                        {
-                            Direction = ParameterDirection.Output
-                        };
-                        cmd.Parameters.Add(paramMensaje);
-
-                        cmd.ExecuteNonQuery();
-
-                        // Obtener valores de salida
-                        Mensaje = paramMensaje.Value.ToString();
-
-                        return Mensaje;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error: " + ex.Message);
-                    return null;
-                }
-                finally
-                {
-                    conexion.Close();
-                }
-            }
-        }
-
         public DataTable obtenerProductosBajoStock()
         {
             DataTable dtProductos = new DataTable();

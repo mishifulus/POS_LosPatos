@@ -235,6 +235,7 @@ namespace LosPatosSystem.Forms.ComprasForms
             AceptarCompra aceptarCompra = new AceptarCompra(IdUsuario, Convert.ToDouble(txtTotal.Text.Substring(1)), detalleCompra);
 
             InicializarTabla();
+            txtTotal.Text = "$0";
 
             aceptarCompra.Show();
         }

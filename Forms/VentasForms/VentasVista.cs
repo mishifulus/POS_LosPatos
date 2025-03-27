@@ -255,6 +255,7 @@ namespace LosPatosSystem.Forms.VentasForms
                 AceptarVenta aceptarVenta = new AceptarVenta(IdUsuario, Convert.ToDouble(txtTotal.Text.Substring(1)), detalleVenta);
 
                 InicializarTabla();
+                txtTotal.Text = "$0";
 
                 aceptarVenta.Show();
             }

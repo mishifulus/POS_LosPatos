@@ -46,6 +46,10 @@ namespace LosPatosSystem.Forms.DevolucionesForms
 
         private void ObtenerProductos(int IdVenta)
         {
+            dgvDetalleDevolucion.Columns.Clear();
+            dgvDetalleDevolucion.DataSource = null;
+            dgvDetalleDevolucion.Rows.Clear();
+
             DevolucionDAO devolucionDAO = new DevolucionDAO();
             detalleDevolucion = devolucionDAO.ObtenerProductosVenta(IdVenta);
 
@@ -73,9 +77,10 @@ namespace LosPatosSystem.Forms.DevolucionesForms
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
+
             if (txtIdDevolucion != null)
             {
-                ObtenerProductos(Convert.ToInt32(txtIdDevolucion.Text));
+                ObtenerProductos(Convert.ToInt32(txtIdVenta.Text));
             }
             else
             {
@@ -90,6 +95,8 @@ namespace LosPatosSystem.Forms.DevolucionesForms
             if (result == DialogResult.Yes)
             {
                 txtTotal.Text = "$0";
+                txtIdVenta.Text = string.Empty;
+                txtMotivo.Text = string.Empty;
                 detalleDevolucion.Clear();
             }
         }
@@ -116,14 +123,16 @@ namespace LosPatosSystem.Forms.DevolucionesForms
                 detalleDevolucion.Columns.Remove("Descripcion");
                 detalleDevolucion.Columns.Remove("Subtotal");
 
-                AceptarDevolucion aceptarDevolucion = new AceptarDevolucion(IdUsuario, Convert.ToDouble(txtTotal.Text.Substring(1)), txtMotivo.Text, Convert.ToInt32(txtIdVenta.Text), detalleDevolucion);
-                
+                AceptarDevolucion aceptarDevolucion = new AceptarDevolucion(IdUsuario, Convert.ToDouble(txtTotal.Text.Substring(1)), txtMotivo.Text, Convert.ToInt32(txtIdVenta.Text), detalleDevolucion.Copy());
+
+                aceptarDevolucion.Show();
+
                 detalleDevolucion.Clear();
                 detalleDevolucion.Columns.Clear();
                 dgvDetalleDevolucion.Columns.Remove("Eliminar");
                 txtTotal.Text = "$0";
-
-                aceptarDevolucion.Show();
+                txtIdVenta.Text = string.Empty;
+                txtMotivo.Text = string.Empty;
             }
             else
             {

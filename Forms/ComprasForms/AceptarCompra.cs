@@ -90,6 +90,12 @@ namespace LosPatosSystem.Forms.ComprasForms
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+
+            if (Convert.ToDouble(txtRecibido.Text) < Convert.ToDouble(txtTotal.Text))
+            {
+                MessageBox.Show("Ingrese la cantidad completa", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
             CompraDAO compraDAO = new CompraDAO();
             int idCompra = 0;
             bool result = compraDAO.RegistrarCompra(Total, (int)cmbTipoPago.SelectedValue, IdUsuario, detalleCompra, out idCompra);

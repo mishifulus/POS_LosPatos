@@ -1,4 +1,5 @@
 ﻿using LosPatosSystem.Data;
+using LosPatosSystem.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -68,6 +69,12 @@ namespace LosPatosSystem.Forms.DevolucionesForms
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+            if (detalleDevolucion == null || detalleDevolucion.Columns.Count == 0)
+            {
+                Console.WriteLine("Error: La DataTable productos no tiene columnas.");
+                return;
+            }
+
             DevolucionDAO devolucionDAO = new DevolucionDAO();
             int idDevolucion = 0;
             bool result = devolucionDAO.RegistrarDevolucion(IdVenta, txtMotivo.Text, IdUsuario, detalleDevolucion, out idDevolucion);
