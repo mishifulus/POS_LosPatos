@@ -127,6 +127,12 @@
     <Compile Include="Forms\CajaForms\CajaVista.Designer.cs">
       <DependentUpon>CajaVista.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\CajaForms\FiltroForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CajaForms\FiltroForm.Designer.cs">
+      <DependentUpon>FiltroForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\CajaForms\MovimientoForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -266,6 +272,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\CajaForms\CajaVista.resx">
       <DependentUpon>CajaVista.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CajaForms\FiltroForm.resx">
+      <DependentUpon>FiltroForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CajaForms\MovimientoForm.resx">
       <DependentUpon>MovimientoForm.cs</DependentUpon>

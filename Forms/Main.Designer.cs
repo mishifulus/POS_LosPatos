@@ -34,7 +34,6 @@
             this.txtUsuario = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.btnFReportes = new System.Windows.Forms.Button();
-            this.btnFAjustes = new System.Windows.Forms.Button();
             this.btnFUsuarios = new System.Windows.Forms.Button();
             this.btnFCaja = new System.Windows.Forms.Button();
             this.btnDevoluciones = new System.Windows.Forms.Button();
@@ -66,7 +65,6 @@
             this.MenuLateral.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(25)))), ((int)(((byte)(86)))));
             this.MenuLateral.Controls.Add(this.panelUsuario);
             this.MenuLateral.Controls.Add(this.btnFReportes);
-            this.MenuLateral.Controls.Add(this.btnFAjustes);
             this.MenuLateral.Controls.Add(this.btnFUsuarios);
             this.MenuLateral.Controls.Add(this.btnFCaja);
             this.MenuLateral.Controls.Add(this.btnDevoluciones);
@@ -127,29 +125,12 @@
             this.btnFReportes.ForeColor = System.Drawing.Color.White;
             this.btnFReportes.Image = ((System.Drawing.Image)(resources.GetObject("btnFReportes.Image")));
             this.btnFReportes.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnFReportes.Location = new System.Drawing.Point(12, 632);
+            this.btnFReportes.Location = new System.Drawing.Point(12, 580);
             this.btnFReportes.Name = "btnFReportes";
             this.btnFReportes.Size = new System.Drawing.Size(215, 45);
             this.btnFReportes.TabIndex = 9;
             this.btnFReportes.Text = "Reportes";
             this.btnFReportes.UseVisualStyleBackColor = true;
-            // 
-            // btnFAjustes
-            // 
-            this.btnFAjustes.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnFAjustes.FlatAppearance.BorderSize = 0;
-            this.btnFAjustes.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.btnFAjustes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFAjustes.Font = new System.Drawing.Font("Century Gothic", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFAjustes.ForeColor = System.Drawing.Color.White;
-            this.btnFAjustes.Image = ((System.Drawing.Image)(resources.GetObject("btnFAjustes.Image")));
-            this.btnFAjustes.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnFAjustes.Location = new System.Drawing.Point(12, 581);
-            this.btnFAjustes.Name = "btnFAjustes";
-            this.btnFAjustes.Size = new System.Drawing.Size(215, 45);
-            this.btnFAjustes.TabIndex = 8;
-            this.btnFAjustes.Text = "Ajustes";
-            this.btnFAjustes.UseVisualStyleBackColor = true;
             // 
             // btnFUsuarios
             // 
@@ -416,7 +397,6 @@
         private System.Windows.Forms.PictureBox btnRestaurar;
         private System.Windows.Forms.PictureBox btnMaximizar;
         private System.Windows.Forms.Button btnFVentas;
-        private System.Windows.Forms.Button btnFAjustes;
         private System.Windows.Forms.Button btnFUsuarios;
         private System.Windows.Forms.Button btnFCaja;
         private System.Windows.Forms.Button btnDevoluciones;

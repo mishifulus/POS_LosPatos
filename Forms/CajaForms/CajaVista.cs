@@ -1,4 +1,5 @@
 ﻿using LosPatosSystem.Data;
+using Microsoft.ReportingServices.ReportProcessing.ReportObjectModel;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DataSet = System.Data.DataSet;
 
 namespace LosPatosSystem.Forms.CajaForms
 {
@@ -33,7 +35,7 @@ namespace LosPatosSystem.Forms.CajaForms
         private void ObtenerMovimientos()
         {
             CajaDAO cajaDAO = new CajaDAO();
-            DataSet dataSet = cajaDAO.obtenerMovimientosDiarios();
+            System.Data.DataSet dataSet = cajaDAO.obtenerMovimientosDiarios();
             dgvMovimientos.DataSource = dataSet.Tables["Caja"];
 
             dgvMovimientos.Columns["IdMovimiento"].Visible = false;
@@ -99,6 +101,29 @@ namespace LosPatosSystem.Forms.CajaForms
             MovimientoForm movimientoForm = new MovimientoForm(IdUsuario);
             movimientoForm.NuevoMovimiento += ObtenerMovimientos;
             movimientoForm.Show();
+        }
+
+        private void btnFiltrar_Click(object sender, EventArgs e)
+        {
+            FiltroForm filtroForm = new FiltroForm();
+
+            filtroForm.FiltradoMovimientos += (filtrado) =>
+            {
+                dgvMovimientos.DataSource = filtrado.Tables["Caja"];
+                if (filtrado == null || filtrado.Tables.Count == 0 || filtrado.Tables[0].Rows.Count == 0)
+                {
+                    return;
+                }
+
+                dgvMovimientos.Columns["IdMovimiento"].Visible = false;
+                dgvMovimientos.Columns["TipoMovimiento"].Visible = false;
+                dgvMovimientos.Columns["IdUsuario"].Visible = false;
+                dgvMovimientos.Columns["EstatusRegistro"].Visible = false;
+                dgvMovimientos.Columns["Fecha"].DefaultCellStyle.Format = "dd/MM/yyyy";
+                dgvMovimientos.Columns["Monto"].DefaultCellStyle.Format = "C2";
+            };
+
+            filtroForm.ShowDialog();
         }
     }
 }

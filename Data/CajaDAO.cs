@@ -24,9 +24,44 @@ namespace LosPatosSystem.Data
                 {
                     string query = "SELECT M.IdMovimiento, M.Fecha, M.TipoMovimiento, CASE WHEN M.TipoMovimiento = 1 THEN 'Ingreso' WHEN M.TipoMovimiento = 0 THEN 'Egreso' ELSE 'Desconocido' END AS Movimiento, M.Monto, M.Descripcion, M.IdUsuario, U.Username, M.EstatusRegistro " +
                         "FROM Caja M LEFT JOIN Usuarios U ON M.IdUsuario = U.IdUsuario " +
-                        "WHERE CONVERT(DATE, M.Fecha) = CONVERT(DATE, GETDATE()) AND M.EstatusRegistro = 1";
+                        "WHERE CONVERT(DATE, M.Fecha) = CONVERT(DATE, GETDATE()) AND M.EstatusRegistro = 1 ORDER BY M.Fecha";
                     using (SqlCommand cmd = new SqlCommand(query, conexion))
                     {
+                        SqlDataAdapter adapter = new SqlDataAdapter();
+                        adapter.SelectCommand = cmd;
+                        adapter.Fill(dtMovimientos, "Caja");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    conexion.Close();
+                }
+            }
+            return dtMovimientos;
+        }
+
+        public DataSet obtenerMovimientosByFecha(DateTime fechaInicio, DateTime fechaFin)
+        {
+            DataSet dtMovimientos = new DataSet();
+
+            using (SqlConnection conexion = ConexionBD.ObtenerConexion())
+            {
+                conexion.Open();
+                try
+                {
+                    string query = "SELECT M.IdMovimiento, M.Fecha, M.TipoMovimiento, CASE WHEN M.TipoMovimiento = 1 THEN 'Ingreso' WHEN M.TipoMovimiento = 0 THEN 'Egreso' ELSE 'Desconocido' END AS Movimiento, M.Monto, M.Descripcion, M.IdUsuario, U.Username, M.EstatusRegistro " +
+                        "FROM Caja M LEFT JOIN Usuarios U ON M.IdUsuario = U.IdUsuario " +
+                        "WHERE CONVERT(DATE, M.Fecha) BETWEEN CONVERT(DATE, @FechaInicio) AND CONVERT(DATE, @FechaFin) " +
+                        "AND M.EstatusRegistro = 1 ORDER BY M.Fecha";
+                    using (SqlCommand cmd = new SqlCommand(query, conexion))
+                    {
+                        cmd.Parameters.AddWithValue("@FechaInicio", fechaInicio);
+                        cmd.Parameters.AddWithValue("@FechaFin", fechaFin);
+
                         SqlDataAdapter adapter = new SqlDataAdapter();
                         adapter.SelectCommand = cmd;
                         adapter.Fill(dtMovimientos, "Caja");
@@ -56,7 +91,7 @@ namespace LosPatosSystem.Data
                     string query = "SELECT M.IdMovimiento, M.Fecha, M.TipoMovimiento, CASE WHEN M.TipoMovimiento = 1 THEN 'Ingreso' WHEN M.TipoMovimiento = 0 THEN 'Egreso' ELSE 'Desconocido' END AS Movimiento, M.Monto, M.Descripcion, M.IdUsuario, U.Username, M.EstatusRegistro " +
                         "FROM Caja M " +
                         "LEFT JOIN Usuarios U ON M.IdUsuario = U.IdUsuario " +
-                        "WHERE CONVERT(DATE, M.Fecha) = CONVERT(DATE, GETDATE()) AND M.TipoMovimiento = @TipoMovimiento AND M.EstatusRegistro = 1";
+                        "WHERE CONVERT(DATE, M.Fecha) = CONVERT(DATE, GETDATE()) AND M.TipoMovimiento = @TipoMovimiento AND M.EstatusRegistro = 1 ORDER BY M.Fecha";
                     using (SqlCommand cmd = new SqlCommand(query, conexion))
                     {
                         cmd.Parameters.AddWithValue("@TipoMovimiento", tipoMovimiento);
