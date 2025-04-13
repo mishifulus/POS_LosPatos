@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace LosPatosSystem.Data
 {
@@ -97,6 +98,33 @@ namespace LosPatosSystem.Data
             }
 
             return descuentoAplicado;
+        }
+
+        public int obtenerVentasDiarias()
+        {
+            int ventas = 0;
+
+            using (SqlConnection conexion = ConexionBD.ObtenerConexion())
+            {
+                conexion.Open();
+                try
+                {
+                    string query = "SELECT COUNT(*) FROM Ventas WHERE CAST(Fecha AS DATE) = CAST(GETDATE() AS DATE) AND EstatusRegistro = 1";
+                    using (SqlCommand cmd = new SqlCommand(query, conexion))
+                    {
+                        ventas = (int)cmd.ExecuteScalar();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    conexion.Close();
+                }
+            }
+            return ventas;
         }
     }
 }

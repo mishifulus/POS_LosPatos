@@ -51,7 +51,6 @@ namespace LosPatosSystem.Forms
             if (IdRol != 1)
             {
                 btnFUsuarios.Visible = false;
-                btnFAjustes.Visible = false;
                 btnFReportes.Visible = false;
             }
         }
@@ -185,6 +184,12 @@ namespace LosPatosSystem.Forms
         {
             txtTitle.Text = "CAJA";
             AbrirFormInPanel(new Forms.CajaForms.CajaVista(IdUsuario, IdRol));
+        }
+
+        private void btnFReportes_Click(object sender, EventArgs e)
+        {
+            txtTitle.Text = "REPORTES";
+            AbrirFormInPanel(new Forms.ReportesForms.ReportesVista());
         }
     }
 }

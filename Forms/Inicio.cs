@@ -56,6 +56,33 @@ namespace LosPatosSystem.Forms
         private void Inicio_Load(object sender, EventArgs e)
         {
             CargarProductosBajoStock();
+            txtBalance.Text = ObtenerBalance().ToString("C");
+            txtVentas.Text = ObtenerVentas().ToString();
+            txtCompras.Text = ObtenerCompras().ToString();
+        }
+
+        private double ObtenerBalance()
+        {
+            CajaDAO cajaDAO = new CajaDAO();
+            double balance = 0;
+            balance = cajaDAO.obtenerBalance();
+            return balance;
+        }
+
+        private int ObtenerVentas()
+        {
+            VentaDAO ventaDAO = new VentaDAO();
+            int totalVentas = 0;
+            totalVentas = ventaDAO.obtenerVentasDiarias();
+            return totalVentas;
+        }
+
+        private int ObtenerCompras()
+        {
+            CompraDAO compraDAO = new CompraDAO();
+            int totalCompras = 0;
+            totalCompras = compraDAO.obtenerComprasDiarias();
+            return totalCompras;
         }
 
         private void dgvBajoStock_CellContentClick(object sender, DataGridViewCellEventArgs e)

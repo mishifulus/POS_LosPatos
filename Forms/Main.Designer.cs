@@ -131,6 +131,7 @@
             this.btnFReportes.TabIndex = 9;
             this.btnFReportes.Text = "Reportes";
             this.btnFReportes.UseVisualStyleBackColor = true;
+            this.btnFReportes.Click += new System.EventHandler(this.btnFReportes_Click);
             // 
             // btnFUsuarios
             // 

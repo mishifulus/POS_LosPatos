@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="04/07/2025 20:40:36" ReportInfo.Modified="04/07/2025 22:53:05" ReportInfo.CreatorVersion="2025.2.0.0">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Forms;
+using System.Drawing;
+using System.Data;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+
+namespace FastReport
+{
+  public class ReportScript
+  {
+  }
+}
+</ScriptText>
+  <Dictionary/>
+  <ReportPage Name="Page1" Watermark.Font="Arial, 60pt">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="37.8" Fill.Color="11, 25, 86">
+      <TextObject Name="Text1" Left="160.65" Top="9.45" Width="302.4" Height="18.9" Text="Depósito Los Patos - Reporte de Ventas" Font="Century Gothic, 11.25pt, style=Bold" TextFill.Color="White"/>
+      <TextObject Name="Text3" Left="529.2" Top="9.45" Width="170.1" Height="18.9" Text="[Date]" HorzAlign="Right" Font="Century Gothic, 11.25pt, style=Bold" TextFill.Color="White"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="41.8" Width="718.2" Height="18.9">
+      <TableObject Name="Table1" Left="18.9" Width="680.29" Height="18.9">
+        <TableColumn Name="Column6" Width="79.13"/>
+        <TableColumn Name="Column7" Width="98.03"/>
+        <TableColumn Name="Column8" Width="88.58"/>
+        <TableColumn Name="Column9" Width="116.93"/>
+        <TableColumn Name="Column10" Width="79.13"/>
+        <TableColumn Name="Column11" Width="79.13"/>
+        <TableColumn Name="Column12" Width="69.68"/>
+        <TableColumn Name="Column13" Width="69.68"/>
+        <TableRow Name="Row2">
+          <TableCell Name="Cell6" Border.Lines="All" Fill.Color="LightBlue" Text="FECHA" HorzAlign="Center" Font="Century Gothic, 9.75pt, style=Bold"/>
+          <TableCell Name="Cell7" Border.Lines="All" Fill.Color="LightBlue" Text="USUARIO" HorzAlign="Center" Font="Century Gothic, 9.75pt, style=Bold"/>
+          <TableCell Name="Cell8" Border.Lines="All" Fill.Color="LightBlue" Text="CÓDIGO" HorzAlign="Center" Font="Century Gothic, 9.75pt, style=Bold"/>
+          <TableCell Name="Cell9" Border.Lines="All" Fill.Color="LightBlue" Text="PRODUCTO" HorzAlign="Center" Font="Century Gothic, 9.75pt, style=Bold"/>
+          <TableCell Name="Cell10" Border.Lines="All" Fill.Color="LightBlue" Text="PRECIO" HorzAlign="Center" Font="Century Gothic, 9.75pt, style=Bold"/>
+          <TableCell Name="Cell11" Border.Lines="All" Fill.Color="LightBlue" Text="CANT" HorzAlign="Center" Font="Century Gothic, 9.75pt, style=Bold"/>
+          <TableCell Name="Cell12" Border.Lines="All" Fill.Color="LightBlue" Text="SUB" HorzAlign="Center" Font="Century Gothic, 9.75pt, style=Bold"/>
+          <TableCell Name="Cell13" Border.Lines="All" Fill.Color="LightBlue" Text="TOTAL" HorzAlign="Center" Font="Century Gothic, 9.75pt, style=Bold"/>
+        </TableRow>
+      </TableObject>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="64.7" Width="718.2" Height="94.5">
+      <TableObject Name="Ventas" Left="18.9" Width="680.37" Height="18.9">
+        <TableColumn Name="Column1" Width="79.14"/>
+        <TableColumn Name="Column2" Width="98.04"/>
+        <TableColumn Name="Column3" Width="88.59"/>
+        <TableColumn Name="Column4" Width="116.94"/>
+        <TableColumn Name="Column5" Width="79.14"/>
+        <TableColumn Name="Column14" Width="79.14"/>
+        <TableColumn Name="Column15" Width="69.69"/>
+        <TableColumn Name="Column16" Width="69.69"/>
+        <TableRow Name="Row1">
+          <TableCell Name="Cell1" Text="[Ventas.Fecha]" Font="Arial, 10pt"/>
+          <TableCell Name="Cell2" Text="[Ventas.Usuario]" Font="Arial, 10pt"/>
+          <TableCell Name="Cell3" Text="[Ventas.Codigo]" Font="Arial, 10pt"/>
+          <TableCell Name="Cell4" Text="[Ventas.Producto]" Font="Arial, 10pt"/>
+          <TableCell Name="Cell5" Text="[Ventas.Precio]" Font="Arial, 10pt"/>
+          <TableCell Name="Cell14" Text="[Ventas.Cantidad]" Font="Arial, 10pt"/>
+          <TableCell Name="Cell15" Text="[Ventas.Subtotal]" Font="Arial, 10pt"/>
+          <TableCell Name="Cell16" Text="[Ventas.Total]" Font="Arial, 10pt"/>
+        </TableRow>
+      </TableObject>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="163.2" Width="718.2" Height="37.8">
+      <TextObject Name="Text2" Left="604.8" Top="9.45" Width="103.95" Height="18.9" Text="[Page] de [TotalPages]" HorzAlign="Center" Font="Century Gothic, 9.75pt" TextFill.Color="White"/>
+    </PageFooterBand>
+  </ReportPage>
+</Report>
