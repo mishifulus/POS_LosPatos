@@ -227,6 +227,12 @@ namespace LosPatosSystem.Forms.ComprasForms
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
+            if (detalleCompra.Rows.Count == 0)
+            {
+                MessageBox.Show("No hay productos en la compra.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             detalleCompra.Columns.Remove("Codigo");
             detalleCompra.Columns.Remove("Producto");
             detalleCompra.Columns.Remove("Descripcion");

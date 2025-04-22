@@ -171,6 +171,11 @@ namespace LosPatosSystem.Forms.PromocionesForms
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(txtNombre.Text) || string.IsNullOrEmpty(txtDescripcion.Text) || string.IsNullOrEmpty(txtCantidadMinima.Text))
+            {
+                MessageBox.Show("Todos los campos son obligatorios", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             string nombre = txtNombre.Text;
             string descripcion = txtDescripcion.Text;
             int tipo = (int)cmbTipo.SelectedValue;
@@ -244,6 +249,14 @@ namespace LosPatosSystem.Forms.PromocionesForms
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
+            }
+        }
+
+        private void cmbTipo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbTipo.SelectedIndex == 2)
+            {
+                txtCantidadMinima.Enabled = false;
             }
         }
     }

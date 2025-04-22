@@ -172,6 +172,12 @@ namespace LosPatosSystem.Forms.Productos
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(txtNombre.Text) || string.IsNullOrEmpty(txtCodigo.Text) || string.IsNullOrEmpty(txtDescripcion.Text) || string.IsNullOrEmpty(txtPrecioCompra.Text) || string.IsNullOrEmpty(txtPrecioVenta.Text) || string.IsNullOrEmpty(txtStock.Text) || string.IsNullOrEmpty(txtStockMinimo.Text))
+            {
+                MessageBox.Show("Todos los campos son obligatorios", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             string nombre = txtNombre.Text.Trim();
             string codigo = txtCodigo.Text.Trim();
             string descripcion = txtDescripcion.Text.Trim();

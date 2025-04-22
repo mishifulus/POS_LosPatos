@@ -94,6 +94,7 @@ namespace LosPatosSystem.Forms.ComprasForms
             if (Convert.ToDouble(txtRecibido.Text) < Convert.ToDouble(txtTotal.Text))
             {
                 MessageBox.Show("Ingrese la cantidad completa", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
 
             CompraDAO compraDAO = new CompraDAO();
@@ -113,6 +114,7 @@ namespace LosPatosSystem.Forms.ComprasForms
             else
             {
                 MessageBox.Show("Ocurrió un error al registrar la compra", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
         }
 

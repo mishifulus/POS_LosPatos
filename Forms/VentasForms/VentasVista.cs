@@ -115,6 +115,7 @@ namespace LosPatosSystem.Forms.VentasForms
             txtDescripcion.Text = row["Descripcion"].ToString();
             txtPrecioVenta.Text = row["PrecioVenta"].ToString();
             txtUnidad.Text = row["Unidad"].ToString();
+            txtStockDisponible.Text = row["Stock"].ToString();
             txtCantidad.Text = "1";
             txtCantidad.Focus();
         }
@@ -169,12 +170,29 @@ namespace LosPatosSystem.Forms.VentasForms
 
         private void btnMenos_Click(object sender, EventArgs e)
         {
-            txtCantidad.Text = (Convert.ToInt32(txtCantidad.Text) - 1).ToString();
+            int cantidadActual = int.Parse(txtCantidad.Text);
+
+            if (cantidadActual > 1)
+            {
+                cantidadActual--;
+                txtCantidad.Text = cantidadActual.ToString();
+            }
         }
 
         private void btnMas_Click(object sender, EventArgs e)
         {
-            txtCantidad.Text = (Convert.ToInt32(txtCantidad.Text) + 1).ToString();
+            int cantidadActual = int.Parse(txtCantidad.Text);
+            int stockDisponible = int.Parse(txtStockDisponible.Text);
+
+            if (cantidadActual < stockDisponible)
+            {
+                cantidadActual++;
+                txtCantidad.Text = cantidadActual.ToString();
+            }
+            else
+            {
+                MessageBox.Show("No puedes vender más de lo que hay en stock.");
+            }
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -246,13 +264,7 @@ namespace LosPatosSystem.Forms.VentasForms
         {
             if (detalleVenta.Rows.Count > 0)
             {
-                detalleVenta.Columns.Remove("Codigo");
-                detalleVenta.Columns.Remove("Producto");
-                detalleVenta.Columns.Remove("Descripcion");
-                detalleVenta.Columns.Remove("Descuento");
-                detalleVenta.Columns.Remove("Subtotal");
-
-                AceptarVenta aceptarVenta = new AceptarVenta(IdUsuario, Convert.ToDouble(txtTotal.Text.Substring(1)), detalleVenta);
+                AceptarVenta aceptarVenta = new AceptarVenta(IdUsuario, Convert.ToDouble(txtTotal.Text.Substring(1)), detalleVenta, Convert.ToInt32(txtIdVenta.Text), txtUsername.Text);
 
                 InicializarTabla();
                 txtTotal.Text = "$0";
@@ -262,6 +274,7 @@ namespace LosPatosSystem.Forms.VentasForms
             else
             {
                 MessageBox.Show("No hay productos para vender.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
 
 

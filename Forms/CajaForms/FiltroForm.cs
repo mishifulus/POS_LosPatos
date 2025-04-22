@@ -71,6 +71,12 @@ namespace LosPatosSystem.Forms.CajaForms
                 return;
             }
 
+            if (fechaInicio == fechaFin)
+            {
+                MessageBox.Show("La fecha de inicio no puede ser igual que la fecha de fin.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             CajaDAO cajaDAO = new CajaDAO();
             DataSet dataMovimientos = cajaDAO.obtenerMovimientosByFecha(fechaInicio, fechaFin);
 

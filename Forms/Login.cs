@@ -50,7 +50,7 @@ namespace LosPatosSystem
             }
             else
             {
-                MessageBox.Show("Inicio de Sesión", Mensaje);
+                MessageBox.Show(Mensaje, "Inicio de Sesión");
             }
         }
 

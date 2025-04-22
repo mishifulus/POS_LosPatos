@@ -154,6 +154,7 @@
             this.cmbTipo.Name = "cmbTipo";
             this.cmbTipo.Size = new System.Drawing.Size(351, 29);
             this.cmbTipo.TabIndex = 44;
+            this.cmbTipo.SelectedIndexChanged += new System.EventHandler(this.cmbTipo_SelectedIndexChanged);
             // 
             // txtCantidadMinima
             // 

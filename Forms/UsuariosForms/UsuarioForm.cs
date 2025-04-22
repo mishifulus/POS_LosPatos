@@ -170,6 +170,15 @@ namespace LosPatosSystem.Forms.UsuariosForms
                 return;
             }
 
+            if (txtIdUsuario.Text == string.Empty)
+            {
+                if (Pass == string.Empty || Pass2 == string.Empty)
+                {
+                    MessageBox.Show("Las contraseñas son obligatorias", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+
             if (Pass != Pass2)
             {
                 MessageBox.Show("Las contraseñas no coinciden", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

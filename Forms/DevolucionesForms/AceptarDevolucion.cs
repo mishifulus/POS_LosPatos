@@ -23,15 +23,20 @@ namespace LosPatosSystem.Forms.DevolucionesForms
 
         public int IdVenta { get; set; }
 
+        public int IdDevolucion { get; set; }
+        public string NombreUsuario { get; set; }
+
         public DataTable detalleDevolucion;
 
-        public AceptarDevolucion(int idUsuario, double total, string motivo, int idVenta, DataTable detalleDevolucion)
+        public AceptarDevolucion(int idUsuario, double total, string motivo, int idVenta, DataTable detalleDevolucion, int idDevolucion, string nombreUsuario)
         {
             InitializeComponent();
             IdUsuario = idUsuario;
             Total = total;
             Motivo = motivo;
             IdVenta = idVenta;
+            IdDevolucion = idDevolucion;
+            NombreUsuario = nombreUsuario;
             this.detalleDevolucion = detalleDevolucion;
         }
 
@@ -71,16 +76,22 @@ namespace LosPatosSystem.Forms.DevolucionesForms
         {
             if (detalleDevolucion == null || detalleDevolucion.Columns.Count == 0)
             {
-                Console.WriteLine("Error: La DataTable productos no tiene columnas.");
+                Console.WriteLine("Error: La tabla de productos no tiene columnas.");
                 return;
             }
 
+            DataTable tablaSoloParaBD = detalleDevolucion.DefaultView.ToTable(false, "IdProducto", "Cantidad", "PrecioUnitario");
+
             DevolucionDAO devolucionDAO = new DevolucionDAO();
             int idDevolucion = 0;
-            bool result = devolucionDAO.RegistrarDevolucion(IdVenta, txtMotivo.Text, IdUsuario, detalleDevolucion, out idDevolucion);
+            bool result = devolucionDAO.RegistrarDevolucion(IdVenta, txtMotivo.Text, IdUsuario, tablaSoloParaBD, out idDevolucion);
 
             if (result)
             {
+                // GENERAR TICKET
+                string ticket = GenerarContenidoTicket("DEVOLUCIÓN", IdDevolucion, IdUsuario, NombreUsuario, detalleDevolucion, 0, Convert.ToDouble(txtTotal.Text), 0);
+                Console.WriteLine(ticket);
+
                 MessageBox.Show("Devolución registrada correctamente", "Devolución registrada", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 txtTotal.Text = "$0";
@@ -105,6 +116,37 @@ namespace LosPatosSystem.Forms.DevolucionesForms
         {
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
+
+        private string GenerarContenidoTicket(string tipo, int folio, int cajero, string nombreCajero, DataTable detalle, double recibido, double total, double cambio)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine("  DÉPOSITO: LOS PATOS ");
+            sb.AppendLine("  DIRECCIÓN ");
+            sb.AppendLine("  --------------------");
+            sb.AppendLine($"Tipo: {tipo.ToUpper()}");
+            sb.AppendLine($"Folio: {folio}");
+            sb.AppendLine($"Fecha: {DateTime.Now}");
+            sb.AppendLine($"Cajero: {cajero} - {nombreCajero.ToUpper()}");
+            sb.AppendLine("----------------------------");
+            sb.AppendLine("Cant Código Producto        Subtotal");
+
+            foreach (DataRow row in detalle.Rows)
+            {
+                string producto = row["Producto"].ToString().PadRight(14).Substring(0, 14);
+                string codigo = row["Codigo"].ToString();
+                int cantidad = Convert.ToInt32(row["Cantidad"]);
+                double subtotal = Convert.ToDouble(row["PrecioUnitario"]) * cantidad;
+
+                sb.AppendLine($"{cantidad.ToString().PadRight(4)} {codigo}  {producto} ${subtotal.ToString("0.00")}");
+            }
+
+            sb.AppendLine("----------------------------");
+            sb.AppendLine($"TOTAL:          ${total.ToString("0.00")}");
+            sb.AppendLine("GRACIAS POR SU COMPRA");
+
+            return sb.ToString();
         }
     }
 }

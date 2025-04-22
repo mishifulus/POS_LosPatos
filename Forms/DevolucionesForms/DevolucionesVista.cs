@@ -78,13 +78,15 @@ namespace LosPatosSystem.Forms.DevolucionesForms
         private void btnAgregar_Click(object sender, EventArgs e)
         {
 
-            if (txtIdDevolucion != null)
+            if (txtIdVenta.Text == String.Empty)
             {
-                ObtenerProductos(Convert.ToInt32(txtIdVenta.Text));
+                MessageBox.Show("Debes agregar el folio de la venta para ver los productos", "Advertencia", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                return;
+                
             }
             else
             {
-                MessageBox.Show("Debes agregar el folio de la venta para ver los productos", "Advertencia", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                ObtenerProductos(Convert.ToInt32(txtIdVenta.Text));
             }
             ActualizarSubtotalYTotal();
         }
@@ -116,16 +118,12 @@ namespace LosPatosSystem.Forms.DevolucionesForms
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
+
             if (detalleDevolucion.Rows.Count > 0)
             {
-                detalleDevolucion.Columns.Remove("Codigo");
-                detalleDevolucion.Columns.Remove("Producto");
-                detalleDevolucion.Columns.Remove("Descripcion");
-                detalleDevolucion.Columns.Remove("Subtotal");
+                AceptarDevolucion aceptarDevolucion = new AceptarDevolucion(IdUsuario, Convert.ToDouble(txtTotal.Text.Substring(1)), txtMotivo.Text, Convert.ToInt32(txtIdVenta.Text), ObtenerDetalleFiltrado(), Convert.ToInt32(txtIdDevolucion.Text), txtUsername.Text);
 
-                AceptarDevolucion aceptarDevolucion = new AceptarDevolucion(IdUsuario, Convert.ToDouble(txtTotal.Text.Substring(1)), txtMotivo.Text, Convert.ToInt32(txtIdVenta.Text), detalleDevolucion.Copy());
-
-                aceptarDevolucion.Show();
+                aceptarDevolucion.ShowDialog();
 
                 detalleDevolucion.Clear();
                 detalleDevolucion.Columns.Clear();
@@ -181,13 +179,35 @@ namespace LosPatosSystem.Forms.DevolucionesForms
                     double precioUnitario = Convert.ToDouble(row.Cells["PrecioUnitario"].Value);
                     double subtotal = cantidad * precioUnitario;
 
-                    row.Cells["Subtotal"].Value = subtotal; // Actualizar el subtotal en la tabla
+                    row.Cells["Subtotal"].Value = subtotal;
                     total += subtotal;
                 }
             }
 
-            txtTotal.Text = total.ToString("C"); // Mostrar el total en un Label
+            txtTotal.Text = total.ToString("C");
+        }
+
+        private DataTable ObtenerDetalleFiltrado()
+        {
+            DataTable tablaFiltrada = detalleDevolucion.Clone();
+
+            foreach (DataGridViewRow row in dgvDetalleDevolucion.Rows)
+            {
+                if (!row.IsNewRow)
+                {
+                    DataRow nuevaFila = tablaFiltrada.NewRow();
+                    nuevaFila["IdProducto"] = row.Cells["IdProducto"].Value;
+                    nuevaFila["Codigo"] = row.Cells["Codigo"].Value;
+                    nuevaFila["Producto"] = row.Cells["Producto"].Value;
+                    nuevaFila["Cantidad"] = row.Cells["Cantidad"].Value;
+                    nuevaFila["PrecioUnitario"] = row.Cells["PrecioUnitario"].Value;
+                    tablaFiltrada.Rows.Add(nuevaFila);
+                }
+            }
+
+            return tablaFiltrada;
         }
 
     }
-}
+
+ }

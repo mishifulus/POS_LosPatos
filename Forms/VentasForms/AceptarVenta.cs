@@ -19,13 +19,17 @@ namespace LosPatosSystem.Forms.VentasForms
         public double Total { get; set; }
 
         public DataTable detalleVenta;
+        public int IdVenta { get; set; }
+        public string NombreUsuario { get; set; }
 
-        public AceptarVenta(int IdUsuario, double Total, DataTable detalleVenta)
+        public AceptarVenta(int IdUsuario, double Total, DataTable detalleVenta, int idVenta, string nombreUsuario)
         {
             InitializeComponent();
             this.IdUsuario = IdUsuario;
             this.Total = Total;
             this.detalleVenta = detalleVenta;
+            this.IdVenta = idVenta;
+            this.NombreUsuario = nombreUsuario;
         }
 
         private void AceptarVenta_Load(object sender, EventArgs e)
@@ -94,14 +98,22 @@ namespace LosPatosSystem.Forms.VentasForms
             if (Convert.ToDouble(txtRecibido.Text) < Convert.ToDouble(txtTotal.Text))
             {
                 MessageBox.Show("Ingrese la cantidad completa", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
+
+            DataTable tablaSoloParaBD = detalleVenta.DefaultView.ToTable(false, "IdProducto", "Cantidad", "PrecioUnitario");
 
             VentaDAO ventaDAO = new VentaDAO();
             int idVenta = 0;
-            bool result = ventaDAO.RegistrarVenta(Total, (int)cmbTipoPago.SelectedValue, IdUsuario, detalleVenta, out idVenta);
+            bool result = ventaDAO.RegistrarVenta(Total, (int)cmbTipoPago.SelectedValue, IdUsuario, tablaSoloParaBD, out idVenta);
             if (result)
             {
+                // GENERAR TICKET
+                string ticket = GenerarContenidoTicket("VENTA", IdVenta, IdUsuario, NombreUsuario, detalleVenta, Convert.ToDouble(txtRecibido.Text), Convert.ToDouble(txtTotal.Text), Convert.ToDouble(txtCambio.Text));
+                Console.WriteLine(ticket);
+
                 MessageBox.Show("Venta registrada correctamente", "Venta registrada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                 txtCambio.Text = "$0";
                 txtTotal.Text = "$0";
                 cmbTipoPago.SelectedIndex = 0;
@@ -113,6 +125,7 @@ namespace LosPatosSystem.Forms.VentasForms
             else
             {
                 MessageBox.Show("Ocurrió un error al registrar la venta", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
         }
 
@@ -137,6 +150,39 @@ namespace LosPatosSystem.Forms.VentasForms
         {
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
+
+        private string GenerarContenidoTicket(string tipo, int folio, int cajero, string nombreCajero, DataTable detalle, double recibido, double total, double cambio)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine("  DÉPOSITO: LOS PATOS ");
+            sb.AppendLine("  DIRECCIÓN ");
+            sb.AppendLine("  --------------------");
+            sb.AppendLine($"Tipo: {tipo.ToUpper()}");
+            sb.AppendLine($"Folio: {folio}");
+            sb.AppendLine($"Fecha: {DateTime.Now}");
+            sb.AppendLine($"Cajero: {cajero} - {nombreCajero.ToUpper()}");
+            sb.AppendLine("----------------------------");
+            sb.AppendLine("Cant Código Producto        Subtotal");
+
+            foreach (DataRow row in detalle.Rows)
+            {
+                string producto = row["Producto"].ToString().PadRight(14).Substring(0, 14);
+                string codigo = row["Codigo"].ToString();
+                int cantidad = Convert.ToInt32(row["Cantidad"]);
+                double subtotal = Convert.ToDouble(row["Descuento"]) * cantidad;
+
+                sb.AppendLine($"{cantidad.ToString().PadRight(4)} {codigo}  {producto} ${subtotal.ToString("0.00")}");
+            }
+
+            sb.AppendLine("----------------------------");
+            sb.AppendLine($"TOTAL:           ${total.ToString("0.00")}");
+            sb.AppendLine($"RECIBIDO:        ${recibido.ToString("0.00")}");
+            sb.AppendLine($"CAMBIO:          ${cambio.ToString("0.00")}");
+            sb.AppendLine("GRACIAS POR SU COMPRA");
+
+            return sb.ToString();
         }
     }
 }
