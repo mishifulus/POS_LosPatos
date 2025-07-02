@@ -57,12 +57,19 @@ namespace LosPatosSystem.Forms
 
         private void btnClose_Click(object sender, EventArgs e)
         {
-            SesionDAO sesionDAO = new SesionDAO();
+            try
+            {
+                SesionDAO sesionDAO = new SesionDAO();
 
-            sesionDAO.CerrarSesion(IdUsuario, IdSesion);
-            MessageBox.Show("¡Adiós! Tu sesión se ha cerrado correctamente", "Cerrar Sesión");
+                sesionDAO.CerrarSesion(IdUsuario, IdSesion);
+                MessageBox.Show("¡Adiós! Tu sesión se ha cerrado correctamente", "Cerrar Sesión");
 
-            Application.Exit();
+                Application.Exit();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cerrar sesión: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnMaximizar_Click(object sender, EventArgs e)
@@ -136,12 +143,19 @@ namespace LosPatosSystem.Forms
 
         private void txtUsuario_MouseClick(object sender, MouseEventArgs e)
         {
-            SesionDAO sesionDAO = new SesionDAO();
+            try
+            {
+                SesionDAO sesionDAO = new SesionDAO();
 
-            sesionDAO.CerrarSesion(IdUsuario, IdSesion);
-            MessageBox.Show("¡Adiós! Tu sesión se ha cerrado correctamente", "Cerrar Sesión");
+                sesionDAO.CerrarSesion(IdUsuario, IdSesion);
+                MessageBox.Show("¡Adiós! Tu sesión se ha cerrado correctamente", "Cerrar Sesión");
 
-            Application.Exit();
+                Application.Exit();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cerrar sesión: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)

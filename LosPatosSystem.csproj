@@ -158,6 +158,7 @@
     <Compile Include="Data\ProductoDAO.cs" />
     <Compile Include="Data\PromocionDAO.cs" />
     <Compile Include="Data\ReporteDAO.cs" />
+    <Compile Include="Data\RetornoEnvaseDAO.cs" />
     <Compile Include="Data\RolDAO.cs" />
     <Compile Include="Data\SesionDAO.cs" />
     <Compile Include="Data\UnidadDAO.cs" />
@@ -306,6 +307,7 @@
     <Compile Include="Models\Compra.cs" />
     <Compile Include="Models\DetalleCompra.cs" />
     <Compile Include="Models\DetalleDevolucion.cs" />
+    <Compile Include="Models\DetalleRetornoEnvase.cs" />
     <Compile Include="Models\DetalleVenta.cs" />
     <Compile Include="Models\Devolucion.cs" />
     <Compile Include="Models\Producto.cs" />
@@ -314,9 +316,11 @@
     <Compile Include="Models\Reportes\BalanceDiarioDTO.cs" />
     <Compile Include="Models\Reportes\ComprasDTO.cs" />
     <Compile Include="Models\Reportes\DevolucionesDTO.cs" />
+    <Compile Include="Models\Reportes\EnvasesDTO.cs" />
     <Compile Include="Models\Reportes\ProductosDTO.cs" />
     <Compile Include="Models\Reportes\VentasDTO.cs" />
     <Compile Include="Models\Reportes\VentasPromocionesDTO.cs" />
+    <Compile Include="Models\RetornoEnvase.cs" />
     <Compile Include="Models\Rol.cs" />
     <Compile Include="Models\Sesion.cs" />
     <Compile Include="Models\Unidad.cs" />

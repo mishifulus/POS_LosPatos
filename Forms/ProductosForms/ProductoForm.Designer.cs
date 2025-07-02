@@ -55,6 +55,9 @@
             this.btnGuardar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.txtIdProducto = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.txtImporteEnvase = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnClose)).BeginInit();
             this.SuspendLayout();
@@ -303,7 +306,7 @@
             this.btnGuardar.ForeColor = System.Drawing.Color.White;
             this.btnGuardar.Image = ((System.Drawing.Image)(resources.GetObject("btnGuardar.Image")));
             this.btnGuardar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnGuardar.Location = new System.Drawing.Point(514, 428);
+            this.btnGuardar.Location = new System.Drawing.Point(514, 465);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(161, 45);
             this.btnGuardar.TabIndex = 23;
@@ -322,7 +325,7 @@
             this.btnCancelar.ForeColor = System.Drawing.Color.White;
             this.btnCancelar.Image = ((System.Drawing.Image)(resources.GetObject("btnCancelar.Image")));
             this.btnCancelar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCancelar.Location = new System.Drawing.Point(704, 428);
+            this.btnCancelar.Location = new System.Drawing.Point(704, 465);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(161, 45);
             this.btnCancelar.TabIndex = 24;
@@ -332,17 +335,50 @@
             // 
             // txtIdProducto
             // 
-            this.txtIdProducto.Location = new System.Drawing.Point(514, 372);
+            this.txtIdProducto.Location = new System.Drawing.Point(514, 429);
             this.txtIdProducto.Name = "txtIdProducto";
             this.txtIdProducto.Size = new System.Drawing.Size(100, 26);
             this.txtIdProducto.TabIndex = 25;
             this.txtIdProducto.Visible = false;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Century Gothic", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(520, 398);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(21, 23);
+            this.label13.TabIndex = 28;
+            this.label13.Text = "$";
+            // 
+            // txtImporteEnvase
+            // 
+            this.txtImporteEnvase.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtImporteEnvase.Font = new System.Drawing.Font("Century Gothic", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtImporteEnvase.Location = new System.Drawing.Point(547, 398);
+            this.txtImporteEnvase.Name = "txtImporteEnvase";
+            this.txtImporteEnvase.Size = new System.Drawing.Size(318, 27);
+            this.txtImporteEnvase.TabIndex = 27;
+            this.txtImporteEnvase.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtImporteEnvase_KeyPress);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Century Gothic", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(510, 372);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(169, 23);
+            this.label14.TabIndex = 26;
+            this.label14.Text = "Importe Envase:";
             // 
             // ProductoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(950, 550);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.txtImporteEnvase);
+            this.Controls.Add(this.label14);
             this.Controls.Add(this.txtIdProducto);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnGuardar);
@@ -408,5 +444,8 @@
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.TextBox txtIdProducto;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox txtImporteEnvase;
+        private System.Windows.Forms.Label label14;
     }
 }

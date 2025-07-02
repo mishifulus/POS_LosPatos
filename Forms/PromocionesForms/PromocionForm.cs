@@ -32,34 +32,41 @@ namespace LosPatosSystem.Forms.PromocionesForms
 
         private void PromocionForm_Load(object sender, EventArgs e)
         {
-            CargarTipos();
-            CargarProductos();
-
-            if (Accion == "Editar" && IdPromocion > 0)
+            try
             {
-                Promocion promocion = new Promocion();
-                promocion.IdPromocion = IdPromocion;
+                CargarTipos();
+                CargarProductos();
 
-                PromocionDAO promocionDAO = new PromocionDAO();
-                DataSet dataSet = promocionDAO.selectPromocion("R", promocion);
-                DataTable dataTable = dataSet.Tables["Promocion"];
+                if (Accion == "Editar" && IdPromocion > 0)
+                {
+                    Promocion promocion = new Promocion();
+                    promocion.IdPromocion = IdPromocion;
 
-                if (dataTable.Rows.Count > 0)
-                {
-                    txtNombre.Text = dataTable.Rows[0]["Nombre"].ToString();
-                    txtDescripcion.Text = dataTable.Rows[0]["Descripcion"].ToString();
-                    cmbTipo.SelectedValue = dataTable.Rows[0]["Tipo"];
-                    txtValorDescuento.Text = dataTable.Rows[0]["ValorDescuento"].ToString();
-                    txtCantidadMinima.Text = dataTable.Rows[0]["CantidadMinima"].ToString();
-                    cmbProductoAsociado.SelectedValue = dataTable.Rows[0]["ProductoAsociado"].ToString();
-                    dtpFechaInicio.Value = Convert.ToDateTime(dataTable.Rows[0]["FechaInicio"].ToString());
-                    dtpFechaFin.Value = Convert.ToDateTime(dataTable.Rows[0]["FechaFin"].ToString());
+                    PromocionDAO promocionDAO = new PromocionDAO();
+                    DataSet dataSet = promocionDAO.selectPromocion("R", promocion);
+                    DataTable dataTable = dataSet.Tables["Promocion"];
+
+                    if (dataTable.Rows.Count > 0)
+                    {
+                        txtNombre.Text = dataTable.Rows[0]["Nombre"].ToString();
+                        txtDescripcion.Text = dataTable.Rows[0]["Descripcion"].ToString();
+                        cmbTipo.SelectedValue = dataTable.Rows[0]["Tipo"];
+                        txtValorDescuento.Text = dataTable.Rows[0]["ValorDescuento"].ToString();
+                        txtCantidadMinima.Text = dataTable.Rows[0]["CantidadMinima"].ToString();
+                        cmbProductoAsociado.SelectedValue = dataTable.Rows[0]["ProductoAsociado"].ToString();
+                        dtpFechaInicio.Value = Convert.ToDateTime(dataTable.Rows[0]["FechaInicio"].ToString());
+                        dtpFechaFin.Value = Convert.ToDateTime(dataTable.Rows[0]["FechaFin"].ToString());
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se encontró la promoción", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        this.Close();
+                    }
                 }
-                else
-                {
-                    MessageBox.Show("No se encontró la promoción", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    this.Close();
-                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar los datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -91,56 +98,77 @@ namespace LosPatosSystem.Forms.PromocionesForms
 
         private void CargarProductos()
         {
-            ProductoDAO productoDAO = new ProductoDAO();
-            DataSet dataSet = productoDAO.selectProducto("L", null);
+            try
+            {
+                ProductoDAO productoDAO = new ProductoDAO();
+                DataSet dataSet = productoDAO.selectProducto("L", null);
 
-            DataTable dataTable = dataSet.Tables["Producto"];
+                DataTable dataTable = dataSet.Tables["Producto"];
 
-            cmbProductoAsociado.DataSource = dataTable;
-            cmbProductoAsociado.DisplayMember = "Nombre";
-            cmbProductoAsociado.ValueMember = "IdProducto";
+                cmbProductoAsociado.DataSource = dataTable;
+                cmbProductoAsociado.DisplayMember = "Nombre";
+                cmbProductoAsociado.ValueMember = "IdProducto";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar los productos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void GuardarPromocion(Promocion promocion)
         {
-            PromocionDAO promocionDAO = new PromocionDAO();
-            promocionDAO.CrudPromocion(promocion, "C");
-            MessageBox.Show("Promoción guardada correctamente", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            try
+            {
+                PromocionDAO promocionDAO = new PromocionDAO();
+                promocionDAO.CrudPromocion(promocion, "C");
+                MessageBox.Show("Promoción guardada correctamente", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            txtNombre.Text = string.Empty;
-            txtDescripcion.Text = string.Empty;
-            cmbTipo.SelectedIndex = 0;
-            txtValorDescuento.Text = string.Empty;
-            txtCantidadMinima.Text = string.Empty;
-            cmbProductoAsociado.SelectedIndex = 0;
-            dtpFechaInicio.Value = DateTime.Now;
-            dtpFechaFin.Value = DateTime.Now;
-            txtIdPromocion.Text = string.Empty;
+                txtNombre.Text = string.Empty;
+                txtDescripcion.Text = string.Empty;
+                cmbTipo.SelectedIndex = 0;
+                txtValorDescuento.Text = string.Empty;
+                txtCantidadMinima.Text = string.Empty;
+                cmbProductoAsociado.SelectedIndex = 0;
+                dtpFechaInicio.Value = DateTime.Now;
+                dtpFechaFin.Value = DateTime.Now;
+                txtIdPromocion.Text = string.Empty;
 
-            NuevaPromocion?.Invoke();
+                NuevaPromocion?.Invoke();
 
-            this.Close();
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al guardar la promoción: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void ActualizarPromocion(Promocion promocion)
         {
-            PromocionDAO promocionDAO = new PromocionDAO();
-            promocionDAO.CrudPromocion(promocion, "U");
-            MessageBox.Show("Promoción actualizada correctamente", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            try
+            {
+                PromocionDAO promocionDAO = new PromocionDAO();
+                promocionDAO.CrudPromocion(promocion, "U");
+                MessageBox.Show("Promoción actualizada correctamente", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            txtNombre.Text = string.Empty;
-            txtDescripcion.Text = string.Empty;
-            cmbTipo.SelectedIndex = 0;
-            txtValorDescuento.Text = string.Empty;
-            txtCantidadMinima.Text = string.Empty;
-            cmbProductoAsociado.SelectedIndex = 0;
-            dtpFechaInicio.Value = DateTime.Now;
-            dtpFechaFin.Value = DateTime.Now;
-            txtIdPromocion.Text = string.Empty;
+                txtNombre.Text = string.Empty;
+                txtDescripcion.Text = string.Empty;
+                cmbTipo.SelectedIndex = 0;
+                txtValorDescuento.Text = string.Empty;
+                txtCantidadMinima.Text = string.Empty;
+                cmbProductoAsociado.SelectedIndex = 0;
+                dtpFechaInicio.Value = DateTime.Now;
+                dtpFechaFin.Value = DateTime.Now;
+                txtIdPromocion.Text = string.Empty;
 
-            NuevaPromocion?.Invoke();
+                NuevaPromocion?.Invoke();
 
-            this.Close();
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al actualizar la promoción: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]

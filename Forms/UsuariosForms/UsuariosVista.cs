@@ -41,74 +41,109 @@ namespace LosPatosSystem.Forms.UsuariosForms
 
         private void ObtenerUsuarios()
         {
-            UsuarioDAO usuarioDAO = new UsuarioDAO();
-            DataSet dataSet = usuarioDAO.selectUsuario("L", null);
-            dgvUsuarios.DataSource = dataSet.Tables["Usuario"];
+            try
+            {
+                UsuarioDAO usuarioDAO = new UsuarioDAO();
+                DataSet dataSet = usuarioDAO.selectUsuario("L", null);
+                dgvUsuarios.DataSource = dataSet.Tables["Usuario"];
 
-            dgvUsuarios.Columns["IdUsuario"].Visible = false;
-            dgvUsuarios.Columns["IdRol"].Visible = false;
-            dgvUsuarios.Columns["APaterno"].HeaderText = "Apellido Paterno";
-            dgvUsuarios.Columns["AMaterno"].HeaderText = "Apellido Materno";
-            dgvUsuarios.Columns["FechaCreacion"].HeaderText = "Fecha Registro";
-            dgvUsuarios.Columns["FechaCreacion"].DefaultCellStyle.Format = "dd/MM/yyyy";
-            dgvUsuarios.Columns["EstatusRegistro"].HeaderCell.Value = "Estatus";
+                dgvUsuarios.Columns["IdUsuario"].Visible = false;
+                dgvUsuarios.Columns["IdRol"].Visible = false;
+                dgvUsuarios.Columns["APaterno"].HeaderText = "Apellido Paterno";
+                dgvUsuarios.Columns["AMaterno"].HeaderText = "Apellido Materno";
+                dgvUsuarios.Columns["FechaCreacion"].HeaderText = "Fecha Registro";
+                dgvUsuarios.Columns["FechaCreacion"].DefaultCellStyle.Format = "dd/MM/yyyy";
+                dgvUsuarios.Columns["EstatusRegistro"].HeaderCell.Value = "Estatus";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al obtener los usuarios: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void ObtenerUsuariosInactivos()
         {
-            UsuarioDAO usuarioDAO = new UsuarioDAO();
-            DataSet dataSet = usuarioDAO.selectUsuario("I", null);
-            dgvUsuarios.DataSource = dataSet.Tables["Usuario"];
+            try
+            {
+                UsuarioDAO usuarioDAO = new UsuarioDAO();
+                DataSet dataSet = usuarioDAO.selectUsuario("I", null);
+                dgvUsuarios.DataSource = dataSet.Tables["Usuario"];
 
-            dgvUsuarios.Columns["IdUsuario"].Visible = false;
-            dgvUsuarios.Columns["IdRol"].Visible = false;
-            dgvUsuarios.Columns["APaterno"].HeaderText = "Apellido Paterno";
-            dgvUsuarios.Columns["AMaterno"].HeaderText = "Apellido Materno";
-            dgvUsuarios.Columns["FechaCreacion"].HeaderText = "Fecha Registro";
-            dgvUsuarios.Columns["FechaCreacion"].DefaultCellStyle.Format = "dd/MM/yyyy";
-            dgvUsuarios.Columns["EstatusRegistro"].HeaderCell.Value = "Estatus";
+                dgvUsuarios.Columns["IdUsuario"].Visible = false;
+                dgvUsuarios.Columns["IdRol"].Visible = false;
+                dgvUsuarios.Columns["APaterno"].HeaderText = "Apellido Paterno";
+                dgvUsuarios.Columns["AMaterno"].HeaderText = "Apellido Materno";
+                dgvUsuarios.Columns["FechaCreacion"].HeaderText = "Fecha Registro";
+                dgvUsuarios.Columns["FechaCreacion"].DefaultCellStyle.Format = "dd/MM/yyyy";
+                dgvUsuarios.Columns["EstatusRegistro"].HeaderCell.Value = "Estatus";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al obtener los usuarios inactivos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void EliminarUsuario(int idUsuario)
         {
-            Usuario usuario = new Usuario();
-            usuario.IdUsuario = idUsuario;
+            try
+            {
+                Usuario usuario = new Usuario();
+                usuario.IdUsuario = idUsuario;
 
-            UsuarioDAO usuarioDAO = new UsuarioDAO();
-            usuarioDAO.CrudUsuario(usuario, "D");
+                UsuarioDAO usuarioDAO = new UsuarioDAO();
+                usuarioDAO.CrudUsuario(usuario, "D");
 
-            txtIdUsuario.Text = string.Empty;
+                txtIdUsuario.Text = string.Empty;
 
-            ObtenerUsuarios();
+                ObtenerUsuarios();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al eliminar el usuario: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void ActivarUsuario(int idUsuario)
         {
-            Usuario usuario = new Usuario();
-            usuario.IdUsuario = idUsuario;
+            try
+            {
+                Usuario usuario = new Usuario();
+                usuario.IdUsuario = idUsuario;
 
-            UsuarioDAO usuarioDAO = new UsuarioDAO();
-            usuarioDAO.CrudUsuario(usuario, "A");
+                UsuarioDAO usuarioDAO = new UsuarioDAO();
+                usuarioDAO.CrudUsuario(usuario, "A");
 
-            txtIdUsuario.Text = string.Empty;
+                txtIdUsuario.Text = string.Empty;
 
-            ObtenerUsuariosInactivos();
+                ObtenerUsuariosInactivos();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al activar el usuario: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void BuscarUsuario(Usuario usuario)
         {
-            UsuarioDAO usuarioDAO = new UsuarioDAO();
-            DataSet dataSet = usuarioDAO.selectUsuario("S", usuario);
+            try
+            {
+                UsuarioDAO usuarioDAO = new UsuarioDAO();
+                DataSet dataSet = usuarioDAO.selectUsuario("S", usuario);
 
-            dgvUsuarios.DataSource = dataSet.Tables["Usuario"];
+                dgvUsuarios.DataSource = dataSet.Tables["Usuario"];
 
-            dgvUsuarios.Columns["IdUsuario"].Visible = false;
-            dgvUsuarios.Columns["IdRol"].Visible = false;
-            dgvUsuarios.Columns["APaterno"].HeaderText = "Apellido Paterno";
-            dgvUsuarios.Columns["AMaterno"].HeaderText = "Apellido Materno";
-            dgvUsuarios.Columns["FechaCreacion"].HeaderText = "Fecha Registro";
-            dgvUsuarios.Columns["FechaCreacion"].DefaultCellStyle.Format = "dd/MM/yyyy";
-            dgvUsuarios.Columns["EstatusRegistro"].HeaderCell.Value = "Estatus";
+                dgvUsuarios.Columns["IdUsuario"].Visible = false;
+                dgvUsuarios.Columns["IdRol"].Visible = false;
+                dgvUsuarios.Columns["APaterno"].HeaderText = "Apellido Paterno";
+                dgvUsuarios.Columns["AMaterno"].HeaderText = "Apellido Materno";
+                dgvUsuarios.Columns["FechaCreacion"].HeaderText = "Fecha Registro";
+                dgvUsuarios.Columns["FechaCreacion"].DefaultCellStyle.Format = "dd/MM/yyyy";
+                dgvUsuarios.Columns["EstatusRegistro"].HeaderCell.Value = "Estatus";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al buscar el usuario: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -225,18 +260,24 @@ namespace LosPatosSystem.Forms.UsuariosForms
 
         private void btnCambiarPass_Click(object sender, EventArgs e)
         {
-            int IdUsuario = Convert.ToInt32(txtIdUsuario.Text);
-            if (IdUsuario == 0)
+            if (!string.IsNullOrEmpty(txtIdUsuario.Text))
             {
-                CambiarPass cambiarPass = new CambiarPass(IdUsuario);
-                cambiarPass.Show();
+                int IdUsuario = Convert.ToInt32(txtIdUsuario.Text);
+
+                if (Convert.ToInt32(txtIdUsuario.Text) > 0)
+                {
+                    CambiarPass cambiarPass = new CambiarPass(IdUsuario);
+                    cambiarPass.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Seleccione un usuario para cambiar contraseña", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
             else
             {
                 MessageBox.Show("Seleccione un usuario para cambiar contraseña", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-
-            
         }
 
         private void txtBuscar_KeyDown(object sender, KeyEventArgs e)

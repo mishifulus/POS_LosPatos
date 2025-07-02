@@ -28,7 +28,6 @@ namespace LosPatosSystem.Forms.CajaForms
         private void MovimientoForm_Load(object sender, EventArgs e)
         {
             CargarTipos();
-
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -58,34 +57,48 @@ namespace LosPatosSystem.Forms.CajaForms
 
         private void GuardarIngreso(string monto, string descripcion)
         {
-            CajaDAO cajaDAO = new CajaDAO();
-            cajaDAO.RegistrarIngreso(Convert.ToDouble(monto), descripcion, IdUsuario);
+            try
+            {
+                CajaDAO cajaDAO = new CajaDAO();
+                cajaDAO.RegistrarIngreso(Convert.ToDouble(monto), descripcion, IdUsuario);
 
-            MessageBox.Show("Ingreso guardada correctamente", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Ingreso guardada correctamente", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            txtMonto.Text = string.Empty;
-            txtDescripcion.Text = string.Empty;
-            cmbTipo.SelectedIndex = 0;
+                txtMonto.Text = string.Empty;
+                txtDescripcion.Text = string.Empty;
+                cmbTipo.SelectedIndex = 0;
 
-            NuevoMovimiento?.Invoke();
+                NuevoMovimiento?.Invoke();
 
-            this.Close();
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al guardar el ingreso: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void GuardarEgreso(string monto, string descripcion)
         {
-            CajaDAO cajaDAO = new CajaDAO();
-            cajaDAO.RegistrarEgreso(Convert.ToDouble(monto), descripcion, IdUsuario);
+            try
+            {
+                CajaDAO cajaDAO = new CajaDAO();
+                cajaDAO.RegistrarEgreso(Convert.ToDouble(monto), descripcion, IdUsuario);
 
-            MessageBox.Show("Egreso guardada correctamente", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Egreso guardada correctamente", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            txtMonto.Text = string.Empty;
-            txtDescripcion.Text = string.Empty;
-            cmbTipo.SelectedIndex = 0;
+                txtMonto.Text = string.Empty;
+                txtDescripcion.Text = string.Empty;
+                cmbTipo.SelectedIndex = 0;
 
-            NuevoMovimiento?.Invoke();
+                NuevoMovimiento?.Invoke();
 
-            this.Close();
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al guardar el egreso: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]

@@ -19,9 +19,9 @@ namespace LosPatosSystem.Data
             using (SqlConnection conexion = ConexionBD.ObtenerConexion())
             {
                 conexion.Open();
-                string query = "SELECT ISNULL(MAX(IdVenta), 0) + 1 FROM Ventas";
                 try
                 {
+                    string query = "SELECT ISNULL(MAX(IdVenta), 0) + 1 FROM Ventas";
                     using (SqlCommand cmd = new SqlCommand(query, conexion))
                     {
                         IdVenta = (int)cmd.ExecuteScalar();
@@ -29,7 +29,7 @@ namespace LosPatosSystem.Data
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.Message);
+                    MessageBox.Show(ex.Message);
                 }
                 finally
                 {
@@ -39,13 +39,15 @@ namespace LosPatosSystem.Data
             return IdVenta;
         }
 
-        public bool RegistrarVenta(double total, int tipoPago, int idUsuario, DataTable productos, out int idVenta)
+        public bool RegistrarVenta(double total, int tipoPago, int idUsuario, DataTable productos, double totalEnvases, out int idVenta)
         {
             idVenta = 0;
+            bool resultado = false;
 
-            try
+            using (SqlConnection conexion = ConexionBD.ObtenerConexion())
             {
-                using (SqlConnection conexion = ConexionBD.ObtenerConexion())
+                conexion.Open();
+                try
                 {
                     using (SqlCommand cmd = new SqlCommand("sp_RegistrarVenta", conexion))
                     {
@@ -53,6 +55,7 @@ namespace LosPatosSystem.Data
                         cmd.Parameters.AddWithValue("@Total", total);
                         cmd.Parameters.AddWithValue("@TipoPago", tipoPago);
                         cmd.Parameters.AddWithValue("@IdUsuario", idUsuario);
+                        cmd.Parameters.AddWithValue("@TotalEnvases", totalEnvases);
 
                         SqlParameter paramProductos = cmd.Parameters.AddWithValue("@Productos", productos);
                         paramProductos.SqlDbType = SqlDbType.Structured;
@@ -61,18 +64,21 @@ namespace LosPatosSystem.Data
                         paramIdVenta.Direction = ParameterDirection.Output;
                         cmd.Parameters.Add(paramIdVenta);
 
-                        conexion.Open();
                         cmd.ExecuteNonQuery();
                         idVenta = Convert.ToInt32(paramIdVenta.Value);
-                        return true;
+                        resultado = true;
                     }
                 }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    conexion.Close();
+                }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error: " + ex.Message);
-                return false;
-            }
+            return resultado;
         }
 
         public double AplicarPromocion(int idProducto, int cantidad, double precioVenta)
@@ -82,21 +88,31 @@ namespace LosPatosSystem.Data
             using (SqlConnection conexion = ConexionBD.ObtenerConexion())
             {
                 conexion.Open();
-                using (SqlCommand cmd = new SqlCommand("sp_AplicarPromocion", conexion))
+                try
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@IdProducto", idProducto);
-                    cmd.Parameters.AddWithValue("@Cantidad", cantidad);
-                    cmd.Parameters.AddWithValue("@PrecioVenta", precioVenta);
+                    using (SqlCommand cmd = new SqlCommand("sp_AplicarPromocion", conexion))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@IdProducto", idProducto);
+                        cmd.Parameters.AddWithValue("@Cantidad", cantidad);
+                        cmd.Parameters.AddWithValue("@PrecioVenta", precioVenta);
 
-                    SqlParameter outputDescuento = new SqlParameter("@DescuentoAplicado", SqlDbType.Decimal) { Direction = ParameterDirection.Output };
-                    cmd.Parameters.Add(outputDescuento);
+                        SqlParameter outputDescuento = new SqlParameter("@DescuentoAplicado", SqlDbType.Decimal) { Direction = ParameterDirection.Output };
+                        cmd.Parameters.Add(outputDescuento);
 
-                    cmd.ExecuteNonQuery();
-                    descuentoAplicado = Convert.ToDouble(outputDescuento.Value);
+                        cmd.ExecuteNonQuery();
+                        descuentoAplicado = Convert.ToDouble(outputDescuento.Value);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    conexion.Close();
                 }
             }
-
             return descuentoAplicado;
         }
 

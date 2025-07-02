@@ -9,21 +9,21 @@ using System.Windows.Forms;
 
 namespace LosPatosSystem.Data
 {
-    class DevolucionDAO
+    class RetornoEnvaseDAO
     {
-        public int ObtenerIdDevolucion()
+        public int ObtenerIdRetorno()
         {
-            int IdDevolucion = 0;
+            int IdRetorno = 0;
 
             using (SqlConnection conexion = ConexionBD.ObtenerConexion())
             {
                 conexion.Open();
                 try
                 {
-                    string query = "SELECT ISNULL(MAX(IdDevolucion), 0) + 1 FROM Devoluciones";
+                    string query = "SELECT ISNULL(MAX(IdRetorno), 0) + 1 FROM RetornoEnvases";
                     using (SqlCommand cmd = new SqlCommand(query, conexion))
                     {
-                        IdDevolucion = (int)cmd.ExecuteScalar();
+                        IdRetorno = (int)cmd.ExecuteScalar();
                     }
                 }
                 catch (Exception ex)
@@ -35,7 +35,7 @@ namespace LosPatosSystem.Data
                     conexion.Close();
                 }
             }
-            return IdDevolucion;
+            return IdRetorno;
         }
 
         public DataTable ObtenerProductosVenta(int idVenta)
@@ -47,10 +47,10 @@ namespace LosPatosSystem.Data
                 conexion.Open();
                 try
                 {
-                    string query = @"SELECT dv.IdProducto,p.Codigo, p.Nombre AS Producto, p.Descripcion, dv.Cantidad, dv.PrecioUnitario, dv.Subtotal
+                    string query = @"SELECT dv.IdProducto,p.Codigo, p.Nombre AS Producto, p.Descripcion, dv.Cantidad, dv.ImporteEnvase, dv.ImporteEnvase * dv.Cantidad AS Subtotal
                      FROM DetalleVentas dv
                      INNER JOIN Productos p ON dv.IdProducto = p.IdProducto
-                     WHERE dv.IdVenta = @IdVenta";
+                     WHERE dv.IdVenta = @IdVenta AND p.TieneImporte = 1";
                     using (SqlCommand cmd = new SqlCommand(query, conexion))
                     {
                         cmd.Parameters.AddWithValue("@IdVenta", idVenta);
@@ -70,32 +70,31 @@ namespace LosPatosSystem.Data
             return dtProductos;
         }
 
-        public bool RegistrarDevolucion(int idVenta, string motivo, int idUsuario, DataTable productos, out int idDevolucion)
+        public bool RegistrarRetorno(int folioVenta, int idUsuario, DataTable productos, out int idRetorno)
         {
-            idDevolucion = 0;
+            idRetorno = 0;
             bool resultado = false;
 
             using (SqlConnection conexion = ConexionBD.ObtenerConexion())
             {
                 conexion.Open();
-                try 
+                try
                 {
-                    using (SqlCommand cmd = new SqlCommand("sp_RegistrarDevolucion", conexion))
+                    using (SqlCommand cmd = new SqlCommand("sp_RegistrarRetornoEnvases", conexion))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@IdVenta", idVenta);
-                        cmd.Parameters.AddWithValue("@Motivo", motivo);
+                        cmd.Parameters.AddWithValue("@FolioVenta", folioVenta);
                         cmd.Parameters.AddWithValue("@IdUsuario", idUsuario);
 
-                        SqlParameter paramProductos = cmd.Parameters.AddWithValue("@ProductosDevoluciones", productos);
+                        SqlParameter paramProductos = cmd.Parameters.AddWithValue("@Detalle", productos);
                         paramProductos.SqlDbType = SqlDbType.Structured;
 
-                        SqlParameter paramIdDevolucion = new SqlParameter("@IdDevolucion", SqlDbType.Int);
-                        paramIdDevolucion.Direction = ParameterDirection.Output;
-                        cmd.Parameters.Add(paramIdDevolucion);
+                        SqlParameter paramIdRetorno = new SqlParameter("@IdRetorno", SqlDbType.Int);
+                        paramIdRetorno.Direction = ParameterDirection.Output;
+                        cmd.Parameters.Add(paramIdRetorno);
 
                         cmd.ExecuteNonQuery();
-                        idDevolucion = Convert.ToInt32(paramIdDevolucion.Value);
+                        idRetorno = Convert.ToInt32(paramIdRetorno.Value);
                         resultado = true;
                     }
                 }

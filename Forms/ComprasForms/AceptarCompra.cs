@@ -90,31 +90,41 @@ namespace LosPatosSystem.Forms.ComprasForms
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-
-            if (Convert.ToDouble(txtRecibido.Text) < Convert.ToDouble(txtTotal.Text))
+            try
             {
-                MessageBox.Show("Ingrese la cantidad completa", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                if (Convert.ToDouble(txtRecibido.Text) < Convert.ToDouble(txtTotal.Text))
+                {
+                    MessageBox.Show("Ingrese la cantidad completa", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                CompraDAO compraDAO = new CompraDAO();
+                int idCompra = 0;
+                bool result = compraDAO.RegistrarCompra(Total, (int)cmbTipoPago.SelectedValue, IdUsuario, detalleCompra, out idCompra);
+                if (result)
+                {
+                    MessageBox.Show("Compra registrada correctamente", "Compra registrada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    txtCambio.Text = "$0";
+                    txtTotal.Text = "$0";
+                    cmbTipoPago.SelectedIndex = 0;
+                    txtRecibido.Text = string.Empty;
+                    detalleCompra.Clear();
+
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Ocurrió un error al registrar la compra", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
             }
-
-            CompraDAO compraDAO = new CompraDAO();
-            int idCompra = 0;
-            bool result = compraDAO.RegistrarCompra(Total, (int)cmbTipoPago.SelectedValue, IdUsuario, detalleCompra, out idCompra);
-            if (result)
+            catch (FormatException)
             {
-                MessageBox.Show("Compra registrada correctamente", "Compra registrada", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                txtCambio.Text = "$0";
-                txtTotal.Text = "$0";
-                cmbTipoPago.SelectedIndex = 0;
-                txtRecibido.Text = string.Empty;
-                detalleCompra.Clear();
-
-                this.Close();
+                MessageBox.Show("Ingrese un valor numérico válido para el monto recibido.", "Error de formato", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Ocurrió un error al registrar la compra", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                MessageBox.Show($"Ocurrió un error al guardar la compra: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

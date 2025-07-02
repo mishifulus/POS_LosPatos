@@ -40,39 +40,53 @@ namespace LosPatosSystem.Forms.DevolucionesForms
 
         private void ObtenerIdDevolucion()
         {
-            DevolucionDAO devolucionDAO = new DevolucionDAO();
-            txtIdDevolucion.Text = devolucionDAO.ObtenerIdDevolucion().ToString();
+            try
+            {
+                DevolucionDAO devolucionDAO = new DevolucionDAO();
+                txtIdDevolucion.Text = devolucionDAO.ObtenerIdDevolucion().ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al obtener el ID de devolución: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void ObtenerProductos(int IdVenta)
         {
-            dgvDetalleDevolucion.Columns.Clear();
-            dgvDetalleDevolucion.DataSource = null;
-            dgvDetalleDevolucion.Rows.Clear();
+            try
+            {
+                dgvDetalleDevolucion.Columns.Clear();
+                dgvDetalleDevolucion.DataSource = null;
+                dgvDetalleDevolucion.Rows.Clear();
 
-            DevolucionDAO devolucionDAO = new DevolucionDAO();
-            detalleDevolucion = devolucionDAO.ObtenerProductosVenta(IdVenta);
+                DevolucionDAO devolucionDAO = new DevolucionDAO();
+                detalleDevolucion = devolucionDAO.ObtenerProductosVenta(IdVenta);
 
-            dgvDetalleDevolucion.DataSource = detalleDevolucion;
+                dgvDetalleDevolucion.DataSource = detalleDevolucion;
 
-            DataGridViewButtonColumn btnEliminar = new DataGridViewButtonColumn();
-            btnEliminar.HeaderText = "Eliminar";
-            btnEliminar.Text = "X";
-            btnEliminar.Name = "Eliminar";
-            btnEliminar.UseColumnTextForButtonValue = true;
-            dgvDetalleDevolucion.Columns.Add(btnEliminar);
+                DataGridViewButtonColumn btnEliminar = new DataGridViewButtonColumn();
+                btnEliminar.HeaderText = "Eliminar";
+                btnEliminar.Text = "X";
+                btnEliminar.Name = "Eliminar";
+                btnEliminar.UseColumnTextForButtonValue = true;
+                dgvDetalleDevolucion.Columns.Add(btnEliminar);
 
-            dgvDetalleDevolucion.Columns["IdProducto"].Visible = false;
-            dgvDetalleDevolucion.Columns["PrecioUnitario"].HeaderText = "Precio Unitario";
-            dgvDetalleDevolucion.Columns["Codigo"].HeaderText = "Código";
-            dgvDetalleDevolucion.Columns["PrecioUnitario"].DefaultCellStyle.Format = "C";
-            dgvDetalleDevolucion.Columns["Subtotal"].DefaultCellStyle.Format = "C";
-            dgvDetalleDevolucion.Columns["Cantidad"].ReadOnly = false;
-            dgvDetalleDevolucion.Columns["Codigo"].ReadOnly = true;
-            dgvDetalleDevolucion.Columns["Producto"].ReadOnly = true;
-            dgvDetalleDevolucion.Columns["Descripcion"].ReadOnly = true;
-            dgvDetalleDevolucion.Columns["PrecioUnitario"].ReadOnly = true;
-            dgvDetalleDevolucion.Columns["Subtotal"].ReadOnly = true;
+                dgvDetalleDevolucion.Columns["IdProducto"].Visible = false;
+                dgvDetalleDevolucion.Columns["PrecioUnitario"].HeaderText = "Precio Unitario";
+                dgvDetalleDevolucion.Columns["Codigo"].HeaderText = "Código";
+                dgvDetalleDevolucion.Columns["PrecioUnitario"].DefaultCellStyle.Format = "C";
+                dgvDetalleDevolucion.Columns["Subtotal"].DefaultCellStyle.Format = "C";
+                dgvDetalleDevolucion.Columns["Cantidad"].ReadOnly = false;
+                dgvDetalleDevolucion.Columns["Codigo"].ReadOnly = true;
+                dgvDetalleDevolucion.Columns["Producto"].ReadOnly = true;
+                dgvDetalleDevolucion.Columns["Descripcion"].ReadOnly = true;
+                dgvDetalleDevolucion.Columns["PrecioUnitario"].ReadOnly = true;
+                dgvDetalleDevolucion.Columns["Subtotal"].ReadOnly = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al obtener los productos de la venta: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -204,7 +218,6 @@ namespace LosPatosSystem.Forms.DevolucionesForms
                     tablaFiltrada.Rows.Add(nuevaFila);
                 }
             }
-
             return tablaFiltrada;
         }
 

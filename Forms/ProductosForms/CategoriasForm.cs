@@ -111,60 +111,88 @@ namespace LosPatosSystem.Forms.Productos
 
         private void ObtenerCategorias()
         {
-            CategoriaDAO categoriaDAO = new CategoriaDAO();
-            DataSet dataSet = categoriaDAO.selectCategoria("L", 0, null);
-            dgvCategorias.DataSource = dataSet.Tables["Categoria"];
+            try
+            {
+                CategoriaDAO categoriaDAO = new CategoriaDAO();
+                DataSet dataSet = categoriaDAO.selectCategoria("L", 0, null);
+                dgvCategorias.DataSource = dataSet.Tables["Categoria"];
 
-            dgvCategorias.Columns["IdCategoria"].Visible = false;
-            dgvCategorias.Columns["Nombre"].HeaderText = "Categoria";
-            dgvCategorias.Columns["FechaCreacion"].HeaderText = "Fecha Registro";
-            dgvCategorias.Columns["FechaCreacion"].DefaultCellStyle.Format = "dd/MM/yyyy";
-            dgvCategorias.Columns["EstatusRegistro"].Visible = false;
-            dgvCategorias.Columns["IdUsuario"].Visible = false;
+                dgvCategorias.Columns["IdCategoria"].Visible = false;
+                dgvCategorias.Columns["Nombre"].HeaderText = "Categoria";
+                dgvCategorias.Columns["FechaCreacion"].HeaderText = "Fecha Registro";
+                dgvCategorias.Columns["FechaCreacion"].DefaultCellStyle.Format = "dd/MM/yyyy";
+                dgvCategorias.Columns["EstatusRegistro"].Visible = false;
+                dgvCategorias.Columns["IdUsuario"].Visible = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al obtener las categorías: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void GuardarCategoria(string nombreCategoria, int idUsuario)
         {
-            Categoria categoria = new Categoria();
-            categoria.Nombre = nombreCategoria;
-            categoria.IdUsuario = idUsuario;
+            try
+            {
+                Categoria categoria = new Categoria();
+                categoria.Nombre = nombreCategoria;
+                categoria.IdUsuario = idUsuario;
 
-            CategoriaDAO categoriaDAO = new CategoriaDAO();
-            categoriaDAO.CrudCategoria(categoria, "C");
+                CategoriaDAO categoriaDAO = new CategoriaDAO();
+                categoriaDAO.CrudCategoria(categoria, "C");
 
-            MessageBox.Show("Categoria agregada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            txtNombre.Text = string.Empty;
-            ObtenerCategorias();
+                MessageBox.Show("Categoria agregada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtNombre.Text = string.Empty;
+                ObtenerCategorias();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al guardar la categoría: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void ActualizarCategoria(int idCategoria, string nombreCategoria, int idUsuario)
         {
-            Categoria categoria = new Categoria();
-            categoria.IdCategoria = idCategoria;
-            categoria.Nombre = nombreCategoria;
-            categoria.IdUsuario = idUsuario;
+            try
+            {
+                Categoria categoria = new Categoria();
+                categoria.IdCategoria = idCategoria;
+                categoria.Nombre = nombreCategoria;
+                categoria.IdUsuario = idUsuario;
 
-            CategoriaDAO categoriaDAO = new CategoriaDAO();
-            categoriaDAO.CrudCategoria(categoria, "U");
+                CategoriaDAO categoriaDAO = new CategoriaDAO();
+                categoriaDAO.CrudCategoria(categoria, "U");
 
-            MessageBox.Show("Categoria editada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            txtNombre.Text = string.Empty;
-            txtIdCategoria.Text = string.Empty;
-            ObtenerCategorias();
+                MessageBox.Show("Categoria editada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtNombre.Text = string.Empty;
+                txtIdCategoria.Text = string.Empty;
+                ObtenerCategorias();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al actualizar la categoría: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void EliminarCategoria(int idCategoria, int idUsuario)
         {
-            Categoria categoria = new Categoria();
-            categoria.IdCategoria = idCategoria;
-            categoria.IdUsuario = idUsuario;
+            try
+            {
+                Categoria categoria = new Categoria();
+                categoria.IdCategoria = idCategoria;
+                categoria.IdUsuario = idUsuario;
 
-            CategoriaDAO categoriaDAO = new CategoriaDAO();
-            categoriaDAO.CrudCategoria(categoria, "D");
-            MessageBox.Show("Categoria eliminada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            txtNombre.Text = string.Empty;
-            txtIdCategoria.Text = string.Empty;
-            ObtenerCategorias();
+                CategoriaDAO categoriaDAO = new CategoriaDAO();
+                categoriaDAO.CrudCategoria(categoria, "D");
+                MessageBox.Show("Categoria eliminada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtNombre.Text = string.Empty;
+                txtIdCategoria.Text = string.Empty;
+                ObtenerCategorias();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al eliminar la categoría: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

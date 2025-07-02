@@ -62,27 +62,34 @@ namespace LosPatosSystem.Forms.CajaForms
 
         private void btnFiltrar_Click(object sender, EventArgs e)
         {
-            DateTime fechaInicio = dtpFechaInicio.Value;
-            DateTime fechaFin = dtpFechaFin.Value;
-
-            if (fechaInicio > fechaFin)
+            try
             {
-                MessageBox.Show("La fecha de inicio no puede ser mayor que la fecha de fin.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+                DateTime fechaInicio = dtpFechaInicio.Value;
+                DateTime fechaFin = dtpFechaFin.Value;
 
-            if (fechaInicio == fechaFin)
+                if (fechaInicio > fechaFin)
+                {
+                    MessageBox.Show("La fecha de inicio no puede ser mayor que la fecha de fin.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                if (fechaInicio == fechaFin)
+                {
+                    MessageBox.Show("La fecha de inicio no puede ser igual que la fecha de fin.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                CajaDAO cajaDAO = new CajaDAO();
+                DataSet dataMovimientos = cajaDAO.obtenerMovimientosByFecha(fechaInicio, fechaFin);
+
+                FiltradoMovimientos?.Invoke(dataMovimientos);
+
+                this.Close();
+            }
+            catch (Exception ex)
             {
-                MessageBox.Show("La fecha de inicio no puede ser igual que la fecha de fin.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                MessageBox.Show($"Ocurrió un error al filtrar los movimientos: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-            CajaDAO cajaDAO = new CajaDAO();
-            DataSet dataMovimientos = cajaDAO.obtenerMovimientosByFecha(fechaInicio, fechaFin);
-
-            FiltradoMovimientos?.Invoke(dataMovimientos);
-
-            this.Close();
         }
     }
 }

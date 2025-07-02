@@ -65,115 +65,159 @@ namespace LosPatosSystem.Forms
 
         private void ObtenerProductos()
         {
-            ProductoDAO productoDAO = new ProductoDAO();
-            DataSet dataSet = productoDAO.selectProducto("L", null);
-            dgvProductos.DataSource = dataSet.Tables["Producto"];
+            try
+            {
+                ProductoDAO productoDAO = new ProductoDAO();
+                DataSet dataSet = productoDAO.selectProducto("L", null);
+                dgvProductos.DataSource = dataSet.Tables["Producto"];
 
-            dgvProductos.Columns["IdProducto"].Visible = false;
-            dgvProductos.Columns["IdUnidad"].Visible = false;
-            dgvProductos.Columns["IdCategoria"].Visible = false;
-            dgvProductos.Columns["IdUsuario"].Visible = false;
-            dgvProductos.Columns["Codigo"].HeaderText = "Código";
-            dgvProductos.Columns["Nombre"].HeaderText = "Producto";
-            dgvProductos.Columns["PrecioCompra"].HeaderText = "Precio Compra";
-            dgvProductos.Columns["PrecioCompra"].DefaultCellStyle.Format = "C2";
-            dgvProductos.Columns["PrecioVenta"].HeaderText = "Precio Venta";
-            dgvProductos.Columns["PrecioVenta"].DefaultCellStyle.Format = "C2";
-            dgvProductos.Columns["StockMinimo"].HeaderText = "Stock Mínimo";
-            dgvProductos.Columns["FechaCreacion"].HeaderText = "Fecha Registro";
-            dgvProductos.Columns["FechaCreacion"].DefaultCellStyle.Format = "dd/MM/yyyy";
-            dgvProductos.Columns["EstatusRegistro"].HeaderCell.Value = "Estatus";
+                dgvProductos.Columns["IdProducto"].Visible = false;
+                dgvProductos.Columns["IdUnidad"].Visible = false;
+                dgvProductos.Columns["IdCategoria"].Visible = false;
+                dgvProductos.Columns["IdUsuario"].Visible = false;
+                dgvProductos.Columns["TieneImporte"].Visible = false;
+                dgvProductos.Columns["Codigo"].HeaderText = "Código";
+                dgvProductos.Columns["Nombre"].HeaderText = "Producto";
+                dgvProductos.Columns["PrecioCompra"].HeaderText = "Precio Compra";
+                dgvProductos.Columns["PrecioCompra"].DefaultCellStyle.Format = "C2";
+                dgvProductos.Columns["PrecioVenta"].HeaderText = "Precio Venta";
+                dgvProductos.Columns["PrecioVenta"].DefaultCellStyle.Format = "C2";
+                dgvProductos.Columns["ImporteEnvase"].HeaderText = "Importe Envase";
+                dgvProductos.Columns["ImporteEnvase"].DefaultCellStyle.Format = "C2";
+                dgvProductos.Columns["StockMinimo"].HeaderText = "Stock Mínimo";
+                dgvProductos.Columns["FechaCreacion"].HeaderText = "Fecha Registro";
+                dgvProductos.Columns["FechaCreacion"].DefaultCellStyle.Format = "dd/MM/yyyy";
+                dgvProductos.Columns["EstatusRegistro"].HeaderCell.Value = "Estatus";
 
-            dgvProductos.Columns["Codigo"].DisplayIndex = 0;
-            dgvProductos.Columns["Nombre"].DisplayIndex = 1;
-            dgvProductos.Columns["Descripcion"].DisplayIndex = 2;
-            dgvProductos.Columns["Unidad"].DisplayIndex = 3;
-            dgvProductos.Columns["Categoria"].DisplayIndex = 4;
+                dgvProductos.Columns["Codigo"].DisplayIndex = 0;
+                dgvProductos.Columns["Nombre"].DisplayIndex = 1;
+                dgvProductos.Columns["Descripcion"].DisplayIndex = 2;
+                dgvProductos.Columns["Unidad"].DisplayIndex = 3;
+                dgvProductos.Columns["Categoria"].DisplayIndex = 4;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al obtener los productos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void ObtenerProductosInactivos()
         {
-            ProductoDAO productoDAO = new ProductoDAO();
-            DataSet dataSet = productoDAO.selectProducto("I", null);
-            dgvProductos.DataSource = dataSet.Tables["Producto"];
+            try
+            {
+                ProductoDAO productoDAO = new ProductoDAO();
+                DataSet dataSet = productoDAO.selectProducto("I", null);
+                dgvProductos.DataSource = dataSet.Tables["Producto"];
 
-            dgvProductos.Columns["IdProducto"].Visible = false;
-            dgvProductos.Columns["IdUnidad"].Visible = false;
-            dgvProductos.Columns["IdCategoria"].Visible = false;
-            dgvProductos.Columns["IdUsuario"].Visible = false;
-            dgvProductos.Columns["Codigo"].HeaderText = "Código";
-            dgvProductos.Columns["Nombre"].HeaderText = "Producto";
-            dgvProductos.Columns["PrecioCompra"].HeaderText = "Precio Compra";
-            dgvProductos.Columns["PrecioCompra"].DefaultCellStyle.Format = "C2";
-            dgvProductos.Columns["PrecioVenta"].HeaderText = "Precio Venta";
-            dgvProductos.Columns["PrecioVenta"].DefaultCellStyle.Format = "C2";
-            dgvProductos.Columns["StockMinimo"].HeaderText = "Stock Mínimo";
-            dgvProductos.Columns["FechaCreacion"].HeaderText = "Fecha Registro";
-            dgvProductos.Columns["FechaCreacion"].DefaultCellStyle.Format = "dd/MM/yyyy";
-            dgvProductos.Columns["EstatusRegistro"].HeaderCell.Value = "Estatus";
+                dgvProductos.Columns["IdProducto"].Visible = false;
+                dgvProductos.Columns["IdUnidad"].Visible = false;
+                dgvProductos.Columns["IdCategoria"].Visible = false;
+                dgvProductos.Columns["IdUsuario"].Visible = false;
+                dgvProductos.Columns["TieneImporte"].Visible = false;
+                dgvProductos.Columns["Codigo"].HeaderText = "Código";
+                dgvProductos.Columns["Nombre"].HeaderText = "Producto";
+                dgvProductos.Columns["PrecioCompra"].HeaderText = "Precio Compra";
+                dgvProductos.Columns["PrecioCompra"].DefaultCellStyle.Format = "C2";
+                dgvProductos.Columns["PrecioVenta"].HeaderText = "Precio Venta";
+                dgvProductos.Columns["PrecioVenta"].DefaultCellStyle.Format = "C2";
+                dgvProductos.Columns["ImporteEnvase"].HeaderText = "Importe Envase";
+                dgvProductos.Columns["ImporteEnvase"].DefaultCellStyle.Format = "C2";
+                dgvProductos.Columns["StockMinimo"].HeaderText = "Stock Mínimo";
+                dgvProductos.Columns["FechaCreacion"].HeaderText = "Fecha Registro";
+                dgvProductos.Columns["FechaCreacion"].DefaultCellStyle.Format = "dd/MM/yyyy";
+                dgvProductos.Columns["EstatusRegistro"].HeaderCell.Value = "Estatus";
 
-            dgvProductos.Columns["Codigo"].DisplayIndex = 0;
-            dgvProductos.Columns["Nombre"].DisplayIndex = 1;
-            dgvProductos.Columns["Descripcion"].DisplayIndex = 2;
-            dgvProductos.Columns["Unidad"].DisplayIndex = 3;
-            dgvProductos.Columns["Categoria"].DisplayIndex = 4;
+                dgvProductos.Columns["Codigo"].DisplayIndex = 0;
+                dgvProductos.Columns["Nombre"].DisplayIndex = 1;
+                dgvProductos.Columns["Descripcion"].DisplayIndex = 2;
+                dgvProductos.Columns["Unidad"].DisplayIndex = 3;
+                dgvProductos.Columns["Categoria"].DisplayIndex = 4;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al obtener los productos inactivos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void EliminarProducto(int idProducto, int idUsuario)
         {
-            Producto producto = new Producto();
-            producto.IdProducto = idProducto;
-            producto.IdUsuario = idUsuario;
+            try
+            {
+                Producto producto = new Producto();
+                producto.IdProducto = idProducto;
+                producto.IdUsuario = idUsuario;
 
-            ProductoDAO productoDAO = new ProductoDAO();
-            productoDAO.CrudProducto("D", producto);
+                ProductoDAO productoDAO = new ProductoDAO();
+                productoDAO.CrudProducto("D", producto);
 
-            txtIdProducto.Text = string.Empty;
+                txtIdProducto.Text = string.Empty;
 
-            ObtenerProductos();
+                ObtenerProductos();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al eliminar el producto: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void ActivarProducto(int idProducto, int idUsuario)
         {
-            Producto producto = new Producto();
-            producto.IdProducto = idProducto;
-            producto.IdUsuario = idUsuario;
+            try
+            {
+                Producto producto = new Producto();
+                producto.IdProducto = idProducto;
+                producto.IdUsuario = idUsuario;
 
-            ProductoDAO productoDAO = new ProductoDAO();
-            productoDAO.CrudProducto("A", producto);
+                ProductoDAO productoDAO = new ProductoDAO();
+                productoDAO.CrudProducto("A", producto);
 
-            txtIdProducto.Text = string.Empty;
+                txtIdProducto.Text = string.Empty;
 
-            ObtenerProductosInactivos();
+                ObtenerProductosInactivos();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al activar el producto: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void BuscarProducto(Producto producto)
         {
-            ProductoDAO productoDAO = new ProductoDAO();
-            DataSet dataSet = productoDAO.selectProducto("S", producto);
+            try
+            {
+                ProductoDAO productoDAO = new ProductoDAO();
+                DataSet dataSet = productoDAO.selectProducto("S", producto);
 
-            dgvProductos.DataSource = dataSet.Tables["Producto"];
+                dgvProductos.DataSource = dataSet.Tables["Producto"];
 
-            dgvProductos.Columns["IdProducto"].Visible = false;
-            dgvProductos.Columns["IdUnidad"].Visible = false;
-            dgvProductos.Columns["IdCategoria"].Visible = false;
-            dgvProductos.Columns["IdUsuario"].Visible = false;
-            dgvProductos.Columns["Codigo"].HeaderText = "Código";
-            dgvProductos.Columns["Nombre"].HeaderText = "Producto";
-            dgvProductos.Columns["PrecioCompra"].HeaderText = "Precio Compra";
-            dgvProductos.Columns["PrecioCompra"].DefaultCellStyle.Format = "C2";
-            dgvProductos.Columns["PrecioVenta"].HeaderText = "Precio Venta";
-            dgvProductos.Columns["PrecioVenta"].DefaultCellStyle.Format = "C2";
-            dgvProductos.Columns["StockMinimo"].HeaderText = "Stock Mínimo";
-            dgvProductos.Columns["FechaCreacion"].HeaderText = "Fecha Registro";
-            dgvProductos.Columns["FechaCreacion"].DefaultCellStyle.Format = "dd/MM/yyyy";
-            dgvProductos.Columns["EstatusRegistro"].HeaderCell.Value = "Estatus";
+                dgvProductos.Columns["IdProducto"].Visible = false;
+                dgvProductos.Columns["IdUnidad"].Visible = false;
+                dgvProductos.Columns["IdCategoria"].Visible = false;
+                dgvProductos.Columns["IdUsuario"].Visible = false;
+                dgvProductos.Columns["TieneImporte"].Visible = false;
+                dgvProductos.Columns["Codigo"].HeaderText = "Código";
+                dgvProductos.Columns["Nombre"].HeaderText = "Producto";
+                dgvProductos.Columns["PrecioCompra"].HeaderText = "Precio Compra";
+                dgvProductos.Columns["PrecioCompra"].DefaultCellStyle.Format = "C2";
+                dgvProductos.Columns["PrecioVenta"].HeaderText = "Precio Venta";
+                dgvProductos.Columns["PrecioVenta"].DefaultCellStyle.Format = "C2";
+                dgvProductos.Columns["ImporteEnvase"].HeaderText = "Importe Envase";
+                dgvProductos.Columns["ImporteEnvase"].DefaultCellStyle.Format = "C2";
+                dgvProductos.Columns["StockMinimo"].HeaderText = "Stock Mínimo";
+                dgvProductos.Columns["FechaCreacion"].HeaderText = "Fecha Registro";
+                dgvProductos.Columns["FechaCreacion"].DefaultCellStyle.Format = "dd/MM/yyyy";
+                dgvProductos.Columns["EstatusRegistro"].HeaderCell.Value = "Estatus";
 
-            dgvProductos.Columns["Codigo"].DisplayIndex = 0;
-            dgvProductos.Columns["Nombre"].DisplayIndex = 1;
-            dgvProductos.Columns["Descripcion"].DisplayIndex = 2;
-            dgvProductos.Columns["Unidad"].DisplayIndex = 3;
-            dgvProductos.Columns["Categoria"].DisplayIndex = 4;
+                dgvProductos.Columns["Codigo"].DisplayIndex = 0;
+                dgvProductos.Columns["Nombre"].DisplayIndex = 1;
+                dgvProductos.Columns["Descripcion"].DisplayIndex = 2;
+                dgvProductos.Columns["Unidad"].DisplayIndex = 3;
+                dgvProductos.Columns["Categoria"].DisplayIndex = 4;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al buscar el producto: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         private void btnAgregar_Click(object sender, EventArgs e)
         {

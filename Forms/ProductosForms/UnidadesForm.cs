@@ -111,60 +111,88 @@ namespace LosPatosSystem.Forms.Productos
 
         private void ObtenerUnidades()
         {
-            UnidadDAO unidadDAO = new UnidadDAO();
-            DataSet dataSet = unidadDAO.selectUnidad("L", 0, null);
-            dgvUnidades.DataSource = dataSet.Tables["Unidad"];
+            try
+            {
+                UnidadDAO unidadDAO = new UnidadDAO();
+                DataSet dataSet = unidadDAO.selectUnidad("L", 0, null);
+                dgvUnidades.DataSource = dataSet.Tables["Unidad"];
 
-            dgvUnidades.Columns["IdUnidad"].Visible = false;
-            dgvUnidades.Columns["Nombre"].HeaderText = "Unidad";
-            dgvUnidades.Columns["FechaCreacion"].HeaderText = "Fecha Registro";
-            dgvUnidades.Columns["FechaCreacion"].DefaultCellStyle.Format = "dd/MM/yyyy";
-            dgvUnidades.Columns["EstatusRegistro"].Visible = false;
-            dgvUnidades.Columns["IdUsuario"].Visible = false;
+                dgvUnidades.Columns["IdUnidad"].Visible = false;
+                dgvUnidades.Columns["Nombre"].HeaderText = "Unidad";
+                dgvUnidades.Columns["FechaCreacion"].HeaderText = "Fecha Registro";
+                dgvUnidades.Columns["FechaCreacion"].DefaultCellStyle.Format = "dd/MM/yyyy";
+                dgvUnidades.Columns["EstatusRegistro"].Visible = false;
+                dgvUnidades.Columns["IdUsuario"].Visible = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al obtener las unidades: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void GuardarUnidad(string nombreUnidad, int idUsuario)
         {
-            Unidad unidad = new Unidad();
-            unidad.Nombre = nombreUnidad;
-            unidad.IdUsuario = idUsuario;
+            try
+            {
+                Unidad unidad = new Unidad();
+                unidad.Nombre = nombreUnidad;
+                unidad.IdUsuario = idUsuario;
 
-            UnidadDAO unidadDAO = new UnidadDAO();
-            unidadDAO.CrudUnidad(unidad, "C");
+                UnidadDAO unidadDAO = new UnidadDAO();
+                unidadDAO.CrudUnidad(unidad, "C");
 
-            MessageBox.Show("Unidad agregada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            txtNombre.Text = string.Empty;
-            ObtenerUnidades();
+                MessageBox.Show("Unidad agregada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtNombre.Text = string.Empty;
+                ObtenerUnidades();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al guardar la unidad: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void ActualizarUnidad(int idUnidad, string nombreUnidad, int idUsuario)
         {
-            Unidad unidad = new Unidad();
-            unidad.IdUnidad = idUnidad;
-            unidad.Nombre = nombreUnidad;
-            unidad.IdUsuario = idUsuario;
+            try
+            {
+                Unidad unidad = new Unidad();
+                unidad.IdUnidad = idUnidad;
+                unidad.Nombre = nombreUnidad;
+                unidad.IdUsuario = idUsuario;
 
-            UnidadDAO unidadDAO = new UnidadDAO();
-            unidadDAO.CrudUnidad(unidad, "U");
+                UnidadDAO unidadDAO = new UnidadDAO();
+                unidadDAO.CrudUnidad(unidad, "U");
 
-            MessageBox.Show("Unidad editada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            txtNombre.Text = string.Empty;
-            txtIdUnidad.Text = string.Empty;
-            ObtenerUnidades();
+                MessageBox.Show("Unidad editada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtNombre.Text = string.Empty;
+                txtIdUnidad.Text = string.Empty;
+                ObtenerUnidades();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al actualizar la unidad: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void EliminarUnidad(int idUnidad, int idUsuario)
         {
-            Unidad unidad = new Unidad();
-            unidad.IdUnidad = idUnidad;
-            unidad.IdUsuario = idUsuario;
+            try
+            {
+                Unidad unidad = new Unidad();
+                unidad.IdUnidad = idUnidad;
+                unidad.IdUsuario = idUsuario;
 
-            UnidadDAO unidadDAO = new UnidadDAO();
-            unidadDAO.CrudUnidad(unidad, "D");
-            MessageBox.Show("Unidad eliminada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            txtNombre.Text = string.Empty;
-            txtIdUnidad.Text = string.Empty;
-            ObtenerUnidades();
+                UnidadDAO unidadDAO = new UnidadDAO();
+                unidadDAO.CrudUnidad(unidad, "D");
+                MessageBox.Show("Unidad eliminada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtNombre.Text = string.Empty;
+                txtIdUnidad.Text = string.Empty;
+                ObtenerUnidades();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al eliminar la unidad: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

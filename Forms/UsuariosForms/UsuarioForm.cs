@@ -32,37 +32,44 @@ namespace LosPatosSystem.Forms.UsuariosForms
 
         private void UsuarioForm_Load(object sender, EventArgs e)
         {
-            CargarRoles();
-
-            if (Accion == "Editar" && IdUsuario > 0)
+            try
             {
-                Usuario usuario = new Usuario();
-                usuario.IdUsuario = IdUsuario;
+                CargarRoles();
 
-                UsuarioDAO usuarioDAO = new UsuarioDAO();
-                DataSet dataSet = usuarioDAO.selectUsuario("R", usuario);
-                DataTable dataTable = dataSet.Tables["Usuario"];
-
-                if (dataTable.Rows.Count > 0)
+                if (Accion == "Editar" && IdUsuario > 0)
                 {
-                    DataRow row = dataTable.Rows[0];
-                    txtNombre.Text = row["Nombre"].ToString();
-                    txtAPaterno.Text = row["APaterno"].ToString();
-                    txtAMaterno.Text = row["AMaterno"].ToString();
-                    txtUsername.Text = row["Username"].ToString();
-                    cmbRol.SelectedValue = row["IdRol"];
-                }
-                else
-                {
-                    MessageBox.Show("No se encontró el usuario", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                    Usuario usuario = new Usuario();
+                    usuario.IdUsuario = IdUsuario;
 
-                txtPass1.Visible = false;
-                txtPass2.Visible = false;
-                lblPass1.Visible = false;
-                lblPass2.Visible = false;
-                btnPass1.Visible = false;
-                btnPass2.Visible = false;
+                    UsuarioDAO usuarioDAO = new UsuarioDAO();
+                    DataSet dataSet = usuarioDAO.selectUsuario("R", usuario);
+                    DataTable dataTable = dataSet.Tables["Usuario"];
+
+                    if (dataTable.Rows.Count > 0)
+                    {
+                        DataRow row = dataTable.Rows[0];
+                        txtNombre.Text = row["Nombre"].ToString();
+                        txtAPaterno.Text = row["APaterno"].ToString();
+                        txtAMaterno.Text = row["AMaterno"].ToString();
+                        txtUsername.Text = row["Username"].ToString();
+                        cmbRol.SelectedValue = row["IdRol"];
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se encontró el usuario", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+                    txtPass1.Visible = false;
+                    txtPass2.Visible = false;
+                    lblPass1.Visible = false;
+                    lblPass2.Visible = false;
+                    btnPass1.Visible = false;
+                    btnPass2.Visible = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar los datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -81,52 +88,73 @@ namespace LosPatosSystem.Forms.UsuariosForms
 
         private void CargarRoles()
         {
-            RolDAO rolDAO = new RolDAO();
-            DataSet dataSet = rolDAO.selectRol("L", 0, null);
-            cmbRol.DataSource = dataSet.Tables["Rol"];
+            try
+            {
+                RolDAO rolDAO = new RolDAO();
+                DataSet dataSet = rolDAO.selectRol("L", 0, null);
+                cmbRol.DataSource = dataSet.Tables["Rol"];
 
-            cmbRol.DisplayMember = "Nombre";
-            cmbRol.ValueMember = "IdRol";
+                cmbRol.DisplayMember = "Nombre";
+                cmbRol.ValueMember = "IdRol";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar los roles: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void GuardarUsuario(Usuario usuario)
         {
-            UsuarioDAO usuarioDAO = new UsuarioDAO();
-            usuarioDAO.CrudUsuario(usuario, "C");
-            MessageBox.Show("Usuario guardado correctamente", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            try
+            {
+                UsuarioDAO usuarioDAO = new UsuarioDAO();
+                usuarioDAO.CrudUsuario(usuario, "C");
+                MessageBox.Show("Usuario guardado correctamente", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            txtIdUsuario.Text = string.Empty;
-            txtNombre.Text = string.Empty;
-            txtAPaterno.Text = string.Empty;
-            txtAMaterno.Text = string.Empty;
-            txtUsername.Text = string.Empty;
-            txtPass1.Text = string.Empty;
-            txtPass2.Text = string.Empty;
-            cmbRol.SelectedIndex = 0;
-            
-            NuevoUsuario?.Invoke();
+                txtIdUsuario.Text = string.Empty;
+                txtNombre.Text = string.Empty;
+                txtAPaterno.Text = string.Empty;
+                txtAMaterno.Text = string.Empty;
+                txtUsername.Text = string.Empty;
+                txtPass1.Text = string.Empty;
+                txtPass2.Text = string.Empty;
+                cmbRol.SelectedIndex = 0;
 
-            this.Close();
+                NuevoUsuario?.Invoke();
+
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al guardar el usuario: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void ActualizarUsuario(Usuario usuario)
         {
-            UsuarioDAO usuarioDAO = new UsuarioDAO();
-            usuarioDAO.CrudUsuario(usuario, "U");
-            MessageBox.Show("Usuario actualizado correctamente", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            
-            txtIdUsuario.Text = string.Empty;
-            txtNombre.Text = string.Empty;
-            txtAPaterno.Text = string.Empty;
-            txtAMaterno.Text = string.Empty;
-            txtUsername.Text = string.Empty;
-            txtPass1.Text = string.Empty;
-            txtPass2.Text = string.Empty;
-            cmbRol.SelectedIndex = 0;
+            try
+            {
+                UsuarioDAO usuarioDAO = new UsuarioDAO();
+                usuarioDAO.CrudUsuario(usuario, "U");
+                MessageBox.Show("Usuario actualizado correctamente", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            NuevoUsuario?.Invoke();
+                txtIdUsuario.Text = string.Empty;
+                txtNombre.Text = string.Empty;
+                txtAPaterno.Text = string.Empty;
+                txtAMaterno.Text = string.Empty;
+                txtUsername.Text = string.Empty;
+                txtPass1.Text = string.Empty;
+                txtPass2.Text = string.Empty;
+                cmbRol.SelectedIndex = 0;
 
-            this.Close();
+                NuevoUsuario?.Invoke();
+
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al actualizar el usuario: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]

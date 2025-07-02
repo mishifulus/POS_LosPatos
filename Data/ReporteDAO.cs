@@ -202,5 +202,37 @@ namespace LosPatosSystem.Data
             }
             return reporte;
         }
+
+        public DataSet ObtenerReporteEnvases(DateTime fechaInicio, DateTime fechaFin)
+        {
+            DataSet reporte = new DataSet();
+
+            using (SqlConnection conexion = ConexionBD.ObtenerConexion())
+            {
+                conexion.Open();
+                try
+                {
+                    using (SqlCommand cmd = new SqlCommand("sp_ReporteEnvasesFechas", conexion))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@FechaInicio", fechaInicio);
+                        cmd.Parameters.AddWithValue("@FechaFin", fechaFin);
+
+                        SqlDataAdapter adapter = new SqlDataAdapter();
+                        adapter.SelectCommand = cmd;
+                        adapter.Fill(reporte, "EnvasesDTO");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    conexion.Close();
+                }
+            }
+            return reporte;
+        }
     }
 }

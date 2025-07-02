@@ -37,20 +37,27 @@ namespace LosPatosSystem
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            string usuario = txtUsername.Text;
-            string pass = txtPass.Text;
-
-            SesionDAO sesionDAO = new SesionDAO();
-
-            if (sesionDAO.IniciarSesion(usuario, pass, out int IdSesion, out int IdUsuario, out int IdRol, out string Mensaje))
+            try
             {
-                this.Hide();
-                Main main = new Main(IdSesion,IdUsuario,usuario, IdRol);
-                main.Show();
+                string usuario = txtUsername.Text;
+                string pass = txtPass.Text;
+
+                SesionDAO sesionDAO = new SesionDAO();
+
+                if (sesionDAO.IniciarSesion(usuario, pass, out int IdSesion, out int IdUsuario, out int IdRol, out string Mensaje))
+                {
+                    this.Hide();
+                    Main main = new Main(IdSesion, IdUsuario, usuario, IdRol);
+                    main.Show();
+                }
+                else
+                {
+                    MessageBox.Show(Mensaje, "Inicio de Sesión");
+                }
             }
-            else
+            catch
             {
-                MessageBox.Show(Mensaje, "Inicio de Sesión");
+                MessageBox.Show("Error al iniciar sesión. Por favor, inténtelo de nuevo. Si el error persiste, favor de contactar al administrador.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

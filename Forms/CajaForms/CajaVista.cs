@@ -33,56 +33,86 @@ namespace LosPatosSystem.Forms.CajaForms
 
         private void ObtenerMovimientos()
         {
-            CajaDAO cajaDAO = new CajaDAO();
-            System.Data.DataSet dataSet = cajaDAO.obtenerMovimientosDiarios();
-            dgvMovimientos.DataSource = dataSet.Tables["Caja"];
+            try
+            {
+                CajaDAO cajaDAO = new CajaDAO();
+                System.Data.DataSet dataSet = cajaDAO.obtenerMovimientosDiarios();
+                dgvMovimientos.DataSource = dataSet.Tables["Caja"];
 
-            dgvMovimientos.Columns["IdMovimiento"].Visible = false;
-            dgvMovimientos.Columns["TipoMovimiento"].Visible = false;
-            dgvMovimientos.Columns["IdUsuario"].Visible = false;
-            dgvMovimientos.Columns["EstatusRegistro"].Visible = false;
-            dgvMovimientos.Columns["Fecha"].DefaultCellStyle.Format = "dd/MM/yyyy";
-            dgvMovimientos.Columns["Monto"].DefaultCellStyle.Format = "C2";
+                dgvMovimientos.Columns["IdMovimiento"].Visible = false;
+                dgvMovimientos.Columns["TipoMovimiento"].Visible = false;
+                dgvMovimientos.Columns["IdUsuario"].Visible = false;
+                dgvMovimientos.Columns["EstatusRegistro"].Visible = false;
+                dgvMovimientos.Columns["Fecha"].DefaultCellStyle.Format = "dd/MM/yyyy";
+                dgvMovimientos.Columns["Monto"].DefaultCellStyle.Format = "C2";
 
-            txtIngresos.Text = ObtenerTotales(1).ToString("C");
-            txtEgresos.Text = ObtenerTotales(0).ToString("C");
-            txtBalance.Text = ObtenerBalance().ToString("C");
+                txtIngresos.Text = ObtenerTotales(1).ToString("C");
+                txtEgresos.Text = ObtenerTotales(0).ToString("C");
+                txtBalance.Text = ObtenerBalance().ToString("C");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al obtener los movimientos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void ObtenerByTipo(int TipoMovimiento)
         {
-            CajaDAO cajaDAO = new CajaDAO();
-            DataSet dataSet = cajaDAO.obtenerMovimientosByTipo(TipoMovimiento);
-            dgvMovimientos.DataSource = dataSet.Tables["Caja"];
-
-            if (dataSet == null || dataSet.Tables.Count == 0 || dataSet.Tables[0].Rows.Count == 0)
+            try
             {
-                return;
-            }
+                CajaDAO cajaDAO = new CajaDAO();
+                DataSet dataSet = cajaDAO.obtenerMovimientosByTipo(TipoMovimiento);
+                dgvMovimientos.DataSource = dataSet.Tables["Caja"];
 
-            dgvMovimientos.Columns["IdMovimiento"].Visible = false;
-            dgvMovimientos.Columns["TipoMovimiento"].Visible = false;
-            dgvMovimientos.Columns["IdUsuario"].Visible = false;
-            dgvMovimientos.Columns["EstatusRegistro"].Visible = false;
-            dgvMovimientos.Columns["Fecha"].DefaultCellStyle.Format = "dd/MM/yyyy";
-            dgvMovimientos.Columns["Monto"].DefaultCellStyle.Format = "C2";
+                if (dataSet == null || dataSet.Tables.Count == 0 || dataSet.Tables[0].Rows.Count == 0)
+                {
+                    return;
+                }
+
+                dgvMovimientos.Columns["IdMovimiento"].Visible = false;
+                dgvMovimientos.Columns["TipoMovimiento"].Visible = false;
+                dgvMovimientos.Columns["IdUsuario"].Visible = false;
+                dgvMovimientos.Columns["EstatusRegistro"].Visible = false;
+                dgvMovimientos.Columns["Fecha"].DefaultCellStyle.Format = "dd/MM/yyyy";
+                dgvMovimientos.Columns["Monto"].DefaultCellStyle.Format = "C2";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al obtener los movimientos por tipo: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private double ObtenerTotales(int TipoMovimiento)
         {
-            CajaDAO cajaDAO= new CajaDAO();
-            double Total = 0;
-            Total = cajaDAO.obtenerTotales(TipoMovimiento);
-            
-            return Total;
+            try
+            {
+                CajaDAO cajaDAO = new CajaDAO();
+                double Total = 0;
+                Total = cajaDAO.obtenerTotales(TipoMovimiento);
+
+                return Total;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al obtener los totales: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return 0;
+            }
         }
 
         private double ObtenerBalance()
         {
-            CajaDAO cajaDAO = new CajaDAO();
-            double balance = 0;
-            balance = cajaDAO.obtenerBalance();
-            return balance;
+            try
+            {
+                CajaDAO cajaDAO = new CajaDAO();
+                double balance = 0;
+                balance = cajaDAO.obtenerBalance();
+                return balance;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al obtener el balance: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return 0;
+            }
         }
 
         private void btnIngresos_Click(object sender, EventArgs e)

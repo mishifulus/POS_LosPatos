@@ -69,15 +69,22 @@ namespace LosPatosSystem.Forms.UsuariosForms
 
         private void CambiarContraseña(Usuario usuario)
         {
-            UsuarioDAO usuarioDAO = new UsuarioDAO();
-            usuarioDAO.ActualizarPass(usuario.IdUsuario, usuario.Pass);
-            MessageBox.Show("Contraseña actualizada correctamente", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            try
+            {
+                UsuarioDAO usuarioDAO = new UsuarioDAO();
+                usuarioDAO.ActualizarPass(usuario.IdUsuario, usuario.Pass);
+                MessageBox.Show("Contraseña actualizada correctamente", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            txtIdUsuario.Text = string.Empty;
-            txtPass1.Text = string.Empty;
-            txtPass2.Text = string.Empty;
+                txtIdUsuario.Text = string.Empty;
+                txtPass1.Text = string.Empty;
+                txtPass2.Text = string.Empty;
 
-            this.Close();
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al actualizar la contraseña: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

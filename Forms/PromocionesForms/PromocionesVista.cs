@@ -60,100 +60,135 @@ namespace LosPatosSystem.Forms.PromocionesForms
 
         private void ObtenerPromociones()
         {
-            PromocionDAO promocionDAO = new PromocionDAO();
-            DataSet dataSet = promocionDAO.selectPromocion("L", null);
-            dgvPromociones.DataSource = dataSet.Tables["Promocion"];
+            try
+            {
+                PromocionDAO promocionDAO = new PromocionDAO();
+                DataSet dataSet = promocionDAO.selectPromocion("L", null);
+                dgvPromociones.DataSource = dataSet.Tables["Promocion"];
 
-            dgvPromociones.Columns["IdPromocion"].Visible = false;
-            dgvPromociones.Columns["IdUsuario"].Visible = false;
-            dgvPromociones.Columns["Tipo"].Visible = false;
-            dgvPromociones.Columns["ProductoAsociado"].Visible = false;
-            dgvPromociones.Columns["TipoDescuento"].HeaderText = "Tipo de Descuento";
-            dgvPromociones.Columns["ValorDescuento"].HeaderText = "Valor de Descuento";
-            dgvPromociones.Columns["CantidadMinima"].HeaderText = "Cantidad Mínima";
-            dgvPromociones.Columns["ProductoAsociadoNombre"].HeaderText = "Producto";
-            dgvPromociones.Columns["FechaInicio"].HeaderText = "Inicio";
-            dgvPromociones.Columns["FechaInicio"].DefaultCellStyle.Format = "dd/MM/yyyy";
-            dgvPromociones.Columns["FechaFin"].HeaderText = "Fin";
-            dgvPromociones.Columns["FechaFin"].DefaultCellStyle.Format = "dd/MM/yyyy";
-            dgvPromociones.Columns["FechaCreacion"].HeaderText = "Fecha Registro";
-            dgvPromociones.Columns["FechaCreacion"].DefaultCellStyle.Format = "dd/MM/yyyy";
-            dgvPromociones.Columns["EstatusRegistro"].HeaderCell.Value = "Estatus";
+                dgvPromociones.Columns["IdPromocion"].Visible = false;
+                dgvPromociones.Columns["IdUsuario"].Visible = false;
+                dgvPromociones.Columns["Tipo"].Visible = false;
+                dgvPromociones.Columns["ProductoAsociado"].Visible = false;
+                dgvPromociones.Columns["TipoDescuento"].HeaderText = "Tipo de Descuento";
+                dgvPromociones.Columns["ValorDescuento"].HeaderText = "Valor de Descuento";
+                dgvPromociones.Columns["CantidadMinima"].HeaderText = "Cantidad Mínima";
+                dgvPromociones.Columns["ProductoAsociadoNombre"].HeaderText = "Producto";
+                dgvPromociones.Columns["FechaInicio"].HeaderText = "Inicio";
+                dgvPromociones.Columns["FechaInicio"].DefaultCellStyle.Format = "dd/MM/yyyy";
+                dgvPromociones.Columns["FechaFin"].HeaderText = "Fin";
+                dgvPromociones.Columns["FechaFin"].DefaultCellStyle.Format = "dd/MM/yyyy";
+                dgvPromociones.Columns["FechaCreacion"].HeaderText = "Fecha Registro";
+                dgvPromociones.Columns["FechaCreacion"].DefaultCellStyle.Format = "dd/MM/yyyy";
+                dgvPromociones.Columns["EstatusRegistro"].HeaderCell.Value = "Estatus";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar las promociones: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void ObtenerPromocionesInactivas()
         {
-            PromocionDAO promocionDAO = new PromocionDAO();
-            DataSet dataSet = promocionDAO.selectPromocion("I", null);
-            dgvPromociones.DataSource = dataSet.Tables["Promocion"];
+            try
+            {
+                PromocionDAO promocionDAO = new PromocionDAO();
+                DataSet dataSet = promocionDAO.selectPromocion("I", null);
+                dgvPromociones.DataSource = dataSet.Tables["Promocion"];
 
-            dgvPromociones.Columns["IdPromocion"].Visible = false;
-            dgvPromociones.Columns["IdUsuario"].Visible = false;
-            dgvPromociones.Columns["Tipo"].Visible = false;
-            dgvPromociones.Columns["ProductoAsociado"].Visible = false;
-            dgvPromociones.Columns["TipoDescuento"].HeaderText = "Tipo de Descuento";
-            dgvPromociones.Columns["ValorDescuento"].HeaderText = "Valor de Descuento";
-            dgvPromociones.Columns["CantidadMinima"].HeaderText = "Cantidad Mínima";
-            dgvPromociones.Columns["ProductoAsociadoNombre"].HeaderText = "Producto";
-            dgvPromociones.Columns["FechaInicio"].HeaderText = "Inicio";
-            dgvPromociones.Columns["FechaInicio"].DefaultCellStyle.Format = "dd/MM/yyyy";
-            dgvPromociones.Columns["FechaFin"].HeaderText = "Fin";
-            dgvPromociones.Columns["FechaFin"].DefaultCellStyle.Format = "dd/MM/yyyy";
-            dgvPromociones.Columns["FechaCreacion"].HeaderText = "Fecha Registro";
-            dgvPromociones.Columns["FechaCreacion"].DefaultCellStyle.Format = "dd/MM/yyyy";
-            dgvPromociones.Columns["EstatusRegistro"].HeaderCell.Value = "Estatus";
+                dgvPromociones.Columns["IdPromocion"].Visible = false;
+                dgvPromociones.Columns["IdUsuario"].Visible = false;
+                dgvPromociones.Columns["Tipo"].Visible = false;
+                dgvPromociones.Columns["ProductoAsociado"].Visible = false;
+                dgvPromociones.Columns["TipoDescuento"].HeaderText = "Tipo de Descuento";
+                dgvPromociones.Columns["ValorDescuento"].HeaderText = "Valor de Descuento";
+                dgvPromociones.Columns["CantidadMinima"].HeaderText = "Cantidad Mínima";
+                dgvPromociones.Columns["ProductoAsociadoNombre"].HeaderText = "Producto";
+                dgvPromociones.Columns["FechaInicio"].HeaderText = "Inicio";
+                dgvPromociones.Columns["FechaInicio"].DefaultCellStyle.Format = "dd/MM/yyyy";
+                dgvPromociones.Columns["FechaFin"].HeaderText = "Fin";
+                dgvPromociones.Columns["FechaFin"].DefaultCellStyle.Format = "dd/MM/yyyy";
+                dgvPromociones.Columns["FechaCreacion"].HeaderText = "Fecha Registro";
+                dgvPromociones.Columns["FechaCreacion"].DefaultCellStyle.Format = "dd/MM/yyyy";
+                dgvPromociones.Columns["EstatusRegistro"].HeaderCell.Value = "Estatus";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar las promociones inactivas: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void EliminarPromocion(int idPromocion, int idUsuario)
         {
-            Promocion promocion = new Promocion();
-            promocion.IdPromocion = idPromocion;
-            promocion.IdUsuario = idUsuario;
+            try
+            {
+                Promocion promocion = new Promocion();
+                promocion.IdPromocion = idPromocion;
+                promocion.IdUsuario = idUsuario;
 
-            PromocionDAO promocionDAO = new PromocionDAO();
-            promocionDAO.CrudPromocion(promocion, "D");
+                PromocionDAO promocionDAO = new PromocionDAO();
+                promocionDAO.CrudPromocion(promocion, "D");
 
-            txtIdPromocion.Text = string.Empty;
+                txtIdPromocion.Text = string.Empty;
 
-            ObtenerPromociones();
+                ObtenerPromociones();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al eliminar la promoción: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void ActivarPromocion(int idPromocion, int idUsuario)
         {
-            Promocion promocion = new Promocion();
-            promocion.IdPromocion = idPromocion;
-            promocion.IdUsuario = idUsuario;
+            try
+            {
+                Promocion promocion = new Promocion();
+                promocion.IdPromocion = idPromocion;
+                promocion.IdUsuario = idUsuario;
 
-            PromocionDAO promocionDAO = new PromocionDAO();
-            promocionDAO.CrudPromocion(promocion, "A");
+                PromocionDAO promocionDAO = new PromocionDAO();
+                promocionDAO.CrudPromocion(promocion, "A");
 
-            txtIdPromocion.Text = string.Empty;
+                txtIdPromocion.Text = string.Empty;
 
-            ObtenerPromocionesInactivas();
+                ObtenerPromocionesInactivas();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al activar la promoción: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void BuscarPromocion(Promocion promocion)
         {
-            PromocionDAO promocionDAO = new PromocionDAO();
-            DataSet dataSet = promocionDAO.selectPromocion("S", promocion);
+            try
+            {
+                PromocionDAO promocionDAO = new PromocionDAO();
+                DataSet dataSet = promocionDAO.selectPromocion("S", promocion);
 
-            dgvPromociones.DataSource = dataSet.Tables["Promocion"];
+                dgvPromociones.DataSource = dataSet.Tables["Promocion"];
 
-            dgvPromociones.Columns["IdPromocion"].Visible = false;
-            dgvPromociones.Columns["IdUsuario"].Visible = false;
-            dgvPromociones.Columns["Tipo"].Visible = false;
-            dgvPromociones.Columns["ProductoAsociado"].Visible = false;
-            dgvPromociones.Columns["TipoDescuento"].HeaderText = "Tipo de Descuento";
-            dgvPromociones.Columns["ValorDescuento"].HeaderText = "Valor de Descuento";
-            dgvPromociones.Columns["CantidadMinima"].HeaderText = "Cantidad Mínima";
-            dgvPromociones.Columns["ProductoAsociadoNombre"].HeaderText = "Producto";
-            dgvPromociones.Columns["FechaInicio"].HeaderText = "Inicio";
-            dgvPromociones.Columns["FechaInicio"].DefaultCellStyle.Format = "dd/MM/yyyy";
-            dgvPromociones.Columns["FechaFin"].HeaderText = "Fin";
-            dgvPromociones.Columns["FechaFin"].DefaultCellStyle.Format = "dd/MM/yyyy";
-            dgvPromociones.Columns["FechaCreacion"].HeaderText = "Fecha Registro";
-            dgvPromociones.Columns["FechaCreacion"].DefaultCellStyle.Format = "dd/MM/yyyy";
-            dgvPromociones.Columns["EstatusRegistro"].HeaderCell.Value = "Estatus";
+                dgvPromociones.Columns["IdPromocion"].Visible = false;
+                dgvPromociones.Columns["IdUsuario"].Visible = false;
+                dgvPromociones.Columns["Tipo"].Visible = false;
+                dgvPromociones.Columns["ProductoAsociado"].Visible = false;
+                dgvPromociones.Columns["TipoDescuento"].HeaderText = "Tipo de Descuento";
+                dgvPromociones.Columns["ValorDescuento"].HeaderText = "Valor de Descuento";
+                dgvPromociones.Columns["CantidadMinima"].HeaderText = "Cantidad Mínima";
+                dgvPromociones.Columns["ProductoAsociadoNombre"].HeaderText = "Producto";
+                dgvPromociones.Columns["FechaInicio"].HeaderText = "Inicio";
+                dgvPromociones.Columns["FechaInicio"].DefaultCellStyle.Format = "dd/MM/yyyy";
+                dgvPromociones.Columns["FechaFin"].HeaderText = "Fin";
+                dgvPromociones.Columns["FechaFin"].DefaultCellStyle.Format = "dd/MM/yyyy";
+                dgvPromociones.Columns["FechaCreacion"].HeaderText = "Fecha Registro";
+                dgvPromociones.Columns["FechaCreacion"].DefaultCellStyle.Format = "dd/MM/yyyy";
+                dgvPromociones.Columns["EstatusRegistro"].HeaderCell.Value = "Estatus";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al buscar la promoción: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)

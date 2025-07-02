@@ -68,51 +68,79 @@ namespace LosPatosSystem.Forms.ComprasForms
 
         private void ObtenerIdCompra()
         {
-            CompraDAO compraDAO = new CompraDAO();
-            txtIdCompra.Text = compraDAO.ObtenerIdCompra().ToString();
+            try
+            {
+                CompraDAO compraDAO = new CompraDAO();
+                txtIdCompra.Text = compraDAO.ObtenerIdCompra().ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al obtener el ID de compra: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void ObtenerProductos()
         {
-            ProductoDAO productoDAO = new ProductoDAO();
-            DataSet dataSet = productoDAO.selectProducto("L", null);
+            try
+            {
+                ProductoDAO productoDAO = new ProductoDAO();
+                DataSet dataSet = productoDAO.selectProducto("L", null);
 
-            cmbProducto.DataSource = dataSet.Tables[0];
-            cmbProducto.DisplayMember = "Nombre";
-            cmbProducto.ValueMember = "IdProducto";
-            cmbProducto.BindingContext = new BindingContext();
+                cmbProducto.DataSource = dataSet.Tables[0];
+                cmbProducto.DisplayMember = "Nombre";
+                cmbProducto.ValueMember = "IdProducto";
+                cmbProducto.BindingContext = new BindingContext();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al obtener los productos: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void BuscarProducto(Producto producto)
         {
-            ProductoDAO productoDAO = new ProductoDAO();
-            DataSet dataSet = productoDAO.selectProducto("S", producto);
+            try
+            {
+                ProductoDAO productoDAO = new ProductoDAO();
+                DataSet dataSet = productoDAO.selectProducto("S", producto);
 
-            cmbProducto.DataSource = dataSet.Tables[0];
-            cmbProducto.DisplayMember = "Nombre";
-            cmbProducto.ValueMember = "IdProducto";
-            cmbProducto.BindingContext = new BindingContext();
+                cmbProducto.DataSource = dataSet.Tables[0];
+                cmbProducto.DisplayMember = "Nombre";
+                cmbProducto.ValueMember = "IdProducto";
+                cmbProducto.BindingContext = new BindingContext();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al buscar el producto: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void SeleccionarProducto(int IdProducto)
         {
-            ProductoDAO productoDAO = new ProductoDAO();
+            try
+            {
+                ProductoDAO productoDAO = new ProductoDAO();
 
-            Producto producto = new Producto();
-            producto.IdProducto = IdProducto;
+                Producto producto = new Producto();
+                producto.IdProducto = IdProducto;
 
-            DataSet dataSet = productoDAO.selectProducto("R", producto);
-            DataTable dataTable = dataSet.Tables["Producto"];
-            DataRow row = dataTable.Rows[0];
+                DataSet dataSet = productoDAO.selectProducto("R", producto);
+                DataTable dataTable = dataSet.Tables["Producto"];
+                DataRow row = dataTable.Rows[0];
 
-            txtIdProducto.Text = row["IdProducto"].ToString();
-            txtCodigo.Text = row["Codigo"].ToString();
-            txtNombre.Text = row["Nombre"].ToString();
-            txtDescripcion.Text = row["Descripcion"].ToString();
-            txtPrecioCompra.Text = row["PrecioCompra"].ToString();
-            txtUnidad.Text = row["Unidad"].ToString();
-            txtCantidad.Text = "1";
-            txtCantidad.Focus();
+                txtIdProducto.Text = row["IdProducto"].ToString();
+                txtCodigo.Text = row["Codigo"].ToString();
+                txtNombre.Text = row["Nombre"].ToString();
+                txtDescripcion.Text = row["Descripcion"].ToString();
+                txtPrecioCompra.Text = row["PrecioCompra"].ToString();
+                txtUnidad.Text = row["Unidad"].ToString();
+                txtCantidad.Text = "1";
+                txtCantidad.Focus();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al seleccionar el producto: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void CalcularTotal()

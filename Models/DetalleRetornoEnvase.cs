@@ -6,16 +6,14 @@ using System.Threading.Tasks;
 
 namespace LosPatosSystem.Models
 {
-    class DetalleVenta
+    class DetalleRetornoEnvase
     {
-        public int IdDetalleVenta { get; set; }
-        public int IdVenta { get; set; }
-        public int IdProducto { get; set; }
-        public string NombreProducto { get; set; }
+        public int IdDetalle { get; set; }
+        public int IdRetorno { get; set; }
+        public int ProductoId { get; set; }
         public int Cantidad { get; set; }
-        public double PrecioUnitario { get; set; }
+        public double MontoUnitario { get; set; }
         public double Subtotal { get; set; }
         public bool EstatusRegistro { get; set; } = true;
-        public double ImporteEnvase { get; set; }
     }
 }

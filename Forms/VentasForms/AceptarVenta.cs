@@ -17,12 +17,13 @@ namespace LosPatosSystem.Forms.VentasForms
     {
         public int IdUsuario { get; set; }
         public double Total { get; set; }
+        public double TotalEnvases { get; set; }
 
         public DataTable detalleVenta;
         public int IdVenta { get; set; }
         public string NombreUsuario { get; set; }
 
-        public AceptarVenta(int IdUsuario, double Total, DataTable detalleVenta, int idVenta, string nombreUsuario)
+        public AceptarVenta(int IdUsuario, double Total, DataTable detalleVenta, int idVenta, string nombreUsuario, double TotalEnvases)
         {
             InitializeComponent();
             this.IdUsuario = IdUsuario;
@@ -30,6 +31,7 @@ namespace LosPatosSystem.Forms.VentasForms
             this.detalleVenta = detalleVenta;
             this.IdVenta = idVenta;
             this.NombreUsuario = nombreUsuario;
+            this.TotalEnvases = TotalEnvases;
         }
 
         private void AceptarVenta_Load(object sender, EventArgs e)
@@ -95,37 +97,44 @@ namespace LosPatosSystem.Forms.VentasForms
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (Convert.ToDouble(txtRecibido.Text) < Convert.ToDouble(txtTotal.Text))
+            try
             {
-                MessageBox.Show("Ingrese la cantidad completa", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                if (Convert.ToDouble(txtRecibido.Text) < Convert.ToDouble(txtTotal.Text))
+                {
+                    MessageBox.Show("Ingrese la cantidad completa", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                DataTable tablaSoloParaBD = detalleVenta.DefaultView.ToTable(false, "IdProducto", "Cantidad", "PrecioUnitario", "ImporteEnvase");
+
+                VentaDAO ventaDAO = new VentaDAO();
+                int idVenta = 0;
+                bool result = ventaDAO.RegistrarVenta(Total-TotalEnvases, (int)cmbTipoPago.SelectedValue, IdUsuario, tablaSoloParaBD, TotalEnvases, out idVenta);
+                if (result)
+                {
+                    // GENERAR TICKET
+                    string ticket = GenerarContenidoTicket("VENTA", IdVenta, IdUsuario, NombreUsuario, detalleVenta, Convert.ToDouble(txtRecibido.Text), Convert.ToDouble(txtTotal.Text), Convert.ToDouble(txtCambio.Text), TotalEnvases);
+                    Console.WriteLine(ticket);
+
+                    MessageBox.Show("Venta registrada correctamente", "Venta registrada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    txtCambio.Text = "$0";
+                    txtTotal.Text = "$0";
+                    cmbTipoPago.SelectedIndex = 0;
+                    txtRecibido.Text = string.Empty;
+                    detalleVenta.Clear();
+
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Ocurrió un error al registrar la venta", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
             }
-
-            DataTable tablaSoloParaBD = detalleVenta.DefaultView.ToTable(false, "IdProducto", "Cantidad", "PrecioUnitario");
-
-            VentaDAO ventaDAO = new VentaDAO();
-            int idVenta = 0;
-            bool result = ventaDAO.RegistrarVenta(Total, (int)cmbTipoPago.SelectedValue, IdUsuario, tablaSoloParaBD, out idVenta);
-            if (result)
+            catch (Exception ex)
             {
-                // GENERAR TICKET
-                string ticket = GenerarContenidoTicket("VENTA", IdVenta, IdUsuario, NombreUsuario, detalleVenta, Convert.ToDouble(txtRecibido.Text), Convert.ToDouble(txtTotal.Text), Convert.ToDouble(txtCambio.Text));
-                Console.WriteLine(ticket);
-
-                MessageBox.Show("Venta registrada correctamente", "Venta registrada", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                txtCambio.Text = "$0";
-                txtTotal.Text = "$0";
-                cmbTipoPago.SelectedIndex = 0;
-                txtRecibido.Text = string.Empty;
-                detalleVenta.Clear();
-
-                this.Close();
-            }
-            else
-            {
-                MessageBox.Show("Ocurrió un error al registrar la venta", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                MessageBox.Show($"Error al guardar la venta: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -152,37 +161,46 @@ namespace LosPatosSystem.Forms.VentasForms
             SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
 
-        private string GenerarContenidoTicket(string tipo, int folio, int cajero, string nombreCajero, DataTable detalle, double recibido, double total, double cambio)
+        private string GenerarContenidoTicket(string tipo, int folio, int cajero, string nombreCajero, DataTable detalle, double recibido, double total, double cambio, double totalEnvases)
         {
-            StringBuilder sb = new StringBuilder();
-
-            sb.AppendLine("  DÉPOSITO: LOS PATOS ");
-            sb.AppendLine("  DIRECCIÓN ");
-            sb.AppendLine("  --------------------");
-            sb.AppendLine($"Tipo: {tipo.ToUpper()}");
-            sb.AppendLine($"Folio: {folio}");
-            sb.AppendLine($"Fecha: {DateTime.Now}");
-            sb.AppendLine($"Cajero: {cajero} - {nombreCajero.ToUpper()}");
-            sb.AppendLine("----------------------------");
-            sb.AppendLine("Cant Código Producto        Subtotal");
-
-            foreach (DataRow row in detalle.Rows)
+            try
             {
-                string producto = row["Producto"].ToString().PadRight(14).Substring(0, 14);
-                string codigo = row["Codigo"].ToString();
-                int cantidad = Convert.ToInt32(row["Cantidad"]);
-                double subtotal = Convert.ToDouble(row["Descuento"]) * cantidad;
+                StringBuilder sb = new StringBuilder();
 
-                sb.AppendLine($"{cantidad.ToString().PadRight(4)} {codigo}  {producto} ${subtotal.ToString("0.00")}");
+                sb.AppendLine("  DÉPOSITO: LOS PATOS ");
+                sb.AppendLine("  DIRECCIÓN ");
+                sb.AppendLine("  --------------------");
+                sb.AppendLine($"Tipo: {tipo.ToUpper()}");
+                sb.AppendLine($"Folio: {folio}");
+                sb.AppendLine($"Fecha: {DateTime.Now}");
+                sb.AppendLine($"Cajero: {cajero} - {nombreCajero.ToUpper()}");
+                sb.AppendLine("----------------------------");
+                sb.AppendLine("Cant Código Producto        Subtotal  Imp. Envases");
+
+                foreach (DataRow row in detalle.Rows)
+                {
+                    string producto = row["Producto"].ToString().PadRight(14).Substring(0, 14);
+                    string codigo = row["Codigo"].ToString();
+                    int cantidad = Convert.ToInt32(row["Cantidad"]);
+                    double subtotal = Convert.ToDouble(row["Descuento"]) * cantidad;
+                    int subtotalEnvases = Convert.ToInt32(row["ImporteEnvase"]) * cantidad;
+
+                    sb.AppendLine($"{cantidad.ToString().PadRight(4)} {codigo}  {producto} ${subtotal.ToString("0.00")}  ${subtotalEnvases.ToString("0.00")}");
+                }
+
+                sb.AppendLine("----------------------------");
+                sb.AppendLine($"TOTAL:           ${total.ToString("0.00")}");
+                sb.AppendLine($"RECIBIDO:        ${recibido.ToString("0.00")}");
+                sb.AppendLine($"CAMBIO:          ${cambio.ToString("0.00")}");
+                sb.AppendLine("CON SU FOLIO DE COMPRA PUEDE RETORNAR LOS ENVASES UTILIZADOS. GRACIAS POR SU COMPRA");
+
+                return sb.ToString();
             }
-
-            sb.AppendLine("----------------------------");
-            sb.AppendLine($"TOTAL:           ${total.ToString("0.00")}");
-            sb.AppendLine($"RECIBIDO:        ${recibido.ToString("0.00")}");
-            sb.AppendLine($"CAMBIO:          ${cambio.ToString("0.00")}");
-            sb.AppendLine("GRACIAS POR SU COMPRA");
-
-            return sb.ToString();
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al generar el ticket: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return string.Empty;
+            }
         }
     }
 }

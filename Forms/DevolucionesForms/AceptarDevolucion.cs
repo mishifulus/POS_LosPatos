@@ -74,36 +74,43 @@ namespace LosPatosSystem.Forms.DevolucionesForms
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (detalleDevolucion == null || detalleDevolucion.Columns.Count == 0)
+            try
             {
-                Console.WriteLine("Error: La tabla de productos no tiene columnas.");
-                return;
+                if (detalleDevolucion == null || detalleDevolucion.Columns.Count == 0)
+                {
+                    Console.WriteLine("Error: La tabla de productos no tiene columnas.");
+                    return;
+                }
+
+                DataTable tablaSoloParaBD = detalleDevolucion.DefaultView.ToTable(false, "IdProducto", "Cantidad", "PrecioUnitario");
+
+                DevolucionDAO devolucionDAO = new DevolucionDAO();
+                int idDevolucion = 0;
+                bool result = devolucionDAO.RegistrarDevolucion(IdVenta, txtMotivo.Text, IdUsuario, tablaSoloParaBD, out idDevolucion);
+
+                if (result)
+                {
+                    // GENERAR TICKET
+                    string ticket = GenerarContenidoTicket("DEVOLUCIÓN", IdDevolucion, IdUsuario, NombreUsuario, detalleDevolucion, 0, Convert.ToDouble(txtTotal.Text), 0);
+                    Console.WriteLine(ticket);
+
+                    MessageBox.Show("Devolución registrada correctamente", "Devolución registrada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    txtTotal.Text = "$0";
+                    txtMotivo.Text = String.Empty;
+                    detalleDevolucion.Clear();
+
+                    this.Close();
+
+                }
+                else
+                {
+                    MessageBox.Show("Ocurrió un error al registrar la devolución", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-
-            DataTable tablaSoloParaBD = detalleDevolucion.DefaultView.ToTable(false, "IdProducto", "Cantidad", "PrecioUnitario");
-
-            DevolucionDAO devolucionDAO = new DevolucionDAO();
-            int idDevolucion = 0;
-            bool result = devolucionDAO.RegistrarDevolucion(IdVenta, txtMotivo.Text, IdUsuario, tablaSoloParaBD, out idDevolucion);
-
-            if (result)
+            catch (Exception ex)
             {
-                // GENERAR TICKET
-                string ticket = GenerarContenidoTicket("DEVOLUCIÓN", IdDevolucion, IdUsuario, NombreUsuario, detalleDevolucion, 0, Convert.ToDouble(txtTotal.Text), 0);
-                Console.WriteLine(ticket);
-
-                MessageBox.Show("Devolución registrada correctamente", "Devolución registrada", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                txtTotal.Text = "$0";
-                txtMotivo.Text = String.Empty;
-                detalleDevolucion.Clear();
-
-                this.Close();
-
-            }
-            else
-            {
-                MessageBox.Show("Ocurrió un error al registrar la devolución", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error al guardar la devolución: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -120,33 +127,41 @@ namespace LosPatosSystem.Forms.DevolucionesForms
 
         private string GenerarContenidoTicket(string tipo, int folio, int cajero, string nombreCajero, DataTable detalle, double recibido, double total, double cambio)
         {
-            StringBuilder sb = new StringBuilder();
-
-            sb.AppendLine("  DÉPOSITO: LOS PATOS ");
-            sb.AppendLine("  DIRECCIÓN ");
-            sb.AppendLine("  --------------------");
-            sb.AppendLine($"Tipo: {tipo.ToUpper()}");
-            sb.AppendLine($"Folio: {folio}");
-            sb.AppendLine($"Fecha: {DateTime.Now}");
-            sb.AppendLine($"Cajero: {cajero} - {nombreCajero.ToUpper()}");
-            sb.AppendLine("----------------------------");
-            sb.AppendLine("Cant Código Producto        Subtotal");
-
-            foreach (DataRow row in detalle.Rows)
+            try
             {
-                string producto = row["Producto"].ToString().PadRight(14).Substring(0, 14);
-                string codigo = row["Codigo"].ToString();
-                int cantidad = Convert.ToInt32(row["Cantidad"]);
-                double subtotal = Convert.ToDouble(row["PrecioUnitario"]) * cantidad;
+                StringBuilder sb = new StringBuilder();
 
-                sb.AppendLine($"{cantidad.ToString().PadRight(4)} {codigo}  {producto} ${subtotal.ToString("0.00")}");
+                sb.AppendLine("  DÉPOSITO: LOS PATOS ");
+                sb.AppendLine("  DIRECCIÓN ");
+                sb.AppendLine("  --------------------");
+                sb.AppendLine($"Tipo: {tipo.ToUpper()}");
+                sb.AppendLine($"Folio: {folio}");
+                sb.AppendLine($"Fecha: {DateTime.Now}");
+                sb.AppendLine($"Cajero: {cajero} - {nombreCajero.ToUpper()}");
+                sb.AppendLine("----------------------------");
+                sb.AppendLine("Cant Código Producto        Subtotal");
+
+                foreach (DataRow row in detalle.Rows)
+                {
+                    string producto = row["Producto"].ToString().PadRight(14).Substring(0, 14);
+                    string codigo = row["Codigo"].ToString();
+                    int cantidad = Convert.ToInt32(row["Cantidad"]);
+                    double subtotal = Convert.ToDouble(row["PrecioUnitario"]) * cantidad;
+
+                    sb.AppendLine($"{cantidad.ToString().PadRight(4)} {codigo}  {producto} ${subtotal.ToString("0.00")}");
+                }
+
+                sb.AppendLine("----------------------------");
+                sb.AppendLine($"TOTAL:          ${total.ToString("0.00")}");
+                sb.AppendLine("GRACIAS POR SU COMPRA");
+
+                return sb.ToString();
             }
-
-            sb.AppendLine("----------------------------");
-            sb.AppendLine($"TOTAL:          ${total.ToString("0.00")}");
-            sb.AppendLine("GRACIAS POR SU COMPRA");
-
-            return sb.ToString();
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al generar el ticket: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return string.Empty;
+            }
         }
     }
 }

@@ -24,7 +24,7 @@ namespace LosPatosSystem.Data
                 {
                     string query = "SELECT M.IdMovimiento, M.Fecha, M.TipoMovimiento, CASE WHEN M.TipoMovimiento = 1 THEN 'Ingreso' WHEN M.TipoMovimiento = 0 THEN 'Egreso' ELSE 'Desconocido' END AS Movimiento, M.Monto, M.Descripcion, M.IdUsuario, U.Username, M.EstatusRegistro " +
                         "FROM Caja M LEFT JOIN Usuarios U ON M.IdUsuario = U.IdUsuario " +
-                        "WHERE CONVERT(DATE, M.Fecha) = CONVERT(DATE, GETDATE()) AND M.EstatusRegistro = 1 ORDER BY M.Fecha";
+                        "WHERE CONVERT(DATE, M.Fecha) = CONVERT(DATE, GETDATE()) AND M.EstatusRegistro = 1 AND M.Descripcion <> 'Importe de Envases' AND M.Descripcion <> 'Retorno de envase' ORDER BY M.Fecha";
                     using (SqlCommand cmd = new SqlCommand(query, conexion))
                     {
                         SqlDataAdapter adapter = new SqlDataAdapter();
@@ -56,7 +56,7 @@ namespace LosPatosSystem.Data
                     string query = "SELECT M.IdMovimiento, M.Fecha, M.TipoMovimiento, CASE WHEN M.TipoMovimiento = 1 THEN 'Ingreso' WHEN M.TipoMovimiento = 0 THEN 'Egreso' ELSE 'Desconocido' END AS Movimiento, M.Monto, M.Descripcion, M.IdUsuario, U.Username, M.EstatusRegistro " +
                         "FROM Caja M LEFT JOIN Usuarios U ON M.IdUsuario = U.IdUsuario " +
                         "WHERE CONVERT(DATE, M.Fecha) BETWEEN CONVERT(DATE, @FechaInicio) AND CONVERT(DATE, @FechaFin) " +
-                        "AND M.EstatusRegistro = 1 ORDER BY M.Fecha";
+                        "AND M.EstatusRegistro = 1 AND M.Descripcion <> 'Importe de Envases' AND M.Descripcion <> 'Retorno de envase' ORDER BY M.Fecha";
                     using (SqlCommand cmd = new SqlCommand(query, conexion))
                     {
                         cmd.Parameters.AddWithValue("@FechaInicio", fechaInicio);
@@ -91,7 +91,7 @@ namespace LosPatosSystem.Data
                     string query = "SELECT M.IdMovimiento, M.Fecha, M.TipoMovimiento, CASE WHEN M.TipoMovimiento = 1 THEN 'Ingreso' WHEN M.TipoMovimiento = 0 THEN 'Egreso' ELSE 'Desconocido' END AS Movimiento, M.Monto, M.Descripcion, M.IdUsuario, U.Username, M.EstatusRegistro " +
                         "FROM Caja M " +
                         "LEFT JOIN Usuarios U ON M.IdUsuario = U.IdUsuario " +
-                        "WHERE CONVERT(DATE, M.Fecha) = CONVERT(DATE, GETDATE()) AND M.TipoMovimiento = @TipoMovimiento AND M.EstatusRegistro = 1 ORDER BY M.Fecha";
+                        "WHERE CONVERT(DATE, M.Fecha) = CONVERT(DATE, GETDATE()) AND M.TipoMovimiento = @TipoMovimiento AND M.EstatusRegistro = 1 AND M.Descripcion <> 'Importe de Envases' AND M.Descripcion <> 'Retorno de envase' ORDER BY M.Fecha";
                     using (SqlCommand cmd = new SqlCommand(query, conexion))
                     {
                         cmd.Parameters.AddWithValue("@TipoMovimiento", tipoMovimiento);
@@ -124,7 +124,7 @@ namespace LosPatosSystem.Data
                 {
                     string query = "SELECT ISNULL(SUM(CASE WHEN TipoMovimiento = @TipoMovimiento THEN Monto ELSE 0 END),0) AS Total " +
                         "FROM Caja " +
-                        "WHERE CONVERT(DATE, Fecha) = CONVERT(DATE, GETDATE()) AND EstatusRegistro = 1";
+                        "WHERE CONVERT(DATE, Fecha) = CONVERT(DATE, GETDATE()) AND EstatusRegistro = 1 AND Descripcion <> 'Importe de Envases' AND Descripcion <> 'Retorno de envase'";
                     using (SqlCommand cmd = new SqlCommand(query, conexion))
                     {
                         cmd.Parameters.AddWithValue("@TipoMovimiento", tipoMovimiento);
@@ -154,7 +154,7 @@ namespace LosPatosSystem.Data
                 {
                     string query = "SELECT ISNULL((SUM(CASE WHEN TipoMovimiento = 1 THEN Monto ELSE 0 END) - SUM(CASE WHEN TipoMovimiento = 0 THEN Monto ELSE 0 END)),0) AS Balance " +
                         "FROM Caja " +
-                        "WHERE CONVERT(DATE, Fecha) = CONVERT(DATE, GETDATE()) AND EstatusRegistro = 1";
+                        "WHERE CONVERT(DATE, Fecha) = CONVERT(DATE, GETDATE()) AND EstatusRegistro = 1 AND Descripcion <> 'Importe de Envases' AND Descripcion <> 'Retorno de envase'";
                     using (SqlCommand cmd = new SqlCommand(query, conexion))
                     {
                         Balance = Convert.ToDouble(cmd.ExecuteScalar());

@@ -18,9 +18,9 @@ namespace LosPatosSystem.Data
             using(SqlConnection conexion = ConexionBD.ObtenerConexion())
             {
                 conexion.Open();
-                string query = "SELECT ISNULL(MAX(IdCompra), 0) + 1 FROM Compras";
                 try
                 {
+                    string query = "SELECT ISNULL(MAX(IdCompra), 0) + 1 FROM Compras";
                     using (SqlCommand cmd = new SqlCommand(query, conexion))
                     {
                         IdCompra = (int)cmd.ExecuteScalar();
@@ -28,7 +28,7 @@ namespace LosPatosSystem.Data
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.Message);
+                    MessageBox.Show(ex.Message);
                 }
                 finally
                 {
@@ -41,10 +41,12 @@ namespace LosPatosSystem.Data
         public bool RegistrarCompra(double total, int tipoPago, int idUsuario, DataTable productos, out int idCompra)
         {
             idCompra = 0;
+            bool resultado = false;
 
-            try
+            using (SqlConnection conexion = ConexionBD.ObtenerConexion())
             {
-                using (SqlConnection conexion = ConexionBD.ObtenerConexion())
+                conexion.Open();
+                try
                 {
                     using (SqlCommand cmd = new SqlCommand("sp_RegistrarCompras", conexion))
                     {
@@ -60,17 +62,20 @@ namespace LosPatosSystem.Data
                         paramIdCompra.Direction = ParameterDirection.Output;
                         cmd.Parameters.Add(paramIdCompra);
 
-                        conexion.Open();
                         cmd.ExecuteNonQuery();
                         idCompra = Convert.ToInt32(paramIdCompra.Value);
-                        return true;
+                        resultado = true;
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error: " + ex.Message);
-                return false;
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    conexion.Close();
+                }
+                return resultado;
             }
         }
 

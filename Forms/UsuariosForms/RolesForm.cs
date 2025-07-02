@@ -109,57 +109,85 @@ namespace LosPatosSystem.Forms.UsuariosForms
 
         private void ObtenerRoles()
         {
-            RolDAO rolDAO = new RolDAO();
-            DataSet dataSet = rolDAO.selectRol("L", 0, null);
-            dgvRoles.DataSource = dataSet.Tables["Rol"];
+            try
+            {
+                RolDAO rolDAO = new RolDAO();
+                DataSet dataSet = rolDAO.selectRol("L", 0, null);
+                dgvRoles.DataSource = dataSet.Tables["Rol"];
 
-            dgvRoles.Columns["IdRol"].Visible = false;
-            dgvRoles.Columns["Nombre"].HeaderText = "Rol";
-            dgvRoles.Columns["FechaCreacion"].HeaderText = "Fecha Registro";
-            dgvRoles.Columns["FechaCreacion"].DefaultCellStyle.Format = "dd/MM/yyyy";
-            dgvRoles.Columns["EstatusRegistro"].Visible = false;
+                dgvRoles.Columns["IdRol"].Visible = false;
+                dgvRoles.Columns["Nombre"].HeaderText = "Rol";
+                dgvRoles.Columns["FechaCreacion"].HeaderText = "Fecha Registro";
+                dgvRoles.Columns["FechaCreacion"].DefaultCellStyle.Format = "dd/MM/yyyy";
+                dgvRoles.Columns["EstatusRegistro"].Visible = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al obtener los roles: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void GuardarRol(string nombreRol)
         {
-            Rol rol = new Rol();
-            rol.Nombre = nombreRol;
+            try
+            {
+                Rol rol = new Rol();
+                rol.Nombre = nombreRol;
 
-            RolDAO rolDAO = new RolDAO();
-            rolDAO.CrudRol(rol, "C");
+                RolDAO rolDAO = new RolDAO();
+                rolDAO.CrudRol(rol, "C");
 
-            MessageBox.Show("Rol agregado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            txtNombre.Text = string.Empty;
-            ObtenerRoles();
+                MessageBox.Show("Rol agregado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtNombre.Text = string.Empty;
+                ObtenerRoles();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al agregar el rol: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void ActualizarRol(string nombreRol, int idRol)
         {
-            Rol rol = new Rol();
-            rol.IdRol = idRol;
-            rol.Nombre = nombreRol;
+            try
+            {
+                Rol rol = new Rol();
+                rol.IdRol = idRol;
+                rol.Nombre = nombreRol;
 
-            RolDAO rolDAO = new RolDAO();
-            rolDAO.CrudRol(rol, "U");
+                RolDAO rolDAO = new RolDAO();
+                rolDAO.CrudRol(rol, "U");
 
-            MessageBox.Show("Rol actualizado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            txtNombre.Text = string.Empty;
-            txtIdRol.Text = string.Empty;
-            ObtenerRoles();
+                MessageBox.Show("Rol actualizado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtNombre.Text = string.Empty;
+                txtIdRol.Text = string.Empty;
+                ObtenerRoles();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al actualizar el rol: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void EliminarRol(int idRol)
         {
-            Rol rol = new Rol();
-            rol.IdRol = idRol;
+            try
+            {
+                Rol rol = new Rol();
+                rol.IdRol = idRol;
 
-            RolDAO rolDAO = new RolDAO();
-            rolDAO.CrudRol(rol, "D");
-            MessageBox.Show("Rol eliminado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                RolDAO rolDAO = new RolDAO();
+                rolDAO.CrudRol(rol, "D");
+                MessageBox.Show("Rol eliminado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            txtNombre.Text = string.Empty;
-            txtIdRol.Text = string.Empty;
-            ObtenerRoles();
+                txtNombre.Text = string.Empty;
+                txtIdRol.Text = string.Empty;
+                ObtenerRoles();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al actualizar el rol: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

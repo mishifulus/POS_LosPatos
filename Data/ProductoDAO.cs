@@ -34,6 +34,7 @@ namespace LosPatosSystem.Data
                             cmd.Parameters.Add(new SqlParameter("@IdUnidad", producto.IdUnidad));
                             cmd.Parameters.Add(new SqlParameter("@Descripcion", producto.Descripcion));
                             cmd.Parameters.Add(new SqlParameter("@IdCategoria", producto.IdCategoria));
+                            cmd.Parameters.Add(new SqlParameter("@ImporteEnvase", producto.ImporteEnvase));
                         }
 
                         dataAdapter.SelectCommand = cmd;
@@ -74,6 +75,7 @@ namespace LosPatosSystem.Data
                         cmd.Parameters.AddWithValue("@Stock", producto.Stock);
                         cmd.Parameters.AddWithValue("@StockMinimo", producto.StockMinimo);
                         cmd.Parameters.AddWithValue("@IdUsuario", producto.IdUsuario);
+                        cmd.Parameters.AddWithValue("@ImporteEnvase", producto.ImporteEnvase);
                         cmd.ExecuteNonQuery();
                     }
                 }
@@ -94,10 +96,9 @@ namespace LosPatosSystem.Data
 
             using (SqlConnection conexion = ConexionBD.ObtenerConexion())
             {
+                conexion.Open();
                 try
                 {
-                    conexion.Open();
-
                     string query = "SELECT IdProducto, Codigo, Nombre, Stock, StockMinimo FROM Productos WHERE Stock < StockMinimo AND EstatusRegistro = 1";
                     using (SqlCommand cmd = new SqlCommand(query, conexion))
                     {
@@ -107,7 +108,7 @@ namespace LosPatosSystem.Data
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.Message);
+                    MessageBox.Show(ex.Message);
                 }
                 finally
                 {

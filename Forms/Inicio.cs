@@ -43,14 +43,21 @@ namespace LosPatosSystem.Forms
 
         private void CargarProductosBajoStock()
         {
-            ProductoDAO productoDAO = new ProductoDAO();
-            productosStock = productoDAO.obtenerProductosBajoStock();
-            dgvBajoStock.DataSource = productosStock;
+            try
+            {
+                ProductoDAO productoDAO = new ProductoDAO();
+                productosStock = productoDAO.obtenerProductosBajoStock();
+                dgvBajoStock.DataSource = productosStock;
 
-            dgvBajoStock.Columns["IdProducto"].Visible = false;
-            dgvBajoStock.Columns["Codigo"].HeaderText = "Código";
-            dgvBajoStock.Columns["Nombre"].HeaderText = "Producto";
-            dgvBajoStock.Columns["StockMinimo"].HeaderText = "Stock Mínimo";
+                dgvBajoStock.Columns["IdProducto"].Visible = false;
+                dgvBajoStock.Columns["Codigo"].HeaderText = "Código";
+                dgvBajoStock.Columns["Nombre"].HeaderText = "Producto";
+                dgvBajoStock.Columns["StockMinimo"].HeaderText = "Stock Mínimo";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar productos bajo stock: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void Inicio_Load(object sender, EventArgs e)
@@ -63,31 +70,50 @@ namespace LosPatosSystem.Forms
 
         private double ObtenerBalance()
         {
-            CajaDAO cajaDAO = new CajaDAO();
-            double balance = 0;
-            balance = cajaDAO.obtenerBalance();
-            return balance;
+            try
+            {
+                CajaDAO cajaDAO = new CajaDAO();
+                double balance = 0;
+                balance = cajaDAO.obtenerBalance();
+                return balance;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al obtener el balance: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return 0;
+            }
         }
 
         private int ObtenerVentas()
         {
-            VentaDAO ventaDAO = new VentaDAO();
-            int totalVentas = 0;
-            totalVentas = ventaDAO.obtenerVentasDiarias();
-            return totalVentas;
+            try
+            {
+                VentaDAO ventaDAO = new VentaDAO();
+                int totalVentas = 0;
+                totalVentas = ventaDAO.obtenerVentasDiarias();
+                return totalVentas;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al obtener las ventas: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return 0;
+            }
         }
 
         private int ObtenerCompras()
         {
-            CompraDAO compraDAO = new CompraDAO();
-            int totalCompras = 0;
-            totalCompras = compraDAO.obtenerComprasDiarias();
-            return totalCompras;
-        }
-
-        private void dgvBajoStock_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
+            try
+            {
+                CompraDAO compraDAO = new CompraDAO();
+                int totalCompras = 0;
+                totalCompras = compraDAO.obtenerComprasDiarias();
+                return totalCompras;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al obtener las compras: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return 0;
+            }
         }
     }
 }

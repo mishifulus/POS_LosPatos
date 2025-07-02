@@ -33,34 +33,43 @@ namespace LosPatosSystem.Forms.Productos
 
         private void ProductoForm_Load(object sender, EventArgs e)
         {
-            CargarCategorias();
-            CargarUnidades();
-
-            if (Accion == "Editar" && IdProducto > 0)
+            try
             {
-                Producto producto = new Producto();
-                producto.IdProducto = IdProducto;
+                CargarCategorias();
+                CargarUnidades();
 
-                ProductoDAO productoDAO = new ProductoDAO();
-                DataSet dataSet = productoDAO.selectProducto("R", producto);
-                DataTable dataTable = dataSet.Tables["Producto"];
+                if (Accion == "Editar" && IdProducto > 0)
+                {
+                    Producto producto = new Producto();
+                    producto.IdProducto = IdProducto;
 
-                if (dataTable.Rows.Count > 0)
-                {
-                    txtNombre.Text = dataTable.Rows[0]["Nombre"].ToString();
-                    txtCodigo.Text = dataTable.Rows[0]["Codigo"].ToString();
-                    txtDescripcion.Text = dataTable.Rows[0]["Descripcion"].ToString();
-                    txtPrecioCompra.Text = dataTable.Rows[0]["PrecioCompra"].ToString();
-                    txtPrecioVenta.Text = dataTable.Rows[0]["PrecioVenta"].ToString();
-                    txtStock.Text = dataTable.Rows[0]["Stock"].ToString();
-                    txtStockMinimo.Text = dataTable.Rows[0]["StockMinimo"].ToString();
-                    cmbCategoria.SelectedValue = dataTable.Rows[0]["IdCategoria"];
-                    cmbUnidad.SelectedValue = dataTable.Rows[0]["IdUnidad"];
+                    ProductoDAO productoDAO = new ProductoDAO();
+                    DataSet dataSet = productoDAO.selectProducto("R", producto);
+                    DataTable dataTable = dataSet.Tables["Producto"];
+
+                    if (dataTable.Rows.Count > 0)
+                    {
+                        txtNombre.Text = dataTable.Rows[0]["Nombre"].ToString();
+                        txtCodigo.Text = dataTable.Rows[0]["Codigo"].ToString();
+                        txtDescripcion.Text = dataTable.Rows[0]["Descripcion"].ToString();
+                        txtPrecioCompra.Text = dataTable.Rows[0]["PrecioCompra"].ToString();
+                        txtPrecioVenta.Text = dataTable.Rows[0]["PrecioVenta"].ToString();
+                        txtStock.Text = dataTable.Rows[0]["Stock"].ToString();
+                        txtStockMinimo.Text = dataTable.Rows[0]["StockMinimo"].ToString();
+                        cmbCategoria.SelectedValue = dataTable.Rows[0]["IdCategoria"];
+                        cmbUnidad.SelectedValue = dataTable.Rows[0]["IdUnidad"];
+                        txtImporteEnvase.Text = dataTable.Rows[0]["ImporteEnvase"].ToString();
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se encontró el producto", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
                 }
-                else
-                {
-                    MessageBox.Show("No se encontró el producto", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar los datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
             }
         }
 
@@ -79,68 +88,96 @@ namespace LosPatosSystem.Forms.Productos
 
         private void CargarCategorias()
         {
-            CategoriaDAO categoriaDAO = new CategoriaDAO();
-            DataSet dataSet = categoriaDAO.selectCategoria("L", 0, null);
-            cmbCategoria.DataSource = dataSet.Tables["Categoria"];
+            try
+            {
+                CategoriaDAO categoriaDAO = new CategoriaDAO();
+                DataSet dataSet = categoriaDAO.selectCategoria("L", 0, null);
+                cmbCategoria.DataSource = dataSet.Tables["Categoria"];
 
-            cmbCategoria.DisplayMember = "Nombre";
-            cmbCategoria.ValueMember = "IdCategoria";
-
+                cmbCategoria.DisplayMember = "Nombre";
+                cmbCategoria.ValueMember = "IdCategoria";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar las categorías: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void CargarUnidades()
         {
-            UnidadDAO unidadDAO = new UnidadDAO();
-            DataSet dataSet = unidadDAO.selectUnidad("L", 0, null);
-            cmbUnidad.DataSource = dataSet.Tables["Unidad"];
+            try
+            {
+                UnidadDAO unidadDAO = new UnidadDAO();
+                DataSet dataSet = unidadDAO.selectUnidad("L", 0, null);
+                cmbUnidad.DataSource = dataSet.Tables["Unidad"];
 
-            cmbUnidad.DisplayMember = "Nombre";
-            cmbUnidad.ValueMember = "IdUnidad";
-
+                cmbUnidad.DisplayMember = "Nombre";
+                cmbUnidad.ValueMember = "IdUnidad";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar las unidades: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void GuardarProducto(Producto producto)
         {
-            ProductoDAO productoDAO = new ProductoDAO();
-            productoDAO.CrudProducto("C", producto);
-            MessageBox.Show("Producto guardado correctamente", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            try
+            {
+                ProductoDAO productoDAO = new ProductoDAO();
+                productoDAO.CrudProducto("C", producto);
+                MessageBox.Show("Producto guardado correctamente", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            txtNombre.Text = string.Empty;
-            txtCodigo.Text = string.Empty;
-            txtDescripcion.Text = string.Empty;
-            txtPrecioCompra.Text = string.Empty;
-            txtPrecioVenta.Text = string.Empty;
-            txtStock.Text = string.Empty;
-            txtStockMinimo.Text = string.Empty;
-            txtIdProducto.Text = string.Empty;
-            cmbCategoria.SelectedIndex = 0;
-            cmbUnidad.SelectedIndex = 0;
+                txtNombre.Text = string.Empty;
+                txtCodigo.Text = string.Empty;
+                txtDescripcion.Text = string.Empty;
+                txtPrecioCompra.Text = string.Empty;
+                txtPrecioVenta.Text = string.Empty;
+                txtStock.Text = string.Empty;
+                txtStockMinimo.Text = string.Empty;
+                txtIdProducto.Text = string.Empty;
+                cmbCategoria.SelectedIndex = 0;
+                cmbUnidad.SelectedIndex = 0;
+                txtImporteEnvase.Text = string.Empty;
 
-            NuevoProducto?.Invoke();
+                NuevoProducto?.Invoke();
 
-            this.Close();
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al guardar el producto: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void ActualizarProducto(Producto producto)
         {
-            ProductoDAO productoDAO = new ProductoDAO();
-            productoDAO.CrudProducto("U", producto );
-            MessageBox.Show("Producto actualizado correctamente", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            try
+            {
+                ProductoDAO productoDAO = new ProductoDAO();
+                productoDAO.CrudProducto("U", producto);
+                MessageBox.Show("Producto actualizado correctamente", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            txtNombre.Text = string.Empty;
-            txtCodigo.Text = string.Empty;
-            txtDescripcion.Text = string.Empty;
-            txtPrecioCompra.Text = string.Empty;
-            txtPrecioVenta.Text = string.Empty;
-            txtStock.Text = string.Empty;
-            txtStockMinimo.Text = string.Empty;
-            txtIdProducto.Text = string.Empty;
-            cmbCategoria.SelectedIndex = 0;
-            cmbUnidad.SelectedIndex = 0;
+                txtNombre.Text = string.Empty;
+                txtCodigo.Text = string.Empty;
+                txtDescripcion.Text = string.Empty;
+                txtPrecioCompra.Text = string.Empty;
+                txtPrecioVenta.Text = string.Empty;
+                txtStock.Text = string.Empty;
+                txtStockMinimo.Text = string.Empty;
+                txtIdProducto.Text = string.Empty;
+                cmbCategoria.SelectedIndex = 0;
+                cmbUnidad.SelectedIndex = 0;
+                txtImporteEnvase.Text = string.Empty;
 
-            NuevoProducto?.Invoke();
+                NuevoProducto?.Invoke();
 
-            this.Close();
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al actualizar el producto: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
@@ -166,6 +203,7 @@ namespace LosPatosSystem.Forms.Productos
             txtIdProducto.Text = string.Empty;
             cmbCategoria.SelectedIndex = 0;
             cmbUnidad.SelectedIndex = 0;
+            txtImporteEnvase.Text = string.Empty;
 
             this.Close();
         }
@@ -187,8 +225,9 @@ namespace LosPatosSystem.Forms.Productos
             int stockMinimo = Convert.ToInt32(txtStockMinimo.Text);
             int idCategoria = Convert.ToInt32(cmbCategoria.SelectedValue);
             int idUnidad = Convert.ToInt32(cmbUnidad.SelectedValue);
+            double importeEnvase = Convert.ToDouble(txtImporteEnvase.Text);
 
-            if (string.IsNullOrEmpty(nombre) || string.IsNullOrEmpty(codigo) || string.IsNullOrEmpty(descripcion) || string.IsNullOrEmpty(txtPrecioCompra.Text) || string.IsNullOrEmpty(txtPrecioVenta.Text) || string.IsNullOrEmpty(txtStock.Text) || string.IsNullOrEmpty(txtStockMinimo.Text))
+            if (string.IsNullOrEmpty(nombre) || string.IsNullOrEmpty(codigo) || string.IsNullOrEmpty(descripcion) || string.IsNullOrEmpty(txtPrecioCompra.Text) || string.IsNullOrEmpty(txtPrecioVenta.Text) || string.IsNullOrEmpty(txtStock.Text) || string.IsNullOrEmpty(txtStockMinimo.Text) || string.IsNullOrEmpty(txtImporteEnvase.Text))
             {
                 MessageBox.Show("Todos los campos son obligatorios", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -205,7 +244,8 @@ namespace LosPatosSystem.Forms.Productos
                 StockMinimo = stockMinimo,
                 IdCategoria = idCategoria,
                 IdUnidad = idUnidad,
-                IdUsuario = IdUsuario
+                IdUsuario = IdUsuario,
+                ImporteEnvase = importeEnvase
             };
 
             if (Accion == "Agregar")
@@ -232,6 +272,7 @@ namespace LosPatosSystem.Forms.Productos
             txtIdProducto.Text = string.Empty;
             cmbCategoria.SelectedIndex = 0;
             cmbUnidad.SelectedIndex = 0;
+            txtImporteEnvase.Text = string.Empty;
 
             this.Close();
         }
@@ -273,6 +314,14 @@ namespace LosPatosSystem.Forms.Productos
         }
 
         private void txtStockMinimo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtImporteEnvase_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
