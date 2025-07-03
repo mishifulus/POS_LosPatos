@@ -49,6 +49,7 @@
             this.btnRestaurar = new System.Windows.Forms.PictureBox();
             this.btnClose = new System.Windows.Forms.PictureBox();
             this.PanelContenedor = new System.Windows.Forms.Panel();
+            this.btnFRetornos = new System.Windows.Forms.Button();
             this.MenuLateral.SuspendLayout();
             this.panelUsuario.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -63,6 +64,7 @@
             // MenuLateral
             // 
             this.MenuLateral.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(25)))), ((int)(((byte)(86)))));
+            this.MenuLateral.Controls.Add(this.btnFRetornos);
             this.MenuLateral.Controls.Add(this.panelUsuario);
             this.MenuLateral.Controls.Add(this.btnFReportes);
             this.MenuLateral.Controls.Add(this.btnFUsuarios);
@@ -125,7 +127,7 @@
             this.btnFReportes.ForeColor = System.Drawing.Color.White;
             this.btnFReportes.Image = ((System.Drawing.Image)(resources.GetObject("btnFReportes.Image")));
             this.btnFReportes.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnFReportes.Location = new System.Drawing.Point(12, 580);
+            this.btnFReportes.Location = new System.Drawing.Point(12, 633);
             this.btnFReportes.Name = "btnFReportes";
             this.btnFReportes.Size = new System.Drawing.Size(215, 45);
             this.btnFReportes.TabIndex = 9;
@@ -143,7 +145,7 @@
             this.btnFUsuarios.ForeColor = System.Drawing.Color.White;
             this.btnFUsuarios.Image = ((System.Drawing.Image)(resources.GetObject("btnFUsuarios.Image")));
             this.btnFUsuarios.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnFUsuarios.Location = new System.Drawing.Point(12, 520);
+            this.btnFUsuarios.Location = new System.Drawing.Point(12, 573);
             this.btnFUsuarios.Name = "btnFUsuarios";
             this.btnFUsuarios.Size = new System.Drawing.Size(215, 45);
             this.btnFUsuarios.TabIndex = 7;
@@ -161,7 +163,7 @@
             this.btnFCaja.ForeColor = System.Drawing.Color.White;
             this.btnFCaja.Image = ((System.Drawing.Image)(resources.GetObject("btnFCaja.Image")));
             this.btnFCaja.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnFCaja.Location = new System.Drawing.Point(12, 455);
+            this.btnFCaja.Location = new System.Drawing.Point(12, 508);
             this.btnFCaja.Name = "btnFCaja";
             this.btnFCaja.Size = new System.Drawing.Size(215, 45);
             this.btnFCaja.TabIndex = 6;
@@ -179,7 +181,7 @@
             this.btnDevoluciones.ForeColor = System.Drawing.Color.White;
             this.btnDevoluciones.Image = ((System.Drawing.Image)(resources.GetObject("btnDevoluciones.Image")));
             this.btnDevoluciones.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDevoluciones.Location = new System.Drawing.Point(12, 393);
+            this.btnDevoluciones.Location = new System.Drawing.Point(12, 446);
             this.btnDevoluciones.Name = "btnDevoluciones";
             this.btnDevoluciones.Size = new System.Drawing.Size(215, 45);
             this.btnDevoluciones.TabIndex = 5;
@@ -197,7 +199,7 @@
             this.btnFPromociones.ForeColor = System.Drawing.Color.White;
             this.btnFPromociones.Image = ((System.Drawing.Image)(resources.GetObject("btnFPromociones.Image")));
             this.btnFPromociones.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnFPromociones.Location = new System.Drawing.Point(12, 327);
+            this.btnFPromociones.Location = new System.Drawing.Point(12, 380);
             this.btnFPromociones.Name = "btnFPromociones";
             this.btnFPromociones.Size = new System.Drawing.Size(215, 45);
             this.btnFPromociones.TabIndex = 4;
@@ -358,6 +360,24 @@
             this.PanelContenedor.Size = new System.Drawing.Size(1050, 800);
             this.PanelContenedor.TabIndex = 2;
             // 
+            // btnFRetornos
+            // 
+            this.btnFRetornos.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnFRetornos.FlatAppearance.BorderSize = 0;
+            this.btnFRetornos.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.btnFRetornos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFRetornos.Font = new System.Drawing.Font("Century Gothic", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFRetornos.ForeColor = System.Drawing.Color.White;
+            this.btnFRetornos.Image = ((System.Drawing.Image)(resources.GetObject("btnFRetornos.Image")));
+            this.btnFRetornos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnFRetornos.Location = new System.Drawing.Point(11, 321);
+            this.btnFRetornos.Name = "btnFRetornos";
+            this.btnFRetornos.Size = new System.Drawing.Size(215, 45);
+            this.btnFRetornos.TabIndex = 11;
+            this.btnFRetornos.Text = "Retornos";
+            this.btnFRetornos.UseVisualStyleBackColor = true;
+            this.btnFRetornos.Click += new System.EventHandler(this.btnFRetornos_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -409,5 +429,6 @@
         private System.Windows.Forms.Label txtUsuario;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label txtTitle;
+        private System.Windows.Forms.Button btnFRetornos;
     }
 }

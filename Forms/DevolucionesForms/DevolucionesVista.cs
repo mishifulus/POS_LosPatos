@@ -220,7 +220,6 @@ namespace LosPatosSystem.Forms.DevolucionesForms
             }
             return tablaFiltrada;
         }
-
     }
 
  }

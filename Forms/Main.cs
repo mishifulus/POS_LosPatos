@@ -205,5 +205,11 @@ namespace LosPatosSystem.Forms
             txtTitle.Text = "REPORTES";
             AbrirFormInPanel(new Forms.ReportesForms.ReportesVista());
         }
+
+        private void btnFRetornos_Click(object sender, EventArgs e)
+        {
+            txtTitle.Text = "RETORNOS DE ENVASES";
+            AbrirFormInPanel(new Forms.RetornoEnvasesForms.RetornosVista(IdUsuario, Username));
+        }
     }
 }

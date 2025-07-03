@@ -305,5 +305,41 @@ namespace LosPatosSystem.Forms.ReportesForms
         {
             ExportarAExcel(dgvReporte);
         }
+
+        private void btnRetornos_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dtpFechaInicio.Value > dtpFechaFin.Value)
+                {
+                    MessageBox.Show("La fecha de inicio no puede ser mayor a la fecha de fin.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                if (dtpFechaInicio.Value == dtpFechaFin.Value)
+                {
+                    MessageBox.Show("La fecha de inicio no puede ser igual a la fecha de fin.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                if (dtpFechaInicio.Value != null && dtpFechaFin.Value != null)
+                {
+                    DataSet ds = reporteDAO.ObtenerReporteEnvases(dtpFechaInicio.Value, dtpFechaFin.Value);
+                    dgvReporte.DataSource = ds.Tables["EnvasesDTO"];
+                    dgvReporte.Columns["Fecha"].DefaultCellStyle.Format = "dd/MM/yyyy";
+                    dgvReporte.Columns["Monto"].DefaultCellStyle.Format = "C2";
+                    dgvReporte.Columns["Subtotal"].DefaultCellStyle.Format = "C2";
+                    dgvReporte.Columns["Total"].DefaultCellStyle.Format = "C2";
+                }
+                else
+                {
+                    MessageBox.Show("Por favor seleccione las fechas de inicio y fin.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al generar el reporte de los envases: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }
