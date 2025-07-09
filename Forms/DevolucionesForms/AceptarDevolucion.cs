@@ -93,6 +93,7 @@ namespace LosPatosSystem.Forms.DevolucionesForms
                     // GENERAR TICKET
                     string ticket = GenerarContenidoTicket("DEVOLUCIÓN", IdDevolucion, IdUsuario, NombreUsuario, detalleDevolucion, 0, Convert.ToDouble(txtTotal.Text), 0);
                     Console.WriteLine(ticket);
+                    TicketHelper.ImprimirTicket(ticket);
 
                     MessageBox.Show("Devolución registrada correctamente", "Devolución registrada", MessageBoxButtons.OK, MessageBoxIcon.Information);
 

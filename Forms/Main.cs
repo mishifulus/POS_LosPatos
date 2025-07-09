@@ -47,6 +47,34 @@ namespace LosPatosSystem.Forms
 
         private void Main_Load(object sender, EventArgs e)
         {
+            try
+            {
+                UsuarioDAO usuarioDAO = new UsuarioDAO();
+                string impresora = usuarioDAO.ObtenerImpresoraPorUsuario(this.IdUsuario);
+                if (string.IsNullOrEmpty(impresora))
+                {
+                    using (PrintDialog pd = new PrintDialog())
+                    {
+                        if (pd.ShowDialog() == DialogResult.OK)
+                        {
+                            impresora = pd.PrinterSettings.PrinterName;
+                            usuarioDAO.GuardarImpresoraUsuario(this.IdUsuario, impresora);
+                            ConfiguracionGlobal.ImpresoraTickets = impresora;
+
+                            MessageBox.Show("Impresora actualizada correctamente.", "Impresora", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                    }
+                }
+                else
+                {
+                    ConfiguracionGlobal.ImpresoraTickets = impresora;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al configurar la impresora: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
             AbrirFormInPanel(new Forms.Inicio());
             if (IdRol != 1)
             {
@@ -210,6 +238,29 @@ namespace LosPatosSystem.Forms
         {
             txtTitle.Text = "RETORNOS DE ENVASES";
             AbrirFormInPanel(new Forms.RetornoEnvasesForms.RetornosVista(IdUsuario, Username));
+        }
+
+        private void btnImpresora_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (PrintDialog pd = new PrintDialog())
+                {
+                    if (pd.ShowDialog() == DialogResult.OK)
+                    {
+                        UsuarioDAO usuarioDAO = new UsuarioDAO();
+                        string impresora = pd.PrinterSettings.PrinterName;
+                        usuarioDAO.GuardarImpresoraUsuario(this.IdUsuario, impresora);
+                        ConfiguracionGlobal.ImpresoraTickets = impresora;
+
+                        MessageBox.Show("Impresora actualizada correctamente.", "Impresora", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al configurar la impresora: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

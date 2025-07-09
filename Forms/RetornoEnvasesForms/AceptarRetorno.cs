@@ -88,6 +88,7 @@ namespace LosPatosSystem.Forms.RetornoEnvasesForms
                     // GENERAR TICKET
                     string ticket = GenerarContenidoTicket("RETORNO", IdRetorno, IdUsuario, NombreUsuario, detalleRetorno, 0, Convert.ToDouble(txtTotal.Text), 0);
                     Console.WriteLine(ticket);
+                    TicketHelper.ImprimirTicket(ticket);
 
                     MessageBox.Show("Retorno registrado correctamente", "Retorno registrado", MessageBoxButtons.OK, MessageBoxIcon.Information);
 

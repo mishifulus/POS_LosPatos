@@ -282,9 +282,25 @@ namespace LosPatosSystem.Forms.PromocionesForms
 
         private void cmbTipo_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (cmbTipo.SelectedIndex == 0)
+            {
+                txtLabelValor.Text = "%";
+                txtCantidadMinima.Enabled = true;
+                txtValorDescuento.Enabled = true;
+            }
+
+            if (cmbTipo.SelectedIndex == 1)
+            {
+                txtLabelValor.Text = "$";
+                txtCantidadMinima.Enabled = true;
+                txtValorDescuento.Enabled = true;
+            }
+
             if (cmbTipo.SelectedIndex == 2)
             {
                 txtCantidadMinima.Enabled = false;
+                txtValorDescuento.Enabled = false;
+                txtLabelValor.Text = "";
             }
         }
     }

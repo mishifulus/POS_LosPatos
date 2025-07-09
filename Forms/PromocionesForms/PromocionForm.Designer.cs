@@ -51,6 +51,7 @@
             this.dtpFechaInicio = new System.Windows.Forms.DateTimePicker();
             this.dtpFechaFin = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
+            this.txtLabelValor = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnClose)).BeginInit();
             this.SuspendLayout();
@@ -180,9 +181,9 @@
             // 
             this.txtValorDescuento.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtValorDescuento.Font = new System.Drawing.Font("Century Gothic", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtValorDescuento.Location = new System.Drawing.Point(49, 408);
+            this.txtValorDescuento.Location = new System.Drawing.Point(98, 408);
             this.txtValorDescuento.Name = "txtValorDescuento";
-            this.txtValorDescuento.Size = new System.Drawing.Size(351, 27);
+            this.txtValorDescuento.Size = new System.Drawing.Size(302, 27);
             this.txtValorDescuento.TabIndex = 39;
             this.txtValorDescuento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtValorDescuento_KeyPress);
             // 
@@ -292,11 +293,22 @@
             this.label3.TabIndex = 50;
             this.label3.Text = "Fin de la Promoción:";
             // 
+            // txtLabelValor
+            // 
+            this.txtLabelValor.AutoSize = true;
+            this.txtLabelValor.Font = new System.Drawing.Font("Century Gothic", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLabelValor.Location = new System.Drawing.Point(71, 408);
+            this.txtLabelValor.Name = "txtLabelValor";
+            this.txtLabelValor.Size = new System.Drawing.Size(21, 23);
+            this.txtLabelValor.TabIndex = 52;
+            this.txtLabelValor.Text = "$";
+            // 
             // PromocionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(950, 550);
+            this.Controls.Add(this.txtLabelValor);
             this.Controls.Add(this.dtpFechaFin);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.dtpFechaInicio);
@@ -354,5 +366,6 @@
         private System.Windows.Forms.DateTimePicker dtpFechaInicio;
         private System.Windows.Forms.DateTimePicker dtpFechaFin;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label txtLabelValor;
     }
 }

@@ -30,7 +30,10 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.MenuLateral = new System.Windows.Forms.Panel();
+            this.btnImpresora = new System.Windows.Forms.Button();
+            this.btnFRetornos = new System.Windows.Forms.Button();
             this.panelUsuario = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.txtUsuario = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.btnFReportes = new System.Windows.Forms.Button();
@@ -49,7 +52,6 @@
             this.btnRestaurar = new System.Windows.Forms.PictureBox();
             this.btnClose = new System.Windows.Forms.PictureBox();
             this.PanelContenedor = new System.Windows.Forms.Panel();
-            this.btnFRetornos = new System.Windows.Forms.Button();
             this.MenuLateral.SuspendLayout();
             this.panelUsuario.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -64,6 +66,7 @@
             // MenuLateral
             // 
             this.MenuLateral.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(25)))), ((int)(((byte)(86)))));
+            this.MenuLateral.Controls.Add(this.btnImpresora);
             this.MenuLateral.Controls.Add(this.btnFRetornos);
             this.MenuLateral.Controls.Add(this.panelUsuario);
             this.MenuLateral.Controls.Add(this.btnFReportes);
@@ -81,17 +84,71 @@
             this.MenuLateral.Size = new System.Drawing.Size(250, 850);
             this.MenuLateral.TabIndex = 0;
             // 
+            // btnImpresora
+            // 
+            this.btnImpresora.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnImpresora.FlatAppearance.BorderSize = 0;
+            this.btnImpresora.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.btnImpresora.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnImpresora.Font = new System.Drawing.Font("Century Gothic", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnImpresora.ForeColor = System.Drawing.Color.White;
+            this.btnImpresora.Image = ((System.Drawing.Image)(resources.GetObject("btnImpresora.Image")));
+            this.btnImpresora.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnImpresora.Location = new System.Drawing.Point(12, 694);
+            this.btnImpresora.Name = "btnImpresora";
+            this.btnImpresora.Size = new System.Drawing.Size(215, 45);
+            this.btnImpresora.TabIndex = 12;
+            this.btnImpresora.Text = "Impresora";
+            this.btnImpresora.UseVisualStyleBackColor = true;
+            this.btnImpresora.Click += new System.EventHandler(this.btnImpresora_Click);
+            // 
+            // btnFRetornos
+            // 
+            this.btnFRetornos.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnFRetornos.FlatAppearance.BorderSize = 0;
+            this.btnFRetornos.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.btnFRetornos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFRetornos.Font = new System.Drawing.Font("Century Gothic", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFRetornos.ForeColor = System.Drawing.Color.White;
+            this.btnFRetornos.Image = ((System.Drawing.Image)(resources.GetObject("btnFRetornos.Image")));
+            this.btnFRetornos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnFRetornos.Location = new System.Drawing.Point(11, 321);
+            this.btnFRetornos.Name = "btnFRetornos";
+            this.btnFRetornos.Size = new System.Drawing.Size(215, 45);
+            this.btnFRetornos.TabIndex = 11;
+            this.btnFRetornos.Text = "Retornos";
+            this.btnFRetornos.UseVisualStyleBackColor = true;
+            this.btnFRetornos.Click += new System.EventHandler(this.btnFRetornos_Click);
+            // 
             // panelUsuario
             // 
             this.panelUsuario.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.panelUsuario.Controls.Add(this.button1);
             this.panelUsuario.Controls.Add(this.txtUsuario);
             this.panelUsuario.Controls.Add(this.pictureBox2);
             this.panelUsuario.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.panelUsuario.Location = new System.Drawing.Point(69, 723);
+            this.panelUsuario.Location = new System.Drawing.Point(74, 741);
             this.panelUsuario.Name = "panelUsuario";
-            this.panelUsuario.Size = new System.Drawing.Size(170, 100);
+            this.panelUsuario.Size = new System.Drawing.Size(170, 97);
             this.panelUsuario.TabIndex = 10;
             this.panelUsuario.MouseClick += new System.Windows.Forms.MouseEventHandler(this.panelUsuario_MouseClick);
+            // 
+            // button1
+            // 
+            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Century Gothic", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button1.Location = new System.Drawing.Point(-58, -39);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(215, 45);
+            this.button1.TabIndex = 12;
+            this.button1.Text = "Reportes";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // txtUsuario
             // 
@@ -360,24 +417,6 @@
             this.PanelContenedor.Size = new System.Drawing.Size(1050, 800);
             this.PanelContenedor.TabIndex = 2;
             // 
-            // btnFRetornos
-            // 
-            this.btnFRetornos.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnFRetornos.FlatAppearance.BorderSize = 0;
-            this.btnFRetornos.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.btnFRetornos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFRetornos.Font = new System.Drawing.Font("Century Gothic", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFRetornos.ForeColor = System.Drawing.Color.White;
-            this.btnFRetornos.Image = ((System.Drawing.Image)(resources.GetObject("btnFRetornos.Image")));
-            this.btnFRetornos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnFRetornos.Location = new System.Drawing.Point(11, 321);
-            this.btnFRetornos.Name = "btnFRetornos";
-            this.btnFRetornos.Size = new System.Drawing.Size(215, 45);
-            this.btnFRetornos.TabIndex = 11;
-            this.btnFRetornos.Text = "Retornos";
-            this.btnFRetornos.UseVisualStyleBackColor = true;
-            this.btnFRetornos.Click += new System.EventHandler(this.btnFRetornos_Click);
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -430,5 +469,7 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label txtTitle;
         private System.Windows.Forms.Button btnFRetornos;
+        private System.Windows.Forms.Button btnImpresora;
+        private System.Windows.Forms.Button button1;
     }
 }

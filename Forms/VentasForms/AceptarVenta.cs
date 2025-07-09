@@ -115,6 +115,7 @@ namespace LosPatosSystem.Forms.VentasForms
                     // GENERAR TICKET
                     string ticket = GenerarContenidoTicket("VENTA", IdVenta, IdUsuario, NombreUsuario, detalleVenta, Convert.ToDouble(txtRecibido.Text), Convert.ToDouble(txtTotal.Text), Convert.ToDouble(txtCambio.Text), TotalEnvases);
                     Console.WriteLine(ticket);
+                    TicketHelper.ImprimirTicket(ticket);
 
                     MessageBox.Show("Venta registrada correctamente", "Venta registrada", MessageBoxButtons.OK, MessageBoxIcon.Information);
 

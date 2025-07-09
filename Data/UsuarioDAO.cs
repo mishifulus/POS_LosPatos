@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data;
+using System.Drawing;
 
 namespace LosPatosSystem.Data
 {
@@ -98,6 +99,57 @@ namespace LosPatosSystem.Data
                         cmd.Parameters.AddWithValue("@NewPass", Pass);
                         cmd.ExecuteNonQuery();
                     }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    conexion.Close();
+                }
+            }
+        }
+
+        public string ObtenerImpresoraPorUsuario(int idUsuario)
+        {
+            object result = null;
+            using (SqlConnection conexion = ConexionBD.ObtenerConexion())
+            {
+                conexion.Open();
+                try
+                {
+                    string query = "SELECT ImpresoraTickets FROM Usuarios WHERE IdUsuario = @Id";
+                    SqlCommand cmd = new SqlCommand(query, conexion);
+                    cmd.Parameters.AddWithValue("@Id", idUsuario);
+;
+                    result = cmd.ExecuteScalar();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    conexion.Close();
+                }
+            }
+            return result?.ToString();
+        }
+
+        public void GuardarImpresoraUsuario(int idUsuario, string impresora)
+        {
+            using (SqlConnection conexion = ConexionBD.ObtenerConexion())
+            {
+                conexion.Open();
+                try
+                {
+                    string query = "UPDATE Usuarios SET ImpresoraTickets = @imp WHERE IdUsuario = @Id";
+                    SqlCommand cmd = new SqlCommand(query, conexion);
+                    cmd.Parameters.AddWithValue("@Id", idUsuario);
+                    cmd.Parameters.AddWithValue("@imp", impresora);
+
+                    cmd.ExecuteNonQuery();
                 }
                 catch (Exception ex)
                 {
