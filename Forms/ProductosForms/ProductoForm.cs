@@ -225,9 +225,14 @@ namespace LosPatosSystem.Forms.Productos
             int stockMinimo = Convert.ToInt32(txtStockMinimo.Text);
             int idCategoria = Convert.ToInt32(cmbCategoria.SelectedValue);
             int idUnidad = Convert.ToInt32(cmbUnidad.SelectedValue);
-            double importeEnvase = Convert.ToDouble(txtImporteEnvase.Text);
+            double importeEnvase = 0.0;
 
-            if (string.IsNullOrEmpty(nombre) || string.IsNullOrEmpty(codigo) || string.IsNullOrEmpty(descripcion) || string.IsNullOrEmpty(txtPrecioCompra.Text) || string.IsNullOrEmpty(txtPrecioVenta.Text) || string.IsNullOrEmpty(txtStock.Text) || string.IsNullOrEmpty(txtStockMinimo.Text) || string.IsNullOrEmpty(txtImporteEnvase.Text))
+            if (!string.IsNullOrEmpty(txtImporteEnvase.Text))
+            {
+                importeEnvase = Convert.ToDouble(txtImporteEnvase.Text);
+            }
+
+            if (string.IsNullOrEmpty(nombre) || string.IsNullOrEmpty(codigo) || string.IsNullOrEmpty(descripcion) || string.IsNullOrEmpty(txtPrecioCompra.Text) || string.IsNullOrEmpty(txtPrecioVenta.Text) || string.IsNullOrEmpty(txtStock.Text) || string.IsNullOrEmpty(txtStockMinimo.Text))
             {
                 MessageBox.Show("Todos los campos son obligatorios", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;

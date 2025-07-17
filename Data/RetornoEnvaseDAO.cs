@@ -38,6 +38,34 @@ namespace LosPatosSystem.Data
             return IdRetorno;
         }
 
+        public int ExisteRetorno(int idVenta)
+        {
+            int existe = 0;
+
+            using (SqlConnection conexion = ConexionBD.ObtenerConexion())
+            {
+                conexion.Open();
+                try
+                {
+                    string query = "SELECT ISNULL(MAX(IdRetorno), 0) FROM RetornoEnvases WHERE FolioVenta = @IdVenta";
+                    using (SqlCommand cmd = new SqlCommand(query, conexion))
+                    {
+                        cmd.Parameters.AddWithValue("@IdVenta", idVenta);
+                        existe = (int)cmd.ExecuteScalar();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    conexion.Close();
+                }
+            }
+            return existe;
+        }
+
         public DataTable ObtenerProductosVenta(int idVenta)
         {
             DataTable dtProductos = new DataTable();

@@ -257,7 +257,7 @@ namespace LosPatosSystem.Forms.VentasForms
                     VentaDAO ventaDAO = new VentaDAO();
                     double descuento = ventaDAO.AplicarPromocion(idProducto, newCantidad, precioUnitario);
                     double precioConDescuento = precioUnitario - (descuento / newCantidad);
-                    subtotal = newCantidad * precioConDescuento;
+                    subtotal = newCantidad * Convert.ToInt32(row["Descuento"]);
                     double subtotalEnvase = importeEnvase * newCantidad;
 
                     row["Cantidad"] = newCantidad;
@@ -301,6 +301,7 @@ namespace LosPatosSystem.Forms.VentasForms
                 if (result == DialogResult.Yes)
                 {
                     detalleVenta.Rows.RemoveAt(e.RowIndex);
+                    CalcularTotal();
                 }
             }
         }
@@ -311,11 +312,12 @@ namespace LosPatosSystem.Forms.VentasForms
             {
                 AceptarVenta aceptarVenta = new AceptarVenta(IdUsuario, Convert.ToDouble(txtTotal.Text.Substring(1)), detalleVenta, Convert.ToInt32(txtIdVenta.Text), txtUsername.Text, Convert.ToDouble(txtTotalEnvases.Text.Substring(1)));
 
+                aceptarVenta.ShowDialog();
+
                 InicializarTabla();
                 txtTotal.Text = "$0";
                 txtTotalEnvases.Text = "$0";
-
-                aceptarVenta.Show();
+                ObtenerIdVenta();
             }
             else
             {

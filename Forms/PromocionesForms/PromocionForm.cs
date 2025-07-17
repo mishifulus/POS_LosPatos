@@ -199,21 +199,32 @@ namespace LosPatosSystem.Forms.PromocionesForms
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtNombre.Text) || string.IsNullOrEmpty(txtDescripcion.Text) || string.IsNullOrEmpty(txtCantidadMinima.Text))
+            if (string.IsNullOrEmpty(txtNombre.Text) || string.IsNullOrEmpty(txtDescripcion.Text))
             {
                 MessageBox.Show("Todos los campos son obligatorios", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
             string nombre = txtNombre.Text;
             string descripcion = txtDescripcion.Text;
             int tipo = (int)cmbTipo.SelectedValue;
-            double valorDescuento = Convert.ToDouble(txtValorDescuento.Text);
-            int cantidadMinima = Convert.ToInt32(txtCantidadMinima.Text);
             int productoAsociado = (int)cmbProductoAsociado.SelectedValue;
             DateTime fechaInicio = dtpFechaInicio.Value;
             DateTime fechaFin = dtpFechaFin.Value;
+            int cantidadMinima = 0;
+            double valorDescuento = 0.0;
 
-            if (string.IsNullOrEmpty(nombre) || string.IsNullOrEmpty(descripcion) || string.IsNullOrEmpty(txtValorDescuento.Text) || string.IsNullOrEmpty(txtCantidadMinima.Text))
+            if (!string.IsNullOrEmpty(txtCantidadMinima.Text))
+            {
+                cantidadMinima = Convert.ToInt32(txtCantidadMinima.Text);
+            }
+
+            if (!string.IsNullOrEmpty(txtValorDescuento.Text))
+            {
+                valorDescuento = Convert.ToDouble(txtValorDescuento.Text);
+            }
+
+            if (string.IsNullOrEmpty(nombre) || string.IsNullOrEmpty(descripcion))
             {
                 MessageBox.Show("Todos los campos son obligatorios", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;

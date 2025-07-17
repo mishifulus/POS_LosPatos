@@ -249,6 +249,7 @@ namespace LosPatosSystem.Forms.ComprasForms
                 if (result == DialogResult.Yes)
                 {
                     detalleCompra.Rows.RemoveAt(e.RowIndex);
+                    CalcularTotal();
                 }
             }
         }
@@ -268,10 +269,11 @@ namespace LosPatosSystem.Forms.ComprasForms
 
             AceptarCompra aceptarCompra = new AceptarCompra(IdUsuario, Convert.ToDouble(txtTotal.Text.Substring(1)), detalleCompra);
 
+            aceptarCompra.ShowDialog();
+
             InicializarTabla();
             txtTotal.Text = "$0";
-
-            aceptarCompra.Show();
+            ObtenerIdCompra();
         }
     }
 }

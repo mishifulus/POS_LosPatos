@@ -60,6 +60,14 @@ namespace LosPatosSystem.Forms.DevolucionesForms
                 dgvDetalleDevolucion.Rows.Clear();
 
                 DevolucionDAO devolucionDAO = new DevolucionDAO();
+
+                int existeDevolucion = devolucionDAO.ExisteDevolucion(IdVenta);
+                if (existeDevolucion > 0)
+                {
+                    MessageBox.Show("Ya existe una devolución para esta venta.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 detalleDevolucion = devolucionDAO.ObtenerProductosVenta(IdVenta);
 
                 dgvDetalleDevolucion.DataSource = detalleDevolucion;
@@ -145,6 +153,7 @@ namespace LosPatosSystem.Forms.DevolucionesForms
                 txtTotal.Text = "$0";
                 txtIdVenta.Text = string.Empty;
                 txtMotivo.Text = string.Empty;
+                ObtenerIdDevolucion();
             }
             else
             {

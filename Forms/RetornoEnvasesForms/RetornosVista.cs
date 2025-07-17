@@ -59,6 +59,14 @@ namespace LosPatosSystem.Forms.RetornoEnvasesForms
                 dgvDetalleRetorno.Rows.Clear();
 
                 RetornoEnvaseDAO retornoEnvaseDAO = new RetornoEnvaseDAO();
+
+                int existeRetorno = retornoEnvaseDAO.ExisteRetorno(IdVenta);
+                if (existeRetorno > 0)
+                {
+                    MessageBox.Show("Ya existe un retorno registrado para esta venta.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 detalleRetorno = retornoEnvaseDAO.ObtenerProductosVenta(IdVenta);
 
                 dgvDetalleRetorno.DataSource = detalleRetorno;
@@ -141,6 +149,7 @@ namespace LosPatosSystem.Forms.RetornoEnvasesForms
                 dgvDetalleRetorno.Columns.Remove("Eliminar");
                 txtTotal.Text = "$0";
                 txtIdVenta.Text = string.Empty;
+                ObtenerIdRetorno();
             }
             else
             {
