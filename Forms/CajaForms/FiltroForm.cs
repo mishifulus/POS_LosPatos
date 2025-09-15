@@ -19,6 +19,7 @@ namespace LosPatosSystem.Forms.CajaForms
         public FiltroForm()
         {
             InitializeComponent();
+            this.Icon = Properties.Resources.icono256;
         }
 
         private void FiltroForm_Load(object sender, EventArgs e)

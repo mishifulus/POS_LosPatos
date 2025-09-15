@@ -25,6 +25,7 @@ namespace LosPatosSystem.Forms.ComprasForms
         public ComprasVista(int idUsuario, string username)
         {
             InitializeComponent();
+            this.Icon = Properties.Resources.icono256;
 
             this.IdUsuario = idUsuario;
             this.Username = username;

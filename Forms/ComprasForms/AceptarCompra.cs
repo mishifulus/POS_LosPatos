@@ -22,6 +22,7 @@ namespace LosPatosSystem.Forms.ComprasForms
         public AceptarCompra(int IdUsuario, double Total, DataTable detalleCompra)
         {
             InitializeComponent();
+            this.Icon = Properties.Resources.icono256;
             this.IdUsuario = IdUsuario;
             this.Total = Total;
             this.detalleCompra = detalleCompra;

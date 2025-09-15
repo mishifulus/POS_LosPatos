@@ -22,6 +22,7 @@ namespace LosPatosSystem.Forms.CajaForms
         public CajaVista(int IdUsuario, int IdRol)
         {
             InitializeComponent();
+            this.Icon = Properties.Resources.icono256;
             this.IdUsuario = IdUsuario;
             this.IdRol = IdRol;
         }

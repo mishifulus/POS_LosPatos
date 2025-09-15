@@ -30,6 +30,7 @@ namespace LosPatosSystem.Forms.RetornoEnvasesForms
         public AceptarRetorno(int idUsuario, double total, int idVenta, DataTable detalleRetorno, int idRetorno, string nombreUsuario)
         {
             InitializeComponent();
+            this.Icon = Properties.Resources.icono256;
             IdUsuario = idUsuario;
             Total = total;
             IdVenta = idVenta;

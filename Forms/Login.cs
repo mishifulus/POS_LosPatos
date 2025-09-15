@@ -18,6 +18,7 @@ namespace LosPatosSystem
         public Login()
         {
             InitializeComponent();
+            this.Icon = Properties.Resources.icono256;
         }
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]

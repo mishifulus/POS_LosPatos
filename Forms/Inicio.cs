@@ -21,6 +21,7 @@ namespace LosPatosSystem.Forms
         public Inicio()
         {
             InitializeComponent();
+            this.Icon = Properties.Resources.icono256;
 
             IniciarTimer();
             txtFecha.Text = fecha;

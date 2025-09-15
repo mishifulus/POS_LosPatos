@@ -23,6 +23,7 @@ namespace LosPatosSystem.Forms.ReportesForms
         public ReportesVista()
         {
             InitializeComponent();
+            this.Icon = Properties.Resources.icono256;
         }
 
         private void ReportesVista_Load(object sender, EventArgs e)

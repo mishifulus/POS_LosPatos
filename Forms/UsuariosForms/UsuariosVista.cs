@@ -17,6 +17,7 @@ namespace LosPatosSystem.Forms.UsuariosForms
         public UsuariosVista()
         {
             InitializeComponent();
+            this.Icon = Properties.Resources.icono256;
             this.Resize += new EventHandler(UsuariosVista_Resize);
         }
 

@@ -23,6 +23,7 @@ namespace LosPatosSystem.Forms
         public Main(int IdSesion, int IdUsuario, string Username, int IdRol)
         {
             InitializeComponent();
+            this.Icon = Properties.Resources.icono256;
 
             Rectangle screenBounds = Screen.PrimaryScreen.WorkingArea;
             this.MaximizedBounds = screenBounds;

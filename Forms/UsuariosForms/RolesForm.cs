@@ -18,6 +18,7 @@ namespace LosPatosSystem.Forms.UsuariosForms
         public RolesForm()
         {
             InitializeComponent();
+            this.Icon = Properties.Resources.icono256;
         }
 
         private void RolesForm_Load(object sender, EventArgs e)

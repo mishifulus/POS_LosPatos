@@ -24,6 +24,7 @@ namespace LosPatosSystem.Forms.Productos
         public ProductoForm(string Accion, int IdUsuario, int IdProducto)
         {
             InitializeComponent();
+            this.Icon = Properties.Resources.icono256;
             this.Accion = Accion;
             this.IdProducto = IdProducto;
             this.IdUsuario = IdUsuario;

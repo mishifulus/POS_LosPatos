@@ -20,7 +20,7 @@ namespace LosPatosSystem.Forms
         public ProductosVista(int IdUsuario, int IdRol)
         {
             InitializeComponent();
-
+            this.Icon = Properties.Resources.icono256;
             this.IdUsuario = IdUsuario;
             this.IdRol = IdRol;
             this.Resize += new EventHandler(ProductosVista_Resize);

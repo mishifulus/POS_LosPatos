@@ -20,6 +20,7 @@ namespace LosPatosSystem.Forms.PromocionesForms
         public PromocionesVista(int IdUsuario, int IdRol)
         {
             InitializeComponent();
+            this.Icon = Properties.Resources.icono256;
             this.IdUsuario = IdUsuario;
             this.IdRol = IdRol;
             this.Resize += new EventHandler(PromocionesVista_Resize);

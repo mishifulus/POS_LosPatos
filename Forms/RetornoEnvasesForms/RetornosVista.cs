@@ -24,6 +24,7 @@ namespace LosPatosSystem.Forms.RetornoEnvasesForms
         public RetornosVista(int IdUsuario, string Username)
         {
             InitializeComponent();
+            this.Icon = Properties.Resources.icono256;
             this.IdUsuario = IdUsuario;
             this.Username = Username;
 

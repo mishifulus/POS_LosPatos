@@ -31,6 +31,7 @@ namespace LosPatosSystem.Forms.DevolucionesForms
         public AceptarDevolucion(int idUsuario, double total, string motivo, int idVenta, DataTable detalleDevolucion, int idDevolucion, string nombreUsuario)
         {
             InitializeComponent();
+            this.Icon = Properties.Resources.icono256;
             IdUsuario = idUsuario;
             Total = total;
             Motivo = motivo;

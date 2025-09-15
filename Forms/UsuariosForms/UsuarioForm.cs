@@ -24,6 +24,7 @@ namespace LosPatosSystem.Forms.UsuariosForms
         public UsuarioForm(string Accion, int IdUsuario)
         {
             InitializeComponent();
+            this.Icon = Properties.Resources.icono256;
             this.Accion = Accion;
             this.IdUsuario = IdUsuario;
 

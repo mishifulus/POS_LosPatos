@@ -18,6 +18,7 @@ namespace LosPatosSystem.Forms.UsuariosForms
         public CambiarPass(int IdUsuario)
         {
             InitializeComponent();
+            this.Icon = Properties.Resources.icono256;
             this.IdUsuario = IdUsuario;
 
             txtIdUsuario.Text = IdUsuario.ToString();

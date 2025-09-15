@@ -19,6 +19,7 @@ namespace LosPatosSystem.Forms.Productos
         public CategoriasForm(int IdUsuario)
         {
             InitializeComponent();
+            this.Icon = Properties.Resources.icono256;
             this.IdUsuario = IdUsuario;
         }
 

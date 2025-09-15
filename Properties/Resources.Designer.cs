@@ -69,5 +69,15 @@ namespace LosPatosSystem.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Icon similar a (Icono).
+        /// </summary>
+        internal static System.Drawing.Icon icono256 {
+            get {
+                object obj = ResourceManager.GetObject("icono256", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
     }
 }

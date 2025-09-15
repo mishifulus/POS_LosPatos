@@ -26,6 +26,7 @@ namespace LosPatosSystem.Forms.VentasForms
         public AceptarVenta(int IdUsuario, double Total, DataTable detalleVenta, int idVenta, string nombreUsuario, double TotalEnvases)
         {
             InitializeComponent();
+            this.Icon = Properties.Resources.icono256;
             this.IdUsuario = IdUsuario;
             this.Total = Total;
             this.detalleVenta = detalleVenta;

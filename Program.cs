@@ -32,7 +32,9 @@ namespace LosPatosSystem
             Application.SetCompatibleTextRenderingDefault(false);
             try
             {
-                Application.Run(new Login());
+                Login login = new Login();
+                login.Icon = Properties.Resources.icono256;
+                Application.Run(login);
             }
             catch (Exception ex)
             {

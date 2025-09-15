@@ -23,6 +23,7 @@ namespace LosPatosSystem.Forms.PromocionesForms
         public PromocionForm(string Accion, int IdUsuario, int IdPromocion)
         {
             InitializeComponent();
+            this.Icon = Properties.Resources.icono256;
             this.Accion = Accion;
             this.IdUsuario = IdUsuario;
             this.IdPromocion = IdPromocion;

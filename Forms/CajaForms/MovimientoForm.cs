@@ -22,6 +22,7 @@ namespace LosPatosSystem.Forms.CajaForms
         public MovimientoForm(int IdUsuario)
         {
             InitializeComponent();
+            this.Icon = Properties.Resources.icono256;
             this.IdUsuario = IdUsuario;
         }
 
