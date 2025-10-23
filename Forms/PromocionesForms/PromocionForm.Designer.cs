@@ -38,9 +38,9 @@
             this.cmbProductoAsociado = new System.Windows.Forms.ComboBox();
             this.cmbTipo = new System.Windows.Forms.ComboBox();
             this.txtCantidadMinima = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
+            this.lblCantidad = new System.Windows.Forms.Label();
             this.txtValorDescuento = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
+            this.lblValor = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -167,15 +167,15 @@
             this.txtCantidadMinima.TabIndex = 41;
             this.txtCantidadMinima.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCantidadMinima_KeyPress);
             // 
-            // label9
+            // lblCantidad
             // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Century Gothic", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(45, 456);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(185, 23);
-            this.label9.TabIndex = 40;
-            this.label9.Text = "Cantidad Mínima:";
+            this.lblCantidad.AutoSize = true;
+            this.lblCantidad.Font = new System.Drawing.Font("Century Gothic", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCantidad.Location = new System.Drawing.Point(45, 456);
+            this.lblCantidad.Name = "lblCantidad";
+            this.lblCantidad.Size = new System.Drawing.Size(185, 23);
+            this.lblCantidad.TabIndex = 40;
+            this.lblCantidad.Text = "Cantidad Mínima:";
             // 
             // txtValorDescuento
             // 
@@ -187,15 +187,15 @@
             this.txtValorDescuento.TabIndex = 39;
             this.txtValorDescuento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtValorDescuento_KeyPress);
             // 
-            // label10
+            // lblValor
             // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Century Gothic", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(45, 382);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(213, 23);
-            this.label10.TabIndex = 38;
-            this.label10.Text = "Valor de Descuento:";
+            this.lblValor.AutoSize = true;
+            this.lblValor.Font = new System.Drawing.Font("Century Gothic", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblValor.Location = new System.Drawing.Point(45, 382);
+            this.lblValor.Name = "lblValor";
+            this.lblValor.Size = new System.Drawing.Size(213, 23);
+            this.lblValor.TabIndex = 38;
+            this.lblValor.Text = "Valor de Descuento:";
             // 
             // label8
             // 
@@ -318,9 +318,9 @@
             this.Controls.Add(this.cmbProductoAsociado);
             this.Controls.Add(this.cmbTipo);
             this.Controls.Add(this.txtCantidadMinima);
-            this.Controls.Add(this.label9);
+            this.Controls.Add(this.lblCantidad);
             this.Controls.Add(this.txtValorDescuento);
-            this.Controls.Add(this.label10);
+            this.Controls.Add(this.lblValor);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -353,9 +353,9 @@
         private System.Windows.Forms.ComboBox cmbProductoAsociado;
         private System.Windows.Forms.ComboBox cmbTipo;
         private System.Windows.Forms.TextBox txtCantidadMinima;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label lblCantidad;
         private System.Windows.Forms.TextBox txtValorDescuento;
-        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label lblValor;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;

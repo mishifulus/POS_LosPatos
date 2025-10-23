@@ -90,7 +90,7 @@ namespace LosPatosSystem.Forms.PromocionesForms
             {
                 { 1, "Descuento" },
                 { 2, "Monto Fijo" },
-                { 3, "2x1" }
+                { 3, "Por Paquete" },
             };
             cmbTipo.DataSource = new BindingSource(tipos, null);
             cmbTipo.DisplayMember = "Value";
@@ -310,9 +310,9 @@ namespace LosPatosSystem.Forms.PromocionesForms
 
             if (cmbTipo.SelectedIndex == 2)
             {
-                txtCantidadMinima.Enabled = false;
-                txtValorDescuento.Enabled = false;
-                txtLabelValor.Text = "";
+                lblCantidad.Text = "Unidades";
+                lblValor.Text = "Precio por paquete";
+                txtLabelValor.Text = "$";
             }
         }
     }

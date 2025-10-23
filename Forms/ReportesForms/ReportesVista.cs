@@ -109,8 +109,7 @@ namespace LosPatosSystem.Forms.ReportesForms
                     dgvReporte.Columns["IdVenta"].Visible = false;
                     dgvReporte.Columns["Fecha"].DefaultCellStyle.Format = "dd/MM/yyyy";
                     dgvReporte.Columns["Precio"].DefaultCellStyle.Format = "C2";
-                    dgvReporte.Columns["Subtotal"].DefaultCellStyle.Format = "C2";
-                    dgvReporte.Columns["Total"].DefaultCellStyle.Format = "C2";
+                    dgvReporte.Columns["TotalProducto"].DefaultCellStyle.Format = "C2";
                 }
                 else
                 {
@@ -178,7 +177,7 @@ namespace LosPatosSystem.Forms.ReportesForms
                     dgvReporte.DataSource = ds.Tables["VentasPromocionesDTO"];
                     dgvReporte.Columns["IdVenta"].Visible = false;
                     dgvReporte.Columns["Fecha"].DefaultCellStyle.Format = "dd/MM/yyyy";
-                    dgvReporte.Columns["Total"].DefaultCellStyle.Format = "C2";
+                    dgvReporte.Columns["TotalProducto"].DefaultCellStyle.Format = "C2";
                 }
                 else
                 {

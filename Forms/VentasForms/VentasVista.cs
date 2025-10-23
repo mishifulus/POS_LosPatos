@@ -68,7 +68,7 @@ namespace LosPatosSystem.Forms.VentasForms
             dgvDetalleVenta.Columns["PrecioUnitario"].HeaderText = "Precio Unitario";
             dgvDetalleVenta.Columns["Codigo"].HeaderText = "Código";
             dgvDetalleVenta.Columns["PrecioUnitario"].DefaultCellStyle.Format = "C";
-            dgvDetalleVenta.Columns["Descuento"].HeaderText = "Precio Con Descuento";
+            dgvDetalleVenta.Columns["Descuento"].HeaderText = "Descuento";
             dgvDetalleVenta.Columns["Descuento"].DefaultCellStyle.Format = "C";
             dgvDetalleVenta.Columns["Subtotal"].DefaultCellStyle.Format = "C";
             dgvDetalleVenta.Columns["ImporteEnvase"].HeaderText = "Importe Envase";
@@ -242,44 +242,47 @@ namespace LosPatosSystem.Forms.VentasForms
             string codigo = txtCodigo.Text;
             string producto = txtNombre.Text;
             string descripcion = txtDescripcion.Text;
-            int cantidad = Convert.ToInt32(txtCantidad.Text);
+            int cantidadNueva = Convert.ToInt32(txtCantidad.Text);
             double precioUnitario = Convert.ToDouble(txtPrecioVenta.Text);
             double importeEnvase = Convert.ToDouble(txtImporteEnvase.Text);
-            double subtotal = cantidad * precioUnitario;
 
-            bool productoExistente = false;
+            DataRow filaExistente = detalleVenta.AsEnumerable().FirstOrDefault(r => Convert.ToInt32(r["IdProducto"]) == idProducto);
 
-            foreach (DataRow row in detalleVenta.Rows)
+            int cantidadTotal = cantidadNueva;
+
+            if (filaExistente != null)
             {
-                if (Convert.ToInt32(row["IdProducto"]) == idProducto)
-                {
-                    int newCantidad = Convert.ToInt32(row["Cantidad"]) + cantidad;
-
-                    VentaDAO ventaDAO = new VentaDAO();
-                    double descuento = ventaDAO.AplicarPromocion(idProducto, newCantidad, precioUnitario);
-                    double precioConDescuento = precioUnitario - (descuento / newCantidad);
-                    subtotal = newCantidad * Convert.ToInt32(row["Descuento"]);
-                    double subtotalEnvase = importeEnvase * newCantidad;
-
-                    row["Cantidad"] = newCantidad;
-                    row["Descuento"] = precioConDescuento;
-                    row["Subtotal"] = subtotal;
-                    row["SubtotalEnvase"] = subtotalEnvase;
-                    productoExistente = true;
-                    break;
-                }
+                cantidadTotal += Convert.ToInt32(filaExistente["Cantidad"]);
             }
 
-            if (!productoExistente)
-            {
-                VentaDAO ventaDAO = new VentaDAO();
-                double descuento = ventaDAO.AplicarPromocion(idProducto, cantidad, precioUnitario);
-                double precioConDescuento = precioUnitario - (descuento / cantidad);
-                subtotal = cantidad * precioConDescuento;
-                double subtotalEnvase = importeEnvase * cantidad;
+            VentaDAO ventaDAO = new VentaDAO();
+            double descuento = ventaDAO.AplicarPromocion(idProducto, cantidadTotal, precioUnitario);
 
-                detalleVenta.Rows.Add(idProducto, codigo, producto, descripcion, cantidad, precioUnitario, precioConDescuento, subtotal, importeEnvase, subtotalEnvase);
+            double subtotal = (cantidadTotal * precioUnitario) - descuento;
+
+            if (filaExistente == null)
+            {
+                DataRow fila = detalleVenta.NewRow();
+                fila["IdProducto"] = idProducto;
+                fila["Codigo"] = codigo;
+                fila["Producto"] = producto;
+                fila["Descripcion"] = descripcion;
+                fila["Cantidad"] = cantidadTotal;
+                fila["PrecioUnitario"] = precioUnitario;
+                fila["Descuento"] = descuento;
+                fila["Subtotal"] = subtotal;
+                fila["ImporteEnvase"] = importeEnvase;
+                fila["SubtotalEnvase"] = cantidadTotal * importeEnvase;
+                detalleVenta.Rows.Add(fila);
             }
+            else
+            {
+                filaExistente["Cantidad"] = cantidadTotal;
+                filaExistente["Descuento"] = descuento;
+                filaExistente["Subtotal"] = subtotal;
+                filaExistente["SubtotalEnvase"] = cantidadTotal * importeEnvase;
+            }
+            dgvDetalleVenta.DataSource = detalleVenta;
             CalcularTotal();
         }
 
@@ -329,31 +332,7 @@ namespace LosPatosSystem.Forms.VentasForms
 
         private void dgvDetalleVenta_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            if (dgvDetalleVenta.Columns[e.ColumnIndex].Name == "PrecioUnitario" && e.RowIndex >= 0)
-            {
-                double precioConDescuento = Convert.ToDouble(dgvDetalleVenta.Rows[e.RowIndex].Cells["Descuento"].Value ?? 0);
-                double precioOriginal = Convert.ToDouble(dgvDetalleVenta.Rows[e.RowIndex].Cells["PrecioUnitario"].Value);
-
-                e.PaintBackground(e.CellBounds, true);
-
-                if (precioConDescuento < precioOriginal)
-                {
-
-                    using (Font fontTachado = new Font(e.CellStyle.Font, FontStyle.Strikeout))
-                    {
-                        SizeF textSize = e.Graphics.MeasureString(precioOriginal.ToString("C"), fontTachado);
-
-                        // Calcular posición centrada en la celda
-                        float posX = e.CellBounds.X + (e.CellBounds.Width - textSize.Width) / 2;
-                        float posY = e.CellBounds.Y + (e.CellBounds.Height - textSize.Height) / 2;
-
-                        // Dibujar el texto centrado
-                        e.Graphics.DrawString(precioOriginal.ToString("C"), fontTachado, Brushes.Red, e.CellBounds.Left, posY);
-                    }
-
-                    e.Handled = true;
-                }
-            }
+            
         }
     }
 }
